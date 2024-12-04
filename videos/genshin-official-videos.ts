@@ -40,8 +40,6 @@
     }).filter(it => new Date(it.published) > lastCheckedPublishedAt);
   }
 
-
-
   Videos.buildMessages = (videoInfos) => videoInfos.map(video => {
     const message: Bluesky.Message = {
       body: `YouTube 原神公式アカウントが動画を公開しました #原神 #原神公式情報
