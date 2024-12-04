@@ -1,4 +1,11 @@
 namespace HoYo {
+  export const Game = {
+    genshin: 'genshin',
+    zzz: 'zzz',
+    starRail: 'starRail',
+  } as const;
+  export type Game = (typeof Game)[keyof typeof Game];
+
   export interface Content {
     id: string;
     subject: string;

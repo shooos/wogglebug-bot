@@ -1,6 +1,4 @@
 (() => {
-  const MAX_IMAGE_SIZE = 976000;
-
   const uploadUrl = 'https://bsky.social/xrpc/com.atproto.repo.uploadBlob';
 
   function request(
@@ -25,7 +23,7 @@
     Logger.log(`Start uploading image to bsky | MimeType=${mimeType}`);
 
     const imageSize = blob.getBytes().length;
-    if (imageSize > MAX_IMAGE_SIZE) {
+    if (imageSize > Bluesky.MAX_IMAGE_SIZE) {
       Logger.log(`Failed to upload image because image is too large | ImageSize=${imageSize}`);
       return null;
     }

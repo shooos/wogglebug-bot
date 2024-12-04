@@ -33,4 +33,31 @@ const Utils = {
   formatToViewDate(date: Date): string {
     return Utilities.formatDate(date, 'Asia/Tokyo', 'yyyy-MM-dd HH:mm');
   },
+
+  /**
+   * ISO-8601文字列表現にフォーマットして返す
+   * 
+   * @param date Date 日時
+   * @returns フォーマット済み日時文字列
+   */
+  formatDateToIsoString(date: Date): string {
+    return Utilities.formatDate(date, 'Asia/Tokyo', "yyyy-MM-dd'T'HH:mm:ss'Z'");
+  },
+
+  /**
+   * Blobを取得して返す
+   * 
+   * @param location 取得対象のURL
+   * @returns Blob
+   */
+  fetchBlob(location: string): GoogleAppsScript.Base.Blob | null {
+    const response = UrlFetchApp.fetch(location, { method: 'get' });
+
+    if (response.getResponseCode() !== 200) {
+      Logger.log(`Failed fetching blob | Location=${location}`);
+      return null;
+    }
+
+    return response.getBlob();
+  },
 }

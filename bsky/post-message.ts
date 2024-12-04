@@ -81,8 +81,9 @@
     };
   }
 
-  Bsky.postMessage = (token, message, images, linkUrl, postedBy) => {
-    Logger.log(`Start posting to bsky | Message=${message.slice(0, 24)}, ImagesCount=${images.length}, LinkUrl=${linkUrl}, PostedBy=${postedBy}`);
+  Bsky.postMessage = (token, message, postedBy) => {
+    const { body, images, linkUrl } = message;
+    Logger.log(`Start posting to bsky | Message=${body.slice(0, 24)}, ImagesCount=${images.length}, LinkUrl=${linkUrl}, PostedBy=${postedBy}`);
 
     const botName = getBotName(postedBy);
 
@@ -90,7 +91,7 @@
       Authorization: `Bearer ${token}`
     };
 
-    const text = `${message}\n\nPosted by ${botName}(bot)`;
+    const text = `${body}\n\nPosted by ${botName}(bot)`;
     const facets = Bsky.detectFacets(text);
 
     const data: Payload = initializePayload(text, facets);
