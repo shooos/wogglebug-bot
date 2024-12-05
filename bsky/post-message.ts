@@ -96,20 +96,26 @@
 
     const data: Payload = initializePayload(text, facets);
 
-    images.forEach(image => {
+    const uploadedImages = images.map(image => {
       const blob = Bsky.uploadImage(token, image.blob);
-      image.blob = blob;
-    });
+
+      if (blob === null) return null;
+
+      return {
+        ...image,
+        blob,
+      };
+    }).filter(it => it !== null);
 
     if (linkUrl) {
       data.record.embed = {
         $type: 'app.bsky.embed.external',
-        external: createExternal(linkUrl, images),
+        external: createExternal(linkUrl, uploadedImages),
       };
-    } else if (images.length) {
+    } else if (uploadedImages.length) {
       data.record.embed = {
         $type: 'app.bsky.embed.images',
-        images: images.map(createEmbedImage)
+        images: uploadedImages.map(createEmbedImage)
       }
     }
 
