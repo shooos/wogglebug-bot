@@ -43,6 +43,20 @@ function noticeStarlightShopCharcter(): void {
 }
 
 /**
+ * 幻想シアター情報を収集する
+ */
+function subscribeImaginariumTheaterInfo(): void {
+
+}
+
+/**
+ * 幻想シアター情報を bsky にポストする
+ */
+function noticeImaginariumTheaterInfo(): void {
+
+}
+
+/**
  * 任意の内容を tester として bsky に投稿する
  */
 function postToBsky(): void {
