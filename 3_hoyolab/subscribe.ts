@@ -13,6 +13,9 @@
     messages.concat(eventMessages).forEach(message => {
       Bsky.postMessage(accessJwt, message, Bluesky.BotType.regular);
     });
+
+    if (messages.length) HoYoLAB.Genshin.saveLastPostedId(newAlivails[0].id);
+    if (eventMessages.length) HoYoLAB.Genshin.saveLastPostedEventId(newAlivailEvents[0].id);
   }
 
   function zzz(): void {
@@ -23,6 +26,8 @@
     messages.forEach(message => {
       Bsky.postMessage(accessJwt, message, Bluesky.BotType.regular);
     });
+
+    if (messages.length) HoYoLAB.ZZZ.saveLastPostedId(newAlivails[0].id);
   }
 
   function starRail(): void {
@@ -33,6 +38,8 @@
     messages.forEach(message => {
       Bsky.postMessage(accessJwt, message, Bluesky.BotType.regular);
     });
+
+    if (messages.length) HoYoLAB.StarRail.saveLastPostedId(newAlivails[0].id);
   }
 
   HoYoLABSubscriber.subscribe = () => {

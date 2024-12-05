@@ -125,28 +125,28 @@
 
     let result: Bluesky.Result = Bluesky.Result.pending;
 
-    try {
-      const response = UrlFetchApp.fetch(postUrl, {
-        method: 'post',
-        contentType: 'application/json',
-        headers,
-        payload,
-      });
+    // try {
+    //   const response = UrlFetchApp.fetch(postUrl, {
+    //     method: 'post',
+    //     contentType: 'application/json',
+    //     headers,
+    //     payload,
+    //   });
 
-      if (response.getResponseCode() >= 400) {
-        Logger.log(`Failed posting to bsky | StatusCode=${response.getResponseCode()}`);
-        result = Bluesky.Result.failure;
-      } else {
-        Logger.log(`Succeeded in posting to bsky!`);
-        result = Bluesky.Result.success;
-      }
-    } catch (e) {
-      Logger.log(`Failed posting to bsky | Error=${e}`);
-      result = Bluesky.Result.failure;
-    }
+    //   if (response.getResponseCode() >= 400) {
+    //     Logger.log(`Failed posting to bsky | StatusCode=${response.getResponseCode()}`);
+    //     result = Bluesky.Result.failure;
+    //   } else {
+    //     Logger.log(`Succeeded in posting to bsky!`);
+    //     result = Bluesky.Result.success;
+    //   }
+    // } catch (e) {
+    //   Logger.log(`Failed posting to bsky | Error=${e}`);
+    //   result = Bluesky.Result.failure;
+    // }
 
-    // 拘束連投を避けるために投稿後しばらく待つ
-    Utilities.sleep(5000);
+    // // 拘束連投を避けるために投稿後しばらく待つ
+    // Utilities.sleep(5000);
 
     return result;
   }

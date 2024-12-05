@@ -7,14 +7,19 @@
   const compressUrl = 'https://api.tinify.com/shrink';
 
   function fetchCompressedImage(location: string): GoogleAppsScript.Base.Blob | null {
+    Logger.log(`Start fetching compressed image | Location=${location}`);
+
     const response = UrlFetchApp.fetch(location, { method: 'get' });
 
-    if (response.getResponseCode() !== 200) return null;
+    if (response.getResponseCode() !== 200) {
+      Logger.log(`Failed fetching compressed image | StatusCode=${response.getResponseCode()}`);
+      return null;
+    }
 
     return response.getBlob();
   }
 
-  function executeCompression(target: GoogleAppsScript.Base.Blob): GoogleAppsScript.Base.Blob {
+  function executeCompression(target: GoogleAppsScript.Base.Blob): GoogleAppsScript.Base.Blob | null {
     try {
       const response = UrlFetchApp.fetch(compressUrl, {
         method: 'post',
@@ -43,7 +48,8 @@
 
     let compressed = target;
     do {
-      compressed = executeCompression(target);
+      compressed = executeCompression(compressed);
+      if (compressed === null) return;
     } while (compressed.getBytes().length > size);
 
     return compressed;
