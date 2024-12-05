@@ -96,6 +96,11 @@
 
     const data: Payload = initializePayload(text, facets);
 
+    images.forEach(image => {
+      const blob = Bsky.uploadImage(token, image.blob);
+      image.blob = blob;
+    });
+
     if (linkUrl) {
       data.record.embed = {
         $type: 'app.bsky.embed.external',

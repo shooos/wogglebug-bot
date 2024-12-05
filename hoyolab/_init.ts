@@ -46,10 +46,15 @@ namespace HoYo {
     Genshin: Partial<Functions> & Partial<{
       getLastPostedEventId(): string;
       saveLastPostedEventId(id: string): void;
-      fetchNewAlivalEvents: (lastPostedId: string) => Event[];
+      fetchNewAlivalEvents(lastPostedId: string): Event[];
+      buildEventMessages(events: Event[]): Bluesky.Message[];
     }>;
     ZZZ: Partial<Functions>;
     StarRail: Partial<Functions>;
+  }
+
+  export interface Subscriber {
+    subscribe(): void;
   }
 }
 
@@ -58,3 +63,5 @@ const HoYoLAB: HoYo.Games = {
   ZZZ: {},
   StarRail: {},
 };
+
+const HoYoLABSubscriber: Partial<HoYo.Subscriber> = {};

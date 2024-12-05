@@ -69,4 +69,20 @@ ${content.body}`;
       }
     });
   }
+
+  HoYoLAB.Genshin.buildEventMessages = (events) => {
+    return events.map(event => {
+      const body = `HoYoLAB 原神公式イベント通知 #原神 #原神公式情報
+
+${event.subject}
+${event.articleUrl}
+期間: ${Utils.formatToViewDate(event.startAt)} ～ ${Utils.formatToViewDate(event.endAt)}
+投稿日時 : ${Utils.formatToViewDate(event.createdAt)}`;
+
+      return {
+        body,
+        images: createImage(event.imageUrls),
+      }
+    });
+  }
 })();
