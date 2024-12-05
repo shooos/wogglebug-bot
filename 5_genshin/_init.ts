@@ -4,7 +4,7 @@ namespace Genshin {
     body: string;
   }
 
-  export interface ImagenariumTheaterInfo {
+  export interface ImaginariumTheaterInfo {
     date: Date;
     elementals: string[];
     principalCastMembers: string[];
@@ -17,14 +17,14 @@ namespace Genshin {
     saveLastFetchedId(id: string): void;
   }
 
-  interface ImagenariumTheater {
-    extractInfo(releasaePost: ReleasePost): ImagenariumTheaterInfo[];
+  interface ImaginariumTheater {
+    extractInfo(releasaePost: ReleasePost): ImaginariumTheaterInfo[];
   }
 
   export interface Functions {
     propertyRepository: PropertyRepository;
     fetchReleases(lastFetchedId: string): ReleasePost[];
-    imagenariumTheater: Partial<ImagenariumTheater>;
+    imaginariumTheater: Partial<ImaginariumTheater>;
   }
 };
 

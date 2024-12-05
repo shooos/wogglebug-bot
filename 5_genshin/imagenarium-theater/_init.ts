@@ -1,3 +1,0 @@
-(() => {
-  Genshin.imagenariumTheater = {};
-})();
