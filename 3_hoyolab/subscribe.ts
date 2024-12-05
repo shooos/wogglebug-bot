@@ -1,7 +1,5 @@
 (() => {
-  const accessJwt = Bsky.createSession();
-
-  function genshin(): void {
+  function genshin(token: string): void {
     const lastPostedId = HoYoLAB.Genshin.getLastPostedId();
     const newAlivails = HoYoLAB.Genshin.fetchNewAlivals(lastPostedId);
     const messages = HoYoLAB.Genshin.buildMessages(newAlivails.reverse());
@@ -11,40 +9,40 @@
     const eventMessages = HoYoLAB.Genshin.buildEventMessages(newAlivailEvents.reverse());
 
     messages.concat(eventMessages).forEach(message => {
-      Bsky.postMessage(accessJwt, message, Bluesky.BotType.regular);
+      Bsky.postMessage(token, message, Bluesky.BotType.regular);
     });
 
     if (messages.length) HoYoLAB.Genshin.saveLastPostedId(newAlivails[0].id);
     if (eventMessages.length) HoYoLAB.Genshin.saveLastPostedEventId(newAlivailEvents[0].id);
   }
 
-  function zzz(): void {
+  function zzz(token: string): void {
     const lastPostedId = HoYoLAB.ZZZ.getLastPostedId();
     const newAlivails = HoYoLAB.ZZZ.fetchNewAlivals(lastPostedId);
     const messages = HoYoLAB.ZZZ.buildMessages(newAlivails.reverse());
 
     messages.forEach(message => {
-      Bsky.postMessage(accessJwt, message, Bluesky.BotType.regular);
+      Bsky.postMessage(token, message, Bluesky.BotType.regular);
     });
 
     if (messages.length) HoYoLAB.ZZZ.saveLastPostedId(newAlivails[0].id);
   }
 
-  function starRail(): void {
+  function starRail(token: string): void {
     const lastPostedId = HoYoLAB.StarRail.getLastPostedId();
     const newAlivails = HoYoLAB.StarRail.fetchNewAlivals(lastPostedId);
     const messages = HoYoLAB.StarRail.buildMessages(newAlivails.reverse());
 
     messages.forEach(message => {
-      Bsky.postMessage(accessJwt, message, Bluesky.BotType.regular);
+      Bsky.postMessage(token, message, Bluesky.BotType.regular);
     });
 
     if (messages.length) HoYoLAB.StarRail.saveLastPostedId(newAlivails[0].id);
   }
 
-  HoYoLABSubscriber.subscribe = () => {
-    genshin();
-    zzz();
-    starRail();
+  HoYoLABSubscriber.subscribe = (token) => {
+    genshin(token);
+    zzz(token);
+    starRail(token);
   }
 })();

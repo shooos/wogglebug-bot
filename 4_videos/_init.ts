@@ -13,6 +13,12 @@ namespace Video {
     fetchGenshinOfficialVideos(lastCheckedPublishedAt: Date): VideoInfo[];
     buildMessages(videoInfos: VideoInfo[]): Bluesky.Message[];
   }
+
+  export interface Subscriber {
+    subscribe(token: string): void;
+  }
 }
 
 const Videos: Partial<Video.Functions> = {};
+
+const VideosSubscriber: Partial<Video.Subscriber> = {};

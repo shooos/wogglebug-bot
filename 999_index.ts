@@ -9,7 +9,9 @@ function subscribeHoYoOfficial(): void {
     return;
   }
 
-  HoYoLABSubscriber.subscribe();
+  const accessJwt = Bsky.createSession();
+  HoYoLABSubscriber.subscribe(accessJwt);
+  VideosSubscriber.subscribe(accessJwt);
 }
 
 /**
