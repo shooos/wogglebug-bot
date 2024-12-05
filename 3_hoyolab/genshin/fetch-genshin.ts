@@ -6,7 +6,7 @@
 
     const newAlivails: HoYo.Content[] = [];
     contents.some(content => {
-      if (content.id === lastPostedId) return true;
+      if (content.id == lastPostedId) return true;
       newAlivails.push(content);
     });
 
@@ -22,7 +22,7 @@
 
     const newAlivails: HoYo.Event[] = [];
     events.some(event => {
-      if (event.id === lastPostedId) return true;
+      if (event.id == lastPostedId) return true;
       newAlivails.push(event);
     });
 
