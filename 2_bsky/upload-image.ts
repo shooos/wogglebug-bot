@@ -37,6 +37,6 @@
 
     Logger.log(`Success uploading image to bsky`);
 
-    return response.getBlob();
+    return JSON.parse(response.getContentText()).blob;
   }
 })();

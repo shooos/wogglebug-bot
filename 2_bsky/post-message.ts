@@ -36,6 +36,7 @@
 
   const hundle = PropertiesService.getScriptProperties().getProperty('BLUESKY_HANDLE');
   const postUrl = 'https://bsky.social/xrpc/com.atproto.repo.createRecord';
+  const enablePost = PropertiesService.getScriptProperties().getProperty('ENABLE_POST');
 
   function getBotName(botType: Bluesky.BotType): string {
     const propertyKey = `BOT_NAME_${botType.toUpperCase()}`;
@@ -91,8 +92,8 @@
       Authorization: `Bearer ${token}`
     };
 
-    const text = `${body}\n\nPosted by ${botName}(bot)`;
-    const facets = Bsky.detectFacets(text);
+    const text = `${body}\n\nPosted by ${botName}`;
+    const facets = Bsky.detectFacets(new Bluesky.UnicodeString(text));
 
     const data: Payload = initializePayload(text, facets);
 
@@ -125,28 +126,33 @@
 
     let result: Bluesky.Result = Bluesky.Result.pending;
 
-    // try {
-    //   const response = UrlFetchApp.fetch(postUrl, {
-    //     method: 'post',
-    //     contentType: 'application/json',
-    //     headers,
-    //     payload,
-    //   });
+    if (enablePost !== '1') {
+      Logger.log(`Is disabled posting to bsky`);
+      return Bluesky.Result.success;
+    }
 
-    //   if (response.getResponseCode() >= 400) {
-    //     Logger.log(`Failed posting to bsky | StatusCode=${response.getResponseCode()}`);
-    //     result = Bluesky.Result.failure;
-    //   } else {
-    //     Logger.log(`Succeeded in posting to bsky!`);
-    //     result = Bluesky.Result.success;
-    //   }
-    // } catch (e) {
-    //   Logger.log(`Failed posting to bsky | Error=${e}`);
-    //   result = Bluesky.Result.failure;
-    // }
+    try {
+      const response = UrlFetchApp.fetch(postUrl, {
+        method: 'post',
+        contentType: 'application/json',
+        headers,
+        payload,
+      });
 
-    // // 拘束連投を避けるために投稿後しばらく待つ
-    // Utilities.sleep(5000);
+      if (response.getResponseCode() >= 400) {
+        Logger.log(`Failed posting to bsky | StatusCode=${response.getResponseCode()}`);
+        result = Bluesky.Result.failure;
+      } else {
+        Logger.log(`Succeeded in posting to bsky!`);
+        result = Bluesky.Result.success;
+      }
+    } catch (e) {
+      Logger.log(`Failed posting to bsky | Error=${e}`);
+      result = Bluesky.Result.failure;
+    }
+
+    // 拘束連投を避けるために投稿後しばらく待つ
+    Utilities.sleep(5000);
 
     return result;
   }

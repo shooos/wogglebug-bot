@@ -1,5 +1,7 @@
 (() => {
   Videos.fetchGenshinOfficialVideos = (lastCheckedPublishedAt) => {
+    Logger.log(`Start fetching genshin official videos | LastCheckedPublishedAt=${Utils.formatDateToIsoString(lastCheckedPublishedAt)}`);
+
     const ret = UrlFetchApp.fetch('https://www.youtube.com/feeds/videos.xml?channel_id=UCAVR6Q0YgYa8xwz8rdg9Mrg');
     const doc = XmlService.parse(ret.getContentText());
     const root = doc.getRootElement();
@@ -9,7 +11,7 @@
 
     const entries = root.getChildren('entry', atom);
 
-    return entries.map(it => {
+    const videos = entries.map(it => {
       const id = it.getChild('videoId', yt).getText();
       const title = it.getChild('title', atom).getText();
       const url = it.getChild('link', atom).getAttribute('href').getValue();
@@ -24,5 +26,15 @@
         thumbnailUrl,
       };
     }).filter(it => new Date(it.published) > lastCheckedPublishedAt);
+
+    Logger.log(`Success fetching genshin official videos | Videos=${JSON.stringify(
+      videos.map(v => ({
+        id: v.id,
+        title: v.title,
+        published: Utils.formatDateToIsoString(v.published)
+      }))
+    )}`)
+
+    return videos;
   }
 })();

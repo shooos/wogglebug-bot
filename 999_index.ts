@@ -41,3 +41,15 @@ function noticeCountdownResetSpiralAbyss(): void {
 function noticeStarlightShopCharcter(): void {
 
 }
+
+/**
+ * 任意の内容を tester として bsky に投稿する
+ */
+function postToBsky(): void {
+  const accessJwt = Bsky.createSession();
+
+  const content = FetchOfficialPostHelper.execute(`https://bbs-api-os.hoyolab.com/community/post/wapi/getPostFull?post_id=35393996&read=1&scene=1`);
+  const message = HoYoLAB.Genshin.buildMessages([content])[0];
+
+  Bsky.postMessage(accessJwt, message, Bluesky.BotType.tester);
+}
