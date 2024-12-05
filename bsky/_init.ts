@@ -1,5 +1,6 @@
 namespace Bluesky {
   export const MAX_IMAGE_SIZE = 976000;
+  export const MAX_BODY_LENGTH = 300 - 25 - 1; // 25文字はbot名、1文字は3点リーダ
 
   export const Result = {
     pending: 'pending',

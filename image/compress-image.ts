@@ -14,9 +14,7 @@
     return response.getBlob();
   }
 
-  Image.compress = (target) => {
-    Logger.log(`Start compressing image | ImageSize=${target.getBytes().length}`);
-
+  function executeCompression(target: GoogleAppsScript.Base.Blob): GoogleAppsScript.Base.Blob {
     try {
       const response = UrlFetchApp.fetch(compressUrl, {
         method: 'post',
@@ -38,5 +36,16 @@
       Logger.log('Failed to compress image | Error=%s', e);
       return null;
     }
+  }
+
+  Image.compress = (target, size) => {
+    Logger.log(`Start compressing image | ImageSize=${target.getBytes().length}, TargetSize=${size}`);
+
+    let compressed = target;
+    do {
+      compressed = executeCompression(target);
+    } while (compressed.getBytes().length > size);
+
+    return compressed;
   }
 })();

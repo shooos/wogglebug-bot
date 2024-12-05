@@ -39,6 +39,7 @@ namespace HoYo {
     getFaildPostIds(): string[];
     saveFaildPostIds(ids: string[]): void;
     fetchNewAlivals(lastPostedId: string): Content[];
+    buildMessages(contents: Content[]): Bluesky.Message[];
   }
 
   export interface Games {
