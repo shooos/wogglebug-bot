@@ -22,8 +22,14 @@
   }
 
   Genshin.imaginariumTheater.extractInfo = (releasePost) => {
+    Logger.log(`Start extracting imaginarium theater information | PostId=${releasePost.id}`);
+
     const { id, body } = releasePost;
     const matches = body.matchAll(/幻想シアターは(.{4,16})より開放されます。\s指定元素タイプ：([炎雷氷水岩草風])元素.([炎雷氷水岩草風])元素.([炎雷氷水岩草風])元素\s開幕キャスト：「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」\s[^\s]+\s特別招待キャスト：「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」/img);
+
+    if (!Array.from(matches).length) {
+      Logger.log(`No matches imaginarium theater informations`);
+    }
 
     const results = [];
     for (let match of Array.from(matches)) {
@@ -36,7 +42,7 @@
       });
     }
 
-    Logger.log(JSON.stringify(results));
+    Logger.log(`Success extracting imaginarium theater information | Results=${JSON.stringify(results)}`);
 
     return results;
   }

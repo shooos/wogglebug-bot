@@ -19,6 +19,8 @@ namespace Genshin {
 
   interface ImaginariumTheater {
     extractInfo(releasaePost: ReleasePost): ImaginariumTheaterInfo[];
+    save(info: ImaginariumTheaterInfo): void;
+    subscribe(): void;
   }
 
   export interface Functions {
