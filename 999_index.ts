@@ -46,7 +46,7 @@ function noticeStarlightShopCharcter(): void {
  * 幻想シアター情報を収集する
  */
 function subscribeImaginariumTheaterInfo(): void {
-
+  Genshin.imaginariumTheater.subscribe();
 }
 
 /**

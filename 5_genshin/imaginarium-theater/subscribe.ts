@@ -1,6 +1,7 @@
 (() => {
   Genshin.imaginariumTheater.subscribe = () => {
     Logger.log(`Start subscribing Genshin Imaginarium Theater informations`);
+
     const lastFetchedId = Genshin.propertyRepository.getLastFetchedId();
     const releases = Genshin.fetchReleases(lastFetchedId);
 
@@ -11,5 +12,7 @@
         Genshin.imaginariumTheater.save(info);
       });
     });
+
+    Logger.log(`Finish subscribing Genshin Imaginarium Theater informations`);
   }
 })();
