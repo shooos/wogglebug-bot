@@ -13,6 +13,8 @@
       });
     });
 
+    if (releases.length) Genshin.propertyRepository.saveLastFetchedId(releases[0].id);
+
     Logger.log(`Finish subscribing Genshin Imaginarium Theater informations`);
   }
 })();

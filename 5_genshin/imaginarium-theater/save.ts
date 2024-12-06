@@ -6,7 +6,7 @@
     const sheet = activeSheet.getSheetByName('幻想シアター');
     const nextRow = sheet.getLastRow() + 1;
 
-    sheet.getRange(nextRow, 1).setValue(info.date);
+    sheet.getRange(nextRow, 1).setValue(Utilities.formatDate(info.date, 'JST', 'M月d日'));
 
     sheet.getRange(nextRow, 2).setValue(info.elementals[0]);
     sheet.getRange(nextRow, 3).setValue(info.elementals[1]);
