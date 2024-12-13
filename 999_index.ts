@@ -53,7 +53,8 @@ function subscribeImaginariumTheaterInfo(): void {
  * 幻想シアター情報を bsky にポストする
  */
 function noticeImaginariumTheaterInfo(): void {
-
+  const accessJwt = Bsky.createSession();
+  Genshin.imaginariumTheater.notice(accessJwt, Bluesky.BotType.regular);
 }
 
 /**
@@ -66,4 +67,9 @@ function postToBsky(): void {
   const message = HoYoLAB.Genshin.buildMessages([content])[0];
 
   Bsky.postMessage(accessJwt, message, Bluesky.BotType.tester);
+}
+
+function __test(): void {
+  const accessJwt = Bsky.createSession();
+  Genshin.imaginariumTheater.notice(accessJwt, Bluesky.BotType.tester);
 }
