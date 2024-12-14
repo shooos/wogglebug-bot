@@ -33,10 +33,17 @@ namespace Genshin {
     buildMessage(info: ImaginariumTheaterMessageModel): Bluesky.Message;
   }
 
+  interface SpiralAbyss {
+    createImage(hours: number): GoogleAppsScript.Drive.File;
+    countDown(token: string, currentDate: Date): void;
+    buildMessage(hours: number, image: GoogleAppsScript.Base.Blob): Bluesky.Message;
+  }
+
   export interface Functions {
     propertyRepository: PropertyRepository;
     fetchReleases(lastFetchedId: string): ReleasePost[];
     imaginariumTheater: Partial<ImaginariumTheater>;
+    spiralAbyss: Partial<SpiralAbyss>;
   }
 };
 

@@ -32,7 +32,8 @@ function noticeOpenSpiralAbyss(): void {
  * 深境螺旋がリセット間近であることを Bsky にポストする
  */
 function noticeCountdownResetSpiralAbyss(): void {
-
+  const accessJwt = Bsky.createSession();
+  Genshin.spiralAbyss.countDown(accessJwt, new Date());
 }
 
 /**
