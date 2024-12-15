@@ -33,8 +33,15 @@ namespace Genshin {
     buildMessage(info: ImaginariumTheaterMessageModel): Bluesky.Message;
   }
 
+  interface SprialAbyssImageData {
+    fileName: string;
+    imageType: string;
+    base64: string;
+  }
+
   interface SpiralAbyss {
     createImage(hours: number): GoogleAppsScript.Drive.File;
+    saveImage(imageData: SprialAbyssImageData): void;
     countDown(token: string, currentDate: Date): void;
     buildMessage(hours: number, image: GoogleAppsScript.Base.Blob): Bluesky.Message;
   }
