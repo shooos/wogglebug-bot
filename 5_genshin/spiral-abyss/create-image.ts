@@ -22,6 +22,14 @@
     <canvas id="canvas" style="width: 768px; height: 512px;"></canvas>
 
     <script>
+      function successSaveImage(fileId) {
+        google.script.run.successSaveSpiralAbyssImage(fileId);
+      }
+
+      function failureSaveImage(error) {
+        google.script.run.failureSaveSpiralAbyssImage(error);
+      }
+
       function draw() {
         const canvas = document.getElementById('canvas');
           const ctx = canvas.getContext('2d');
@@ -42,7 +50,17 @@
 
             ctx.font = '240px "Yusei Magic"';
             ctx.fillStyle = grad;
-            ctx.fillText(${hours}, ${hoursPositionX}, 380)
+            ctx.fillText(${hours}, ${hoursPositionX}, 380);
+
+            const fileName = 'spiral-abyss.png';
+            const imageType = 'image/png';
+            const base64 = board.toDataURL(imageType);
+            const imageData = { fileName, imageType, base64 };
+
+            google.script.run
+              .withSuccessHandler(successSaveImage)
+              .withFailureHandler(failureSaveImage)
+              .saveSpiralAbyssImage(imageData);
           }
           baseImage.src = ${image}
       }
@@ -53,7 +71,9 @@
 </html>
     `;
 
-    const blob = Utilities.newBlob(html, MimeType.HTML).setName('spiral-abyss-image.png');
-    return DriveApp.createFile(blob.getAs(MimeType.PNG));
+    const imageFolder = DriveApp.getFolderById(GENSHIN_SPIRAL_ABYSS_IMAGE_FOLDER_ID);
+    const imageFile = imageFolder.getFiles().next();
+
+    return imageFile;
   }
 })();

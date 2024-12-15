@@ -33,7 +33,7 @@ namespace Genshin {
     buildMessage(info: ImaginariumTheaterMessageModel): Bluesky.Message;
   }
 
-  interface SprialAbyssImageData {
+  export interface SprialAbyssImageData {
     fileName: string;
     imageType: string;
     base64: string;
@@ -42,7 +42,7 @@ namespace Genshin {
   interface SpiralAbyss {
     createImage(hours: number): GoogleAppsScript.Drive.File;
     saveImage(imageData: SprialAbyssImageData): void;
-    countDown(token: string, currentDate: Date): void;
+    countDown(currentDate: Date): void;
     buildMessage(hours: number, image: GoogleAppsScript.Base.Blob): Bluesky.Message;
   }
 
@@ -53,5 +53,7 @@ namespace Genshin {
     spiralAbyss: Partial<SpiralAbyss>;
   }
 };
+
+const GENSHIN_SPIRAL_ABYSS_IMAGE_FOLDER_ID = '1lKdQLkBlvw_WA1i-KccjbRelHb5rlkfL';
 
 const Genshin: Partial<Genshin.Functions> = {};

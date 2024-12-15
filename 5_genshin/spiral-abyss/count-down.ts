@@ -3,7 +3,7 @@
     return Math.floor((dateFinal.getTime() - dateInitial.getTime()) / (60 * 60 * 1000));
   }
 
-  Genshin.spiralAbyss.countDown = (token, currentDate) => {
+  Genshin.spiralAbyss.countDown = (currentDate) => {
     Logger.log(`Start to count down notification of Spiral Abyss | CurrentDate=${Utils.formatToViewDate(currentDate)}`);
 
     const day16 = new Date()
@@ -19,6 +19,7 @@
       return null;
     }
 
+    const token = Bsky.createSession();
     const file = Genshin.spiralAbyss.createImage(hours);
     const message = Genshin.spiralAbyss.buildMessage(hours, file.getBlob());
 
