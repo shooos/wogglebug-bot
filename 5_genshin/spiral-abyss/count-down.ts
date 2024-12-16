@@ -23,7 +23,7 @@
     const file = Genshin.spiralAbyss.createImage(hours);
     const message = Genshin.spiralAbyss.buildMessage(hours, file.getBlob());
 
-    // Bsky.postMessage(token, message, Bluesky.BotType.regular);
+    Bsky.postMessage(token, message, Bluesky.BotType.regular);
 
     file.setTrashed(true);
 
