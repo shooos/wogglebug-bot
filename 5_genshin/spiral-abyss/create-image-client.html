@@ -12,7 +12,7 @@
 
 <body>
   <canvas id="canvas" style="width: 768px; height: 512px;"></canvas>
-  <input id="hours" type="number" value="<?= hours ?>" />
+  <input id="hours" value="<?= hours ?>" />
 
   <script>
     google.script.run
@@ -24,7 +24,7 @@
         grad.addColorStop(0, 'yellow');
         grad.addColorStop(1, 'orange');
 
-        const hours = document.querySelector('#hours').value;
+        const hours = parseInt(document.querySelector('#hours').value);
         const hoursPositionX = hours < 10 ? 320 : 260;
 
         baseImage.onload = function () {
