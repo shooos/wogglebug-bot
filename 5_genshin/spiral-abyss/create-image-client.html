@@ -12,16 +12,9 @@
 
 <body>
   <canvas id="canvas" style="width: 768px; height: 512px;"></canvas>
+  <input id="hours" type="number" value="<?= hours ?>" />
 
   <script>
-    function successSaveImage(fileId) {
-      google.script.run.successSaveSpiralAbyssImage(fileId);
-    }
-
-    function failureSaveImage(error) {
-      google.script.run.failureSaveSpiralAbyssImage(error);
-    }
-
     google.script.run
       .withSuccessHandler((imageDataUrl) => {
         const canvas = document.getElementById('canvas');
@@ -31,7 +24,7 @@
         grad.addColorStop(0, 'yellow');
         grad.addColorStop(1, 'orange');
 
-        const hours = <?= hours ?>;
+        const hours = document.querySelector('#hours').value;
         const hoursPositionX = hours < 10 ? 320 : 260;
 
         baseImage.onload = function () {
@@ -57,10 +50,13 @@
 
           google.script.run.clientLogger('Created image data url from canvas');
 
-
           google.script.run
-            .withSuccessHandler(successSaveImage)
-            .withFailureHandler(failureSaveImage)
+            .withSuccessHandler((fileId) => {
+              google.script.run.successSaveSpiralAbyssImage(fileId);
+            })
+            .withFailureHandler((error) => {
+              google.script.run.failureSaveSpiralAbyssImage(error);
+            })
             .saveSpiralAbyssImage(imageData);
         }
 

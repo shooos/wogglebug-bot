@@ -7,10 +7,11 @@ function toDataUrl_(fileId: string): string {
   return `data:${blob.getContentType()};base64,${Utilities.base64Encode(blob.getBytes())}`;
 }
 
-function getSpiralAbyssImageParameters(): { hours: number, imageDataUrl: string } {
-  Logger.log(`Start getting image data url`);
+function getImageDataUrl(): string {
+  const dataUrl = toDataUrl_('1ESTC71ucNOR-ctKaFXYbadzjZfL_ojLH');
+  Logger.log(`Created spiral abyss image data url | DataUrlLength=${dataUrl.length}`);
 
-  return toDataUrl_('1ESTC71ucNOR-ctKaFXYbadzjZfL_ojLH');
+  return dataUrl;
 }
 
 function saveSpiralAbyssImage({ fileName, imageType, base64 }: Genshin.SprialAbyssImageData): string {
