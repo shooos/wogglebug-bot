@@ -2,10 +2,6 @@
   Genshin.spiralAbyss = {};
 })();
 
-function clientLogger(message: string): void {
-  Logger.log(message);
-}
-
 function saveSpiralAbyssImage({ fileName, imageType, base64 }: Genshin.SprialAbyssImageData): string {
   Logger.log(`Start to save spiral abyss image | FileName=${fileName}`);
 
