@@ -1,4 +1,6 @@
 (() => {
+  const createImageClientUrl = 'https://script.google.com/macros/s/AKfycbwW0BCF8WTLRB5wO0D8fe542wzzQ4sCSkLJPrJ8SKvzT1C9lYAA1i6QwqAVjCoMqNvgIw/exec';
+
   function toDataUrl(fileId: string): string {
     const blob = DriveApp.getFileById(fileId).getBlob();
     return `data:${blob.getContentType()};base64,${Utilities.base64Encode(blob.getBytes())}`;
@@ -10,10 +12,7 @@
     const imageDataUrl = toDataUrl('1ESTC71ucNOR-ctKaFXYbadzjZfL_ojLH');
     const hoursPositionX = hours < 10 ? 320 : 260;
 
-    const output = HtmlService.createHtmlOutputFromFile('5_genshin/spiral-abyss/test');
-    const blob = output.getBlob().setName('spiral-abyss.pdf');
-
-    DriveApp.createFile(blob.getAs(MimeType.PDF));
+    UrlFetchApp.fetch(createImageClientUrl);
 
     const imageFolder = DriveApp.getFolderById(GENSHIN_SPIRAL_ABYSS_IMAGE_FOLDER_ID);
     const imageFile = imageFolder.getFiles().next();

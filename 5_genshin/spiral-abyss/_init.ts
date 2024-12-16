@@ -2,6 +2,17 @@
   Genshin.spiralAbyss = {};
 })();
 
+function toDataUrl_(fileId: string): string {
+  const blob = DriveApp.getFileById(fileId).getBlob();
+  return `data:${blob.getContentType()};base64,${Utilities.base64Encode(blob.getBytes())}`;
+}
+
+function getImageDataUrl(): string {
+  Logger.log(`Start getting image data url`);
+
+  return toDataUrl_('1ESTC71ucNOR-ctKaFXYbadzjZfL_ojLH');
+}
+
 function saveSpiralAbyssImage({ fileName, imageType, base64 }: Genshin.SprialAbyssImageData): string {
   Logger.log(`Start to save spiral abyss image | FileName=${fileName}`);
 
