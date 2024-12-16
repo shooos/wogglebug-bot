@@ -1,5 +1,5 @@
 (() => {
-  const createImageClientUrl = 'https://script.google.com/macros/s/AKfycbzCqFhBNt0k9jpZKWDj7JCrFhQpnRbmhfNiy0Uh-DYmi6Ik4SaAcHAPhWqGmvmtFm0sdw/exec';
+  const createImageClientUrl = 'https://script.google.com/macros/s/AKfycbxgEFgpXnxZvueLhZ1R1AdDvsN7BHOGakU2YpSLqzYRDw8NsFzNzcdDtlD4IKbxDeGw2g/exec';
 
   Genshin.spiralAbyss.createImage = (hours) => {
     Logger.log(`Start to create spiral abyss image | Hours=${hours}`);

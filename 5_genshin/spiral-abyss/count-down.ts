@@ -14,15 +14,15 @@
 
     Logger.log(`Count-down Spiral Abyss | RemainingHours=${hours}`);
 
-    // if (hours <= 0 || hours > 72) {
-    //   Logger.log(`No need to notification`);
-    //   return null;
-    // }
+    if (hours <= 0 || hours > 72) {
+      Logger.log(`No need to notification`);
+      return null;
+    }
 
-    const token = Bsky.createSession();
     const file = Genshin.spiralAbyss.createImage(hours);
     const message = Genshin.spiralAbyss.buildMessage(hours, file.getBlob());
 
+    const token = Bsky.createSession();
     Bsky.postMessage(token, message, Bluesky.BotType.regular);
 
     file.setTrashed(true);
