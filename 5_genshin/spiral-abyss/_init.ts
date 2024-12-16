@@ -7,7 +7,7 @@ function toDataUrl_(fileId: string): string {
   return `data:${blob.getContentType()};base64,${Utilities.base64Encode(blob.getBytes())}`;
 }
 
-function getImageDataUrl(): string {
+function getSpiralAbyssImageParameters(): { hours: number, imageDataUrl: string } {
   Logger.log(`Start getting image data url`);
 
   return toDataUrl_('1ESTC71ucNOR-ctKaFXYbadzjZfL_ojLH');
