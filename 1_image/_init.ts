@@ -1,6 +1,6 @@
 interface ImageFunctions {
   getRectangleSize(target: GoogleAppsScript.Base.Blob): { width: number, height: number };
-  compress(target: GoogleAppsScript.Base.Blob, size: number): GoogleAppsScript.Base.Blob;
+  compress(target: GoogleAppsScript.Base.Blob, size: number): GoogleAppsScript.Base.Blob | null;
 }
 
 const Image: Partial<ImageFunctions> = {};

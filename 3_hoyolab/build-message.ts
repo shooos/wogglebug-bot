@@ -6,6 +6,8 @@
       const validBlob = rawBlob.getBytes().length > Bluesky.MAX_IMAGE_SIZE ?
         Image.compress(rawBlob, Bluesky.MAX_IMAGE_SIZE) : rawBlob;
 
+      if (!validBlob) return null;
+
       const size = Image.getRectangleSize(validBlob);
 
       return {
@@ -16,7 +18,7 @@
           height: size.height,
         }
       };
-    });
+    }).filter(it => it !== null);
   }
 
   HoYoLAB.Genshin.buildMessages = (contents) => {
