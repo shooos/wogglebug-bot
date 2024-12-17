@@ -15,7 +15,7 @@ namespace Video {
   }
 
   export interface Subscriber {
-    subscribe(token: string): void;
+    subscribe(): void;
   }
 }
 

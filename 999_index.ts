@@ -9,9 +9,8 @@ function subscribeHoYoOfficial(): void {
     return;
   }
 
-  const accessJwt = Bsky.createSession();
-  HoYoLABSubscriber.subscribe(accessJwt);
-  VideosSubscriber.subscribe(accessJwt);
+  HoYoLABSubscriber.subscribe();
+  VideosSubscriber.subscribe();
 }
 
 /**

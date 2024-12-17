@@ -52,7 +52,7 @@
 
           google.script.run
             .withSuccessHandler((fileId) => {
-              google.script.run.successSaveSpiralAbyssImage(fileId);
+              google.script.run.successSaveSpiralAbyssImage(fileId, hours);
             })
             .withFailureHandler((error) => {
               google.script.run.failureSaveSpiralAbyssImage(error);

@@ -47,7 +47,7 @@ const FetchOfficialEventsHelper = (() => {
         id: c.id,
         subject: c.subject,
         createdAt: Utils.formatToViewDate(c.createdAt),
-        imageUrls: c.imageUrls
+        images: `${c.imageUrls.length} images`,
       })))}`);
 
       return events;

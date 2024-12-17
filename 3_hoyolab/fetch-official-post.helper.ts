@@ -36,7 +36,7 @@ const FetchOfficialPostHelper = (() => {
         id: content.id,
         subject: content.subject,
         createdAt: Utils.formatToViewDate(content.createdAt),
-        imageUrls: content.imageUrls
+        images: `${content.imageUrls.length} images`,
       })}`);
 
       return content;

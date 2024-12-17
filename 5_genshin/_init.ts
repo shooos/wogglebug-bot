@@ -40,9 +40,10 @@ namespace Genshin {
   }
 
   interface SpiralAbyss {
-    createImage(hours: number): GoogleAppsScript.Drive.File;
+    createImage(hours: number): void;
     saveImage(imageData: SprialAbyssImageData): void;
     countDown(currentDate: Date): void;
+    countDownCallback(fileId: string, hours: number): void;
     buildMessage(hours: number, image: GoogleAppsScript.Base.Blob): Bluesky.Message;
   }
 

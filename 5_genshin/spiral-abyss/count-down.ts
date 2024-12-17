@@ -19,13 +19,18 @@
       return null;
     }
 
-    const file = Genshin.spiralAbyss.createImage(hours);
-    const message = Genshin.spiralAbyss.buildMessage(hours, file.getBlob());
+    Genshin.spiralAbyss.createImage(hours);
+  }
+
+  Genshin.spiralAbyss.countDownCallback = (fileId, hours) => {
+    const imageFile = DriveApp.getFileById(fileId);
+
+    const message = Genshin.spiralAbyss.buildMessage(hours, imageFile.getBlob());
 
     const token = Bsky.createSession();
     Bsky.postMessage(token, message, Bluesky.BotType.regular);
 
-    file.setTrashed(true);
+    imageFile.setTrashed(true);
 
     Logger.log(`Spiral Abyss notification is completed`);
   }

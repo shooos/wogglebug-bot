@@ -55,7 +55,7 @@ namespace HoYo {
   }
 
   export interface Subscriber {
-    subscribe(token: string): void;
+    subscribe(): void;
   }
 }
 
