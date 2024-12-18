@@ -40,7 +40,7 @@ const FetchOfficialPostsHelper = (() => {
         subject: c.subject,
         createdAt: Utils.formatToViewDate(c.createdAt),
         images: `${c.imageUrls.length} images`,
-      })))}`);
+      })), null, 2)}`);
 
       return contents;
     }

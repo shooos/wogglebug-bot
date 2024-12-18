@@ -37,7 +37,7 @@ const FetchOfficialPostHelper = (() => {
         subject: content.subject,
         createdAt: Utils.formatToViewDate(content.createdAt),
         images: `${content.imageUrls.length} images`,
-      })}`);
+      }, null, 2)}`);
 
       return content;
     }
