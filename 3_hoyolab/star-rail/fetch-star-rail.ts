@@ -2,7 +2,7 @@
   HoYoLAB.StarRail.fetchNewAlivals = (lastPostedId) => {
     Logger.log(`Start fetcing StarRail new alival official posts | LastPostedId=${lastPostedId}`);
 
-    const contents = FetchOfficialPostsHelper.execute(`https://bbs-api-os.hoyolab.com/community/post/wapi/userPost?size=15&uid=172534910`);
+    const contents = FetchOfficialPostsHelper.execute(`https://bbs-api-os.hoyolab.com/community/post/wapi/userPost?size=20&uid=172534910`);
 
     const newAlivails: HoYo.Content[] = [];
     contents.some(content => {

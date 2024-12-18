@@ -2,7 +2,7 @@
   HoYoLAB.Genshin.fetchNewAlivals = (lastPostedId) => {
     Logger.log(`Start fetcing Genshin new alival official posts | LastPostedId=${lastPostedId}`);
 
-    const contents = FetchOfficialPostsHelper.execute(`https://bbs-api-os.hoyolab.com/community/post/wapi/userPost?size=15&uid=1015537`);
+    const contents = FetchOfficialPostsHelper.execute(`https://bbs-api-os.hoyolab.com/community/post/wapi/userPost?size=20&uid=1015537`);
 
     const newAlivails: HoYo.Content[] = [];
     contents.some(content => {
@@ -18,7 +18,7 @@
   HoYoLAB.Genshin.fetchNewAlivalEvents = (lastPostedId) => {
     Logger.log(`Start fetcing Genshin new alival official events | LastPostedId=${lastPostedId}`);
 
-    const events = FetchOfficialEventsHelper.execute(`https://bbs-api-os.hoyolab.com/community/community_contribution/wapi/event/list?gids=2&size=15`);
+    const events = FetchOfficialEventsHelper.execute(`https://bbs-api-os.hoyolab.com/community/community_contribution/wapi/event/list?gids=2&size=20`);
 
     const newAlivails: HoYo.Event[] = [];
     events.some(event => {
