@@ -90,4 +90,46 @@ ${event.articleUrl}
       }
     });
   }
+
+  HoYoLAB.Genshin.buildSummaryMessage = (posts) => {
+    const body = `本日の HoYoLAB 原神公式ポストまとめ #原神 #原神公式情報
+
+${posts.map(post => `${post.subject}
+${post.articleUrl}
+${post.createdAt}`).join('\n\n')}
+`;
+
+    return {
+      body,
+      images: [],
+    }
+  }
+
+  HoYoLAB.ZZZ.buildSummaryMessage = (posts) => {
+    const body = `本日の HoYoLAB ゼンレスゾーンゼロ公式ポストまとめ #ゼンゼロ #ZZZ公式情報
+
+${posts.map(post => `${post.subject}
+${post.articleUrl}
+${post.createdAt}`).join('\n\n')}
+`;
+
+    return {
+      body,
+      images: [],
+    }
+  }
+
+  HoYoLAB.StarRail.buildSummaryMessage = (posts) => {
+    const body = `本日の HoYoLAB 崩壊スターレイル公式ポストまとめ #崩壊スターレイル #スタレ公式情報
+
+${posts.map(post => `${post.subject}
+${post.articleUrl}
+${post.createdAt}`).join('\n\n')}
+`;
+
+    return {
+      body,
+      images: [],
+    }
+  }
 })();

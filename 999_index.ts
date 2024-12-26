@@ -69,6 +69,5 @@ function postToBsky(): void {
 }
 
 function __test(): void {
-  const accessJwt = Bsky.createSession();
-  Genshin.imaginariumTheater.notice(accessJwt, Bluesky.BotType.tester);
+  HoYoLAB.Genshin.fetchTodaysPosts(new Date('2024-12-17T21:00:04'));
 }

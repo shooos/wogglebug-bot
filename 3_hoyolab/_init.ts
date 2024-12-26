@@ -39,8 +39,10 @@ namespace HoYo {
     getFaildPostIds(): string[];
     saveFaildPostIds(ids: string[]): void;
     fetchNewAlivals(lastPostedId: string): Content[];
+    fetchTodaysPosts(currentDate: Date): Content[];
     fetchPost(id: string): Content | null;
     buildMessages(contents: Content[]): Bluesky.Message[];
+    buildSummaryMessage(contents: Content[]): Bluesky.Message | null;
   }
 
   export interface Games {
@@ -56,6 +58,7 @@ namespace HoYo {
 
   export interface Subscriber {
     subscribe(): void;
+    notifyTodays(currentDate: Date): void;
   }
 }
 
