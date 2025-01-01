@@ -14,6 +14,15 @@ function subscribeHoYoOfficial(): void {
 }
 
 /**
+ * 1日の終わりに HoYoLAB 公式情報をまとめて Bsky 通知する
+ */
+function notifyTodaysHoYoLABOfficialPosts(): void {
+  const currentDate = new Date();
+
+  HoYoLABSubscriber.notifyTodays(currentDate);
+}
+
+/**
  * Bsky に毎日定期的にお知らせをポストする
  */
 function dailyInformationPost(): void {
