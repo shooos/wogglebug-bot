@@ -96,7 +96,7 @@ ${event.articleUrl}
 
 ${posts.map(post => `${post.subject}
 ${post.articleUrl}
-${post.createdAt}`).join('\n\n')}
+${Utils.formatToViewDate(post.createdAt)}`).join('\n\n')}
 `;
 
     return {
@@ -110,7 +110,7 @@ ${post.createdAt}`).join('\n\n')}
 
 ${posts.map(post => `${post.subject}
 ${post.articleUrl}
-${post.createdAt}`).join('\n\n')}
+${Utils.formatToViewDate(post.createdAt)}`).join('\n\n')}
 `;
 
     return {
@@ -124,7 +124,7 @@ ${post.createdAt}`).join('\n\n')}
 
 ${posts.map(post => `${post.subject}
 ${post.articleUrl}
-${post.createdAt}`).join('\n\n')}
+${Utils.formatToViewDate(post.createdAt)}`).join('\n\n')}
 `;
 
     return {
