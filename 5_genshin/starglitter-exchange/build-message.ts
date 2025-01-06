@@ -18,6 +18,7 @@
   ];
 
   Genshin.starglitterExchange.buildMessage = (currentDate) => {
+    Logger.log(`Start build starglitter exchange message | CurrentDate=${Utils.formatDateToIsoString(currentDate)}`);
 
     const currentMonth = currentDate.getMonth();
     const nextMonth = new Date(currentDate.setMonth(currentMonth + 1)).getMonth();
@@ -35,6 +36,8 @@
 👉 来月は ${nextChars[0]} & ${nextChars[1]}
 
 スターライトのご利用は計画的に！ #原神`;
+
+    Logger.log(`Completed build starglitter exchange message | Body=${body}`);
 
     return {
       body,
