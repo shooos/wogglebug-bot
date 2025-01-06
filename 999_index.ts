@@ -23,10 +23,26 @@ function notifyTodaysHoYoLABOfficialPosts(): void {
 }
 
 /**
- * Bsky に毎日定期的にお知らせをポストする
+ * Bsky に定期的にお知らせをポストする
  */
-function dailyInformationPost(): void {
+function periodicallyInformationPost(): void {
+  Logger.log(`Start periodical information post`);
 
+  const currentDate = new Date();
+  const messages = [
+    Genshin.starglitterExchange.subscribe(currentDate),
+  ].filter(it => it !== null);
+
+  if (!messages.length) {
+    Logger.log(`No informations`);
+  }
+
+  const accessJwt = Bsky.createSession();
+  messages.forEach(message => {
+    Bsky.postMessage(accessJwt, message, Bluesky.BotType.regular);
+  });
+
+  Logger.log(`Completed periodical information post`);
 }
 
 /**

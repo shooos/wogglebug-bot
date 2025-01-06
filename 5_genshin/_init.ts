@@ -47,11 +47,17 @@ namespace Genshin {
     buildMessage(hours: number, image: GoogleAppsScript.Base.Blob): Bluesky.Message;
   }
 
+  interface StarglitterExchange {
+    buildMessage(currentDate: Date): Bluesky.Message;
+    subscribe(currentDate: Date): Bluesky.Message | null;
+  }
+
   export interface Functions {
     propertyRepository: PropertyRepository;
     fetchReleases(lastFetchedId: string): ReleasePost[];
     imaginariumTheater: Partial<ImaginariumTheater>;
     spiralAbyss: Partial<SpiralAbyss>;
+    starglitterExchange: Partial<StarglitterExchange>;
   }
 };
 

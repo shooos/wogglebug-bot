@@ -66,6 +66,12 @@ namespace Bluesky {
   export interface Functions {
     createSession(): string;
     uploadImage(token: string, blob: GoogleAppsScript.Base.Blob): GoogleAppsScript.Base.Blob | null;
+    /**
+     * 渡した内容でポストする。内部で画像のアップロードも行う
+     * @param token accessJwt
+     * @param message ポストするメッセージ
+     * @param postedBy ポストするボットの種類
+     */
     postMessage(token: string, message: Message, postedBy: BotType): Result;
     detectFacets(text: UnicodeString): Facet[];
   }
