@@ -24,6 +24,13 @@
     }).filter(it => it !== null);
   }
 
+  const MAX_SUBJECT_LENGTH_FOR_SUMMARY = 20;
+
+  function shortenSubject(subject: String): String {
+    if (subject.length <= MAX_SUBJECT_LENGTH_FOR_SUMMARY) return subject;
+    return `${subject.slice(0, MAX_SUBJECT_LENGTH_FOR_SUMMARY)}…`;
+  }
+
   HoYoLAB.Genshin.buildMessages = (contents) => {
     return contents.map(content => {
       const body = `HoYoLAB 原神公式ポスト通知 #原神 #原神公式情報
@@ -92,12 +99,11 @@ ${event.articleUrl}
   }
 
   HoYoLAB.Genshin.buildSummaryMessage = (posts) => {
-    const body = `本日の HoYoLAB 原神公式ポストまとめ #原神 #原神公式情報
+    const body = `本日の原神公式ポストまとめ 📒
 
-${posts.map(post => `${post.subject}
-${post.articleUrl}
-${Utils.formatToViewDate(post.createdAt)}`).join('\n\n')}
-`;
+${posts.map(post => `${shortenSubject(post.subject)}`).join('\n\n')}
+
+https://www.hoyolab.com/accountCenter/postList?id=1015537`;
 
     return {
       body,
@@ -106,12 +112,11 @@ ${Utils.formatToViewDate(post.createdAt)}`).join('\n\n')}
   }
 
   HoYoLAB.ZZZ.buildSummaryMessage = (posts) => {
-    const body = `本日の HoYoLAB ゼンレスゾーンゼロ公式ポストまとめ #ゼンゼロ #ZZZ公式情報
+    const body = `本日のゼンレスゾーンゼロ公式ポストまとめ 📒
 
-${posts.map(post => `${post.subject}
-${post.articleUrl}
-${Utils.formatToViewDate(post.createdAt)}`).join('\n\n')}
-`;
+${posts.map(post => `${shortenSubject(post.subject)}`).join('\n\n')}
+
+https://www.hoyolab.com/accountCenter/postList?id=219270333`;
 
     return {
       body,
@@ -120,12 +125,11 @@ ${Utils.formatToViewDate(post.createdAt)}`).join('\n\n')}
   }
 
   HoYoLAB.StarRail.buildSummaryMessage = (posts) => {
-    const body = `本日の HoYoLAB 崩壊スターレイル公式ポストまとめ #崩壊スターレイル #スタレ公式情報
+    const body = `本日の崩壊スターレイル公式ポストまとめ 📒
 
-${posts.map(post => `${post.subject}
-${post.articleUrl}
-${Utils.formatToViewDate(post.createdAt)}`).join('\n\n')}
-`;
+${posts.map(post => `${shortenSubject(post.subject)}`).join('\n\n')}
+
+https://www.hoyolab.com/accountCenter/postList?id=172534910`;
 
     return {
       body,

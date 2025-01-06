@@ -35,6 +35,15 @@ const Utils = {
   },
 
   /**
+   * HH:mm にフォーマットして返す
+   * @param date Date 日時
+   * @returns フォーマット済み時刻文字列
+   */
+  formatToViewTime(date: Date): String {
+    return Utilities.formatDate(date, 'Asia/Tokyo', 'HH:mm');
+  },
+
+  /**
    * ISO-8601文字列表現にフォーマットして返す
    * 
    * @param date Date 日時
