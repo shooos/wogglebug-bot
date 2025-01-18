@@ -93,7 +93,7 @@
     };
 
     const text = `${body}\n\nPosted by ${botName}`;
-    const facets = Bsky.detectFacets(new Bluesky.UnicodeString(text));
+    const facets = (message.customFacets ?? []).concat(Bsky.detectFacets(new Bluesky.UnicodeString(text)));
 
     const data: Payload = initializePayload(text, facets);
 

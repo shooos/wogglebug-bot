@@ -94,5 +94,9 @@ function postToBsky(): void {
 }
 
 function __test(): void {
-  HoYoLAB.Genshin.fetchTodaysPosts(new Date('2024-12-17T21:00:04'));
+  const message = DailyInfo.loginBonus(new Date('2025-01-18T05:00:00'));
+
+  const jwt = Bsky.createSession();
+
+  Bsky.postMessage(jwt, message, Bluesky.BotType.tester);
 }
