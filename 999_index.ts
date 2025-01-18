@@ -31,6 +31,7 @@ function periodicallyInformationPost(): void {
   const currentDate = new Date();
   const messages = [
     Genshin.starglitterExchange.subscribe(currentDate),
+    DailyInfo.loginBonus(currentDate),
   ].filter(it => it !== null);
 
   if (!messages.length) {
