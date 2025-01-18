@@ -61,6 +61,7 @@ namespace Bluesky {
     body: string;
     images: AttachImage[];
     linkUrl?: string;
+    customFacets?: Facet[];
   }
 
   export interface Functions {
