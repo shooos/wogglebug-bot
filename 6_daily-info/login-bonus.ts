@@ -29,20 +29,17 @@
     const currentHours = currentDate.getHours();
     const currentMinutes = currentDate.getMinutes();
     const morning = currentHours === 5 && currentMinutes < 15;
-    const afternoon = currentHours === 12 && currentMinutes < 15;
     const night = currentHours === 23 && currentMinutes > 44;
 
-    if (!morning && !afternoon && !night) {
+    if (!morning && !night) {
       Logger.log(`Unsbscribe login bonus notification`);
       return null;
     }
 
     let topMessage: string;
-    if (currentHours < 10) {
+    if (morning) {
       topMessage = `🔔今日のログインボーナスを受け取りに行こう！`;
-    } else if (currentHours < 20) {
-      topMessage = `🔔今日のログインボーナスは受け取ったかな？`;
-    } else {
+    } else if (night) {
       topMessage = `🔔今日のログインボーナス受け取り忘れてない?!`;
     }
 
@@ -54,7 +51,7 @@
 
 📅[ スタレログインボーナス ]
 
-ンナンナ…
+ンナンナ！
 （各ゲームごとの HoYoLAB デイリーログインボーナスページが直接開けちゃう！）`
 
     const unicodeString = new Bluesky.UnicodeString(body)
