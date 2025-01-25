@@ -32,7 +32,7 @@
     const night = currentHours === 23 && currentMinutes > 44;
 
     if (!morning && !night) {
-      Logger.log(`Unsbscribe login bonus notification`);
+      Logger.log(`Unsubscribe login bonus notification`);
       return null;
     }
 

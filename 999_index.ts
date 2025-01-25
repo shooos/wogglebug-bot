@@ -32,10 +32,11 @@ function periodicallyInformationPost(): void {
   const messages = [
     Genshin.starglitterExchange.subscribe(currentDate),
     DailyInfo.loginBonus(currentDate),
+    DailyInfo.weeklyMessage(currentDate),
   ].filter(it => it !== null);
 
   if (!messages.length) {
-    Logger.log(`No informations`);
+    Logger.log(`No information`);
   }
 
   const accessJwt = Bsky.createSession();
