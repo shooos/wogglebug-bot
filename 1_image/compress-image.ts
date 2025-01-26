@@ -5,6 +5,7 @@
     Authorization: `Basic ${authorization}`,
   };
   const compressUrl = 'https://api.tinify.com/shrink';
+  const MAX_RETRY = 3;
 
   function fetchCompressedImage(location: string): GoogleAppsScript.Base.Blob | null {
     Logger.log(`Start fetching compressed image | Location=${location}`);
@@ -46,10 +47,13 @@
   Image.compress = (target, size) => {
     Logger.log(`Start compressing image | ImageSize=${target.getBytes().length}, TargetSize=${size}`);
 
+
+    let retryCount = 0;
     let compressed = target;
     do {
       compressed = executeCompression(compressed);
-      if (compressed === null) return;
+      if (compressed === null || MAX_RETRY < retryCount) return;
+      retryCount++;
     } while (compressed.getBytes().length > size);
 
     return compressed;
