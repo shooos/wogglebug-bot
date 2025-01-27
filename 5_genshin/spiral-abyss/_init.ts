@@ -8,7 +8,7 @@ function toDataUrl_(fileId: string): string {
 }
 
 function getImageDataUrl(): string {
-  const dataUrl = toDataUrl_('1ESTC71ucNOR-ctKaFXYbadzjZfL_ojLH');
+  const dataUrl = toDataUrl_('1lC8As90m_vQGV-bCDYpFinAz9ftJTrB7');
   Logger.log(`Created spiral abyss image data url | DataUrlLength=${dataUrl.length}`);
 
   return dataUrl;

@@ -58,7 +58,7 @@ function noticeOpenSpiralAbyss(): void {
  * 深境螺旋がリセット間近であることを Bsky にポストする
  */
 function noticeCountdownResetSpiralAbyss(): void {
-  Genshin.spiralAbyss.countDown(new Date('2024-12-15T00:00:00'));
+  Genshin.spiralAbyss.countDown(new Date());
 }
 
 /**
@@ -96,9 +96,5 @@ function postToBsky(): void {
 }
 
 function __test(): void {
-  const message = DailyInfo.loginBonus(new Date('2025-01-18T05:00:00'));
-
-  const jwt = Bsky.createSession();
-
-  Bsky.postMessage(jwt, message, Bluesky.BotType.tester);
+  Genshin.spiralAbyss.createImage(10);
 }
