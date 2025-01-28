@@ -14,7 +14,7 @@ function getImageDataUrl(): string {
   return dataUrl;
 }
 
-function saveSpiralAbyssImage({ fileName, imageType, base64 }: Genshin.SprialAbyssImageData): string {
+function saveSpiralAbyssImage({ fileName, imageType, base64 }: Genshin.SpiralAbyssImageData): string {
   Logger.log(`Start to save spiral abyss image | FileName=${fileName}`);
 
   const imagesFolder = DriveApp.getFolderById(GENSHIN_SPIRAL_ABYSS_IMAGE_FOLDER_ID);

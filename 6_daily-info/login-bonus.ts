@@ -2,27 +2,6 @@
   const imageId = '1CzfxDs1IHUHq5aFNeChSHMXMH5MVALGq';
   const imageBlob = DriveApp.getFileById(imageId).getBlob();
 
-  const detectFacet = (text: Bluesky.UnicodeString, regex: RegExp, uri: string): Bluesky.Facet => {
-    const match = regex.exec(text.utf16);
-    const target = match[1];
-    const start = text.utf16.indexOf(target, match.index);
-    const end = start + target.length
-    const index = { start, end }
-
-    return {
-      index: {
-        byteStart: text.utf16IndexToUtf8Index(index.start),
-        byteEnd: text.utf16IndexToUtf8Index(index.end),
-      },
-      features: [
-        {
-          $type: 'app.bsky.richtext.facet#link',
-          uri,
-        }
-      ]
-    }
-  }
-
   DailyInfo.loginBonus = (currentDate) => {
     Logger.log(`Subscribe login bonus notification`);
 
@@ -57,9 +36,9 @@
     const unicodeString = new Bluesky.UnicodeString(body)
 
     const facets = [
-      detectFacet(unicodeString, /(原神ログインボーナス)/gim, 'https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481&lang=ja-jp'),
-      detectFacet(unicodeString, /(ゼンゼロログインボーナス)/gim, 'https://act.hoyolab.com/bbs/event/signin/zzz/e202406031448091.html?act_id=e202406031448091&lang=ja-jp'),
-      detectFacet(unicodeString, /(スタレログインボーナス)/gim, 'https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311&lang=ja-jp'),
+      Bsky.detectCustomFacet(unicodeString, /(原神ログインボーナス)/gim, 'https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481&lang=ja-jp'),
+      Bsky.detectCustomFacet(unicodeString, /(ゼンゼロログインボーナス)/gim, 'https://act.hoyolab.com/bbs/event/signin/zzz/e202406031448091.html?act_id=e202406031448091&lang=ja-jp'),
+      Bsky.detectCustomFacet(unicodeString, /(スタレログインボーナス)/gim, 'https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311&lang=ja-jp'),
     ];
 
     const imageSize = Image.getRectangleSize(imageBlob);

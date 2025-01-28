@@ -75,6 +75,7 @@ namespace Bluesky {
      */
     postMessage(token: string, message: Message, postedBy: BotType): Result;
     detectFacets(text: UnicodeString): Facet[];
+    detectCustomFacet(text: UnicodeString, regex: RegExp, uri: string): Facet;
   }
 }
 

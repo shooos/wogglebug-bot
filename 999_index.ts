@@ -96,5 +96,5 @@ function postToBsky(): void {
 }
 
 function __test(): void {
-  Genshin.spiralAbyss.createImage(10);
+  HoYoLABSubscriber.notifyTodays(new Date());
 }

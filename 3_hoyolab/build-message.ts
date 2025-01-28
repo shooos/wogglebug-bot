@@ -24,13 +24,6 @@
     }).filter(it => it !== null);
   }
 
-  const MAX_SUBJECT_LENGTH_FOR_SUMMARY = 20;
-
-  function shortenSubject(subject: String): String {
-    if (subject.length <= MAX_SUBJECT_LENGTH_FOR_SUMMARY) return subject;
-    return `${subject.slice(0, MAX_SUBJECT_LENGTH_FOR_SUMMARY)}…`;
-  }
-
   HoYoLAB.Genshin.buildMessages = (contents) => {
     return contents.map(content => {
       const body = `HoYoLAB 原神公式ポスト通知 #原神 #原神公式情報
@@ -98,42 +91,34 @@ ${event.articleUrl}
     });
   }
 
-  HoYoLAB.Genshin.buildSummaryMessage = (posts) => {
-    const body = `本日の原神公式ポストまとめ 📒
+  function makeSummaryMessage(posts: HoYo.Content[], topMessage: string): Bluesky.Message {
+    const body = `📒 ${topMessage} 📒
 
-${posts.map(post => `${shortenSubject(post.subject)}`).join('\n\n')}
+${posts.map(post => `📣 ${post.subject}`).join('\n\n')}`;
 
-https://www.hoyolab.com/accountCenter/postList?id=1015537`;
+    const unicodeBody = new Bluesky.UnicodeString(body);
 
     return {
       body,
-      images: [],
-    }
+      customFacets: posts.map(post => {
+        const regexp = new RegExp(`(${post.subject})`, 'gim');
+        return Bsky.detectCustomFacet(unicodeBody, regexp, post.articleUrl);
+      }),
+      images: createImage(
+        posts.map(post => post.imageUrls[0]).filter(it => it != undefined).slice(0, 4)
+      ),
+    };
+  }
+
+  HoYoLAB.Genshin.buildSummaryMessage = (posts) => {
+    return makeSummaryMessage(posts, '本日の原神公式ポストまとめ');
   }
 
   HoYoLAB.ZZZ.buildSummaryMessage = (posts) => {
-    const body = `本日のゼンレスゾーンゼロ公式ポストまとめ 📒
-
-${posts.map(post => `${shortenSubject(post.subject)}`).join('\n\n')}
-
-https://www.hoyolab.com/accountCenter/postList?id=219270333`;
-
-    return {
-      body,
-      images: [],
-    }
+    return makeSummaryMessage(posts, '本日のゼンレスゾーンゼロ公式ポストまとめ');
   }
 
   HoYoLAB.StarRail.buildSummaryMessage = (posts) => {
-    const body = `本日の崩壊スターレイル公式ポストまとめ 📒
-
-${posts.map(post => `${shortenSubject(post.subject)}`).join('\n\n')}
-
-https://www.hoyolab.com/accountCenter/postList?id=172534910`;
-
-    return {
-      body,
-      images: [],
-    }
+    return makeSummaryMessage(posts, '本日の崩壊スターレイル公式ポストまとめ');
   }
 })();

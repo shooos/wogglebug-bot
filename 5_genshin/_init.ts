@@ -26,14 +26,14 @@ namespace Genshin {
   }
 
   interface ImaginariumTheater {
-    extractInfo(releasaePost: ReleasePost): ImaginariumTheaterInfo[];
+    extractInfo(releasePost: ReleasePost): ImaginariumTheaterInfo[];
     save(info: ImaginariumTheaterInfo): void;
     subscribe(): void;
     notice(token: string, botType: Bluesky.BotType): void;
     buildMessage(info: ImaginariumTheaterMessageModel): Bluesky.Message;
   }
 
-  export interface SprialAbyssImageData {
+  export interface SpiralAbyssImageData {
     fileName: string;
     imageType: string;
     base64: string;
@@ -41,7 +41,7 @@ namespace Genshin {
 
   interface SpiralAbyss {
     createImage(hours: number): void;
-    saveImage(imageData: SprialAbyssImageData): void;
+    saveImage(imageData: SpiralAbyssImageData): void;
     countDown(currentDate: Date): void;
     countDownCallback(fileId: string, hours: number): void;
     buildMessage(hours: number, image: GoogleAppsScript.Base.Blob): Bluesky.Message;

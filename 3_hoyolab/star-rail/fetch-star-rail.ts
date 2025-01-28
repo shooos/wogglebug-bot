@@ -19,9 +19,10 @@
     Logger.log(`Start fetching StarRail today's official posts | CurrentDate=${Utils.formatDateToIsoString(currentDate)}`);
 
     const posts = FetchOfficialPostsHelper.execute(`https://bbs-api-os.hoyolab.com/community/post/wapi/userPost?size=20&uid=172534910`);
+    currentDate.setHours(currentDate.getHours() - 24);
     const results = posts
       .filter(it =>
-        it.createdAt.toDateString() === currentDate.toDateString()
+        it.createdAt.getTime() > currentDate.getTime()
       )
       .toReversed();
 
