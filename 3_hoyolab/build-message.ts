@@ -94,7 +94,10 @@ ${event.articleUrl}
   function makeSummaryMessage(posts: HoYo.Content[], topMessage: string): Bluesky.Message {
     const body = `📒 ${topMessage} 📒
 
-${posts.map(post => `📣 ${post.subject}`).join('\n\n')}`;
+${posts.map(post => {
+      const subject = post.subject.replaceAll(/[\r\n]/, '');
+      return `📣 ${subject}`;
+    }).join('\n\n')}`;
 
     const unicodeBody = new Bluesky.UnicodeString(body);
 
