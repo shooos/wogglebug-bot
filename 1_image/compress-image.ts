@@ -5,7 +5,6 @@
     Authorization: `Basic ${authorization}`,
   };
   const compressUrl = 'https://api.tinify.com/shrink';
-  const MAX_RETRY = 2;
 
   function fetchCompressedImage(location: string): GoogleAppsScript.Base.Blob | null {
     Logger.log(`Start fetching compressed image | Location=${location}`);
@@ -20,7 +19,37 @@
     return response.getBlob();
   }
 
-  function executeCompression(target: GoogleAppsScript.Base.Blob): GoogleAppsScript.Base.Blob | null {
+  function executeResize(compressedImageLocation: string, width: number): GoogleAppsScript.Base.Blob | null {
+    Logger.log(`Start resizing image | CompressedImageLocation=${compressedImageLocation}, Width=${width}`);
+
+    try {
+      const response = UrlFetchApp.fetch(compressedImageLocation, {
+        method: 'post',
+        headers,
+        payload: {
+          resize: {
+            method: 'scale',
+            width,
+          }
+        }
+      });
+
+      if (response.getResponseCode() == 200) {
+        const resized = response.getBlob();
+        Logger.log(`Success resizing image | ImageSize=${resized.getBytes().length}`);
+
+        return resized;
+      } else {
+        Logger.log('Failed to compress image | ResponseCode=%s', response.getResponseCode());
+        return null;
+      }
+    } catch (e) {
+      Logger.log('Failed to compress image | Error=%s', e);
+      return null;
+    }
+  }
+
+  function executeCompression(target: GoogleAppsScript.Base.Blob, size: number): GoogleAppsScript.Base.Blob | null {
     try {
       const response = UrlFetchApp.fetch(compressUrl, {
         method: 'post',
@@ -29,12 +58,19 @@
       });
 
       if (response.getResponseCode() == 201) {
-        const compressedImageLocation = response.getHeaders()['Location'];
-        const compressed = fetchCompressedImage(compressedImageLocation);
+        const compressedImageLocation: string = response.getHeaders()['Location'];
+        const compressedSize: number = JSON.parse(response.getContentText()).output.size;
 
-        Logger.log(`Success compressing image | ImageSize=${compressed.getBytes().length}`);
+        Logger.log(`Success compressing image | ImageSize=${compressedSize}`);
 
-        return compressed;
+        if (compressedSize > size) {
+          const resizeRacio = size / compressedSize;
+          const width = Image.getRectangleSize(target).width * resizeRacio;
+
+          return executeResize(compressedImageLocation, width);
+        } else {
+          return fetchCompressedImage(compressedImageLocation);
+        }
       } else {
         return null;
       }
@@ -47,15 +83,15 @@
   Image.compress = (target, size) => {
     Logger.log(`Start compressing image | ImageSize=${target.getBytes().length}, TargetSize=${size}`);
 
-
     let retryCount = 0;
-    let compressed = target;
-    do {
-      compressed = executeCompression(compressed);
-      if (compressed === null || MAX_RETRY < retryCount) return;
-      retryCount++;
-    } while (compressed.getBytes().length > size);
+    const compressed = executeCompression(target, size);
 
+    if (compressed.getBytes().length > size) {
+      Logger.log(`Failed compressing image | Reason=Exceeded Size Limit`);
+      return null;
+    }
+
+    Logger.log(`Finish compressing image | RetryCount=${retryCount}`);
     return compressed;
   }
 })();
