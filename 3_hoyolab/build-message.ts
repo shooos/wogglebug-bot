@@ -101,7 +101,7 @@ ${posts.map(post => `📣 ${post.subject.replaceAll(/[\r\n\|]/, '')}`).join('\n\
     return {
       body,
       customFacets: posts.map(post => {
-        const regexp = new RegExp(`(${post.subject.replaceAll(/[\r\n]/, '')})`, 'gim');
+        const regexp = new RegExp(`(${post.subject.replaceAll(/[\r\n\|]/, '')})`, 'gim');
         return Bsky.detectCustomFacet(unicodeBody, regexp, post.articleUrl);
       }),
       images: createImage(
