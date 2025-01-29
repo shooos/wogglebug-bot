@@ -94,17 +94,14 @@ ${event.articleUrl}
   function makeSummaryMessage(posts: HoYo.Content[], topMessage: string): Bluesky.Message {
     const body = `📒 ${topMessage} 📒
 
-${posts.map(post => {
-      const subject = post.subject.replaceAll(/[\r\n]/, '');
-      return `📣 ${subject}`;
-    }).join('\n\n')}`;
+${posts.map(post => `📣 ${post.subject.replaceAll(/[\r\n\|]/, '')}`).join('\n\n')}`;
 
     const unicodeBody = new Bluesky.UnicodeString(body);
 
     return {
       body,
       customFacets: posts.map(post => {
-        const regexp = new RegExp(`(${post.subject})`, 'gim');
+        const regexp = new RegExp(`(${post.subject.replaceAll(/[\r\n]/, '')})`, 'gim');
         return Bsky.detectCustomFacet(unicodeBody, regexp, post.articleUrl);
       }),
       images: createImage(
