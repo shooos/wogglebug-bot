@@ -22,6 +22,8 @@
   function executeResize(compressedImageLocation: string, width: number): GoogleAppsScript.Base.Blob | null {
     Logger.log(`Start resizing image | CompressedImageLocation=${compressedImageLocation}, Width=${width}`);
 
+    headers['Content-Type'] = 'application/json';
+
     try {
       const response = UrlFetchApp.fetch(compressedImageLocation, {
         method: 'post',
