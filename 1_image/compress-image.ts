@@ -27,7 +27,7 @@
     const payload = JSON.stringify({
       resize: {
         method: 'scale',
-        width,
+        width: Math.floor(width),
       }
     });
 
