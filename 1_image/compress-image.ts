@@ -24,16 +24,18 @@
 
     headers['Content-Type'] = 'application/json';
 
+    const payload = JSON.stringify({
+      resize: {
+        method: 'scale',
+        width,
+      }
+    });
+
     try {
       const response = UrlFetchApp.fetch(compressedImageLocation, {
         method: 'post',
         headers,
-        payload: {
-          resize: {
-            method: 'scale',
-            width,
-          }
-        }
+        payload,
       });
 
       if (response.getResponseCode() == 200) {
