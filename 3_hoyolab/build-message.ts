@@ -93,7 +93,7 @@ ${event.articleUrl}
 
   function makeSummaryMessage(posts: HoYo.Content[], topMessage: string): Bluesky.Message {
     const messages = posts.map(post => {
-      const subject = post.subject.replaceAll(/[\r\n\|]/, '');
+      const subject = post.subject.replaceAll(/[\r\n\|]/g, '');
       return `📣 ${subject}`;
     }).join('\n\n');
     const body = `📒 ${topMessage} 📒
@@ -105,7 +105,7 @@ ${messages.length === 0 ? '🔕 本日の公式ポストはありませんでし
     return {
       body,
       customFacets: posts.map(post => {
-        const subject = post.subject.replaceAll(/[\r\n\|]/, '');
+        const subject = post.subject.replaceAll(/[\r\n\|]/g, '');
         const regexp = new RegExp(`(${subject})`, 'gim');
         return Bsky.detectCustomFacet(unicodeBody, regexp, post.articleUrl);
       }),
