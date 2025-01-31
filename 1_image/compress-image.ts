@@ -90,6 +90,8 @@
     let retryCount = 0;
     const compressed = executeCompression(target, size);
 
+    if (compressed == null) return null;
+
     if (compressed.getBytes().length > size) {
       Logger.log(`Failed compressing image | Reason=Exceeded Size Limit`);
       return null;
