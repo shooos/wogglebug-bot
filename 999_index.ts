@@ -1,5 +1,5 @@
 /**
- * HoYoverse 公式情報を収集して Bsky 連携する
+ * HoYoVerse 公式情報を収集して Bsky 連携する
  */
 function subscribeHoYoOfficial(): void {
   const currentHours = new Date().getHours();
@@ -65,7 +65,7 @@ function noticeCountdownResetSpiralAbyss(): void {
 /**
  * スターライト交換が更新されたことを Bsky にポストする
  */
-function noticeStarlightShopCharcter(): void {
+function noticeStarlightShopCharacter(): void {
 
 }
 
@@ -82,6 +82,14 @@ function subscribeImaginariumTheaterInfo(): void {
 function noticeImaginariumTheaterInfo(): void {
   const accessJwt = Bsky.createSession!();
   Genshin.imaginariumTheater!.notice!(accessJwt, Bluesky.BotType.regular);
+}
+
+/**
+ * 幻想シアターの開幕を通知する
+ */
+function startImaginariumTheater(): void {
+  const accessJwt = Bsky.createSession!();
+  Genshin.imaginariumTheater!.start!(accessJwt, new Date, Bluesky.BotType.regular);
 }
 
 /**

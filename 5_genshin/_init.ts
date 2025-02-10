@@ -30,6 +30,7 @@ namespace Genshin {
     save(info: ImaginariumTheaterInfo): void;
     subscribe(): void;
     notice(token: string, botType: Bluesky.BotType): void;
+    start(token: string, currentDate: Date, botType: Bluesky.BotType): void;
     buildMessage(info: ImaginariumTheaterMessageModel): Bluesky.Message;
   }
 
