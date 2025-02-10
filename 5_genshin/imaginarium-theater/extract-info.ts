@@ -1,5 +1,5 @@
 (() => {
-  function parseMixFormatDate(dateString: string) {
+  function parseMixFormatDate(dateString: string): Date | undefined {
     function parse(dateString: string, format: string): Date | null {
       try {
         return Utilities.parseDate(dateString, 'JST', format);
@@ -21,7 +21,7 @@
     }
   }
 
-  Genshin.imaginariumTheater.extractInfo = (releasePost) => {
+  Genshin.imaginariumTheater!.extractInfo = (releasePost) => {
     Logger.log(`Start extracting imaginarium theater information | PostId=${releasePost.id}`);
 
     const { id, body } = releasePost;
@@ -35,8 +35,11 @@
     matches.forEach((match) => {
       Logger.log(`Matched=${JSON.stringify(match)}`);
 
+      const date = parseMixFormatDate(match[1]);
+      if (!date) throw new Error('Failed to parse date');
+
       results.push({
-        date: parseMixFormatDate(match[1]),
+        date,
         elementals: [...match.slice(2, 5)],
         principalCastMembers: [...match.slice(5, 11)],
         alternateCastMembers: [...match.slice(11, 15)],

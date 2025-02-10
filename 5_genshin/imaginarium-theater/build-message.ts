@@ -1,6 +1,6 @@
 (() => {
   const imageBlob = DriveApp.getFileById('1AUMe5huFFIR9_Hk7WfspUFEg6cG-AqPO').getBlob();
-  const imageSize = Image.getRectangleSize(imageBlob);
+  const imageSize = Image.getRectangleSize!(imageBlob);
 
   function attachElementalIcon(elemental: string): string {
     switch (elemental) {
@@ -23,7 +23,7 @@
     }
   }
 
-  Genshin.imaginariumTheater.buildMessage = (info) => {
+  Genshin.imaginariumTheater!.buildMessage = (info) => {
     const body = `📢 #原神 ${info.date}からの幻想シアターは…👉
 
 【元素】 ${attachElementalIcon(info.elementals[0])}、${attachElementalIcon(info.elementals[1])}、${attachElementalIcon(info.elementals[2])}

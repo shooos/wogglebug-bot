@@ -4,6 +4,9 @@
   function openSheet(): GoogleAppsScript.Spreadsheet.Sheet {
     const spreadSheet = SpreadsheetApp.openById('1T_qYwriDOLRrLWZFW9v0ygF_aj0NtrbpEGnZwltiXPo');
     const sheet = spreadSheet.getSheetByName('幻想シアター');
+
+    if (!sheet) throw new Error('Failed to get sheet | SheetName=幻想シアター');
+
     return sheet;
   }
 
@@ -11,12 +14,15 @@
     return sheet.getRange(sheet.getLastRow(), 1).getDisplayValue();
   }
 
-  Genshin.imaginariumTheater.notice = (token, botType) => {
+  Genshin.imaginariumTheater!.notice = (token, botType) => {
     Logger.log(`Start to notice of Imaginarium theater information`);
 
     const sheet = openSheet();
     const lastRowDateValue = getLastRowDateValue(sheet);
-    const lastRowMonth = parseInt(lastRowDateValue.match(/(\d+)月/)[1]);
+    const match = lastRowDateValue.match(/(\d+)月/);
+    if (!match) throw new Error('Failed to get last row month');
+
+    const lastRowMonth = parseInt(match[1]);
 
     const currentMonth = (new Date()).getMonth() + 1;
     const currentMonthIndex = MONTH_LIST.findIndex(m => m == currentMonth);
@@ -32,7 +38,7 @@
     }
 
     if (monthDiff > 0) {
-      const message = Genshin.imaginariumTheater.buildMessage({
+      const message = Genshin.imaginariumTheater!.buildMessage!({
         date: sheet.getRange(row, 1).getDisplayValue(),
         elementals: sheet.getRange(row, 2, 1, 3).getValues()[0],
         principalCastMembers: sheet.getRange(row, 5, 1, 6).getValues()[0],
@@ -40,7 +46,7 @@
         articleUrl: sheet.getRange(row, 15).getValue(),
       });
 
-      Bsky.postMessage(token, message, botType);
+      Bsky.postMessage!(token, message, botType);
 
       Logger.log('Finish to notice of Imaginarium theater information');
     } else {
