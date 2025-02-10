@@ -33,6 +33,7 @@ function periodicallyInformationPost(): void {
     Genshin.starglitterExchange.subscribe(currentDate),
     DailyInfo.loginBonus(currentDate),
     DailyInfo.weeklyMessage(currentDate),
+    ...DailyInfo.domainMessages(currentDate),
   ].filter(it => it !== null);
 
   if (!messages.length) {
@@ -88,11 +89,11 @@ function noticeImaginariumTheaterInfo(): void {
  */
 function postToBsky(): void {
   const accessJwt = Bsky.createSession();
+  const messages = DailyInfo.domainMessages(new Date('2025-02-10T08:00:00'));
 
-  const content = FetchOfficialPostHelper.execute(`https://bbs-api-os.hoyolab.com/community/post/wapi/getPostFull?post_id=35393996&read=1&scene=1`);
-  const message = HoYoLAB.Genshin.buildMessages([content])[0];
-
-  Bsky.postMessage(accessJwt, message, Bluesky.BotType.tester);
+  messages.forEach(message => {
+    Bsky.postMessage(accessJwt, message, Bluesky.BotType.tester);
+  });
 }
 
 function __test(): void {
