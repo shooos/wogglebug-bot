@@ -3,7 +3,7 @@
     return Math.floor((dateFinal.getTime() - dateInitial.getTime()) / (60 * 60 * 1000));
   }
 
-  Genshin.spiralAbyss.countDown = (currentDate) => {
+  Genshin.spiralAbyss!.countDown = (currentDate) => {
     Logger.log(`Start to count down notification of Spiral Abyss | CurrentDate=${Utils.formatToViewDate(currentDate)}`);
 
     const day16 = new Date()
@@ -19,16 +19,16 @@
       return null;
     }
 
-    Genshin.spiralAbyss.createImage(hours);
+    Genshin.spiralAbyss!.createImage!(hours);
   }
 
-  Genshin.spiralAbyss.countDownCallback = (fileId, hours) => {
+  Genshin.spiralAbyss!.countDownCallback = (fileId, hours) => {
     const imageFile = DriveApp.getFileById(fileId);
 
-    const message = Genshin.spiralAbyss.buildMessage(hours, imageFile.getBlob());
+    const message = Genshin.spiralAbyss!.buildMessage!(hours, imageFile.getBlob());
 
-    const token = Bsky.createSession();
-    Bsky.postMessage(token, message, Bluesky.BotType.regular);
+    const token = Bsky.createSession!();
+    Bsky.postMessage!(token, message, Bluesky.BotType.regular);
 
     imageFile.setTrashed(true);
 

@@ -9,8 +9,8 @@ function subscribeHoYoOfficial(): void {
     return;
   }
 
-  HoYoLABSubscriber.subscribe();
-  VideosSubscriber.subscribe();
+  HoYoLABSubscriber.subscribe!();
+  VideosSubscriber.subscribe!();
 }
 
 /**
@@ -19,7 +19,7 @@ function subscribeHoYoOfficial(): void {
 function notifyTodaysHoYoLABOfficialPosts(): void {
   const currentDate = new Date();
 
-  HoYoLABSubscriber.notifyTodays(currentDate);
+  HoYoLABSubscriber.notifyTodays!(currentDate);
 }
 
 /**
@@ -30,19 +30,19 @@ function periodicallyInformationPost(): void {
 
   const currentDate = new Date();
   const messages = [
-    Genshin.starglitterExchange.subscribe(currentDate),
-    DailyInfo.loginBonus(currentDate),
-    DailyInfo.weeklyMessage(currentDate),
-    ...DailyInfo.domainMessages(currentDate),
+    Genshin.starglitterExchange!.subscribe!(currentDate),
+    DailyInfo.loginBonus!(currentDate),
+    DailyInfo.weeklyMessage!(currentDate),
+    ...DailyInfo.domainMessages!(currentDate),
   ].filter(it => it !== null);
 
   if (!messages.length) {
     Logger.log(`No information`);
   }
 
-  const accessJwt = Bsky.createSession();
+  const accessJwt = Bsky.createSession!();
   messages.forEach(message => {
-    Bsky.postMessage(accessJwt, message, Bluesky.BotType.regular);
+    Bsky.postMessage!(accessJwt, message, Bluesky.BotType.regular);
   });
 
   Logger.log(`Completed periodical information post`);
@@ -59,7 +59,7 @@ function noticeOpenSpiralAbyss(): void {
  * 深境螺旋がリセット間近であることを Bsky にポストする
  */
 function noticeCountdownResetSpiralAbyss(): void {
-  Genshin.spiralAbyss.countDown(new Date());
+  Genshin.spiralAbyss!.countDown!(new Date());
 }
 
 /**
@@ -73,29 +73,29 @@ function noticeStarlightShopCharcter(): void {
  * 幻想シアター情報を収集する
  */
 function subscribeImaginariumTheaterInfo(): void {
-  Genshin.imaginariumTheater.subscribe();
+  Genshin.imaginariumTheater!.subscribe!();
 }
 
 /**
  * 幻想シアター情報を bsky にポストする
  */
 function noticeImaginariumTheaterInfo(): void {
-  const accessJwt = Bsky.createSession();
-  Genshin.imaginariumTheater.notice(accessJwt, Bluesky.BotType.regular);
+  const accessJwt = Bsky.createSession!();
+  Genshin.imaginariumTheater!.notice!(accessJwt, Bluesky.BotType.regular);
 }
 
 /**
  * 任意の内容を tester として bsky に投稿する
  */
 function postToBsky(): void {
-  const accessJwt = Bsky.createSession();
-  const messages = DailyInfo.domainMessages(new Date('2025-02-10T08:00:00'));
+  const accessJwt = Bsky.createSession!();
+  const messages = DailyInfo.domainMessages!(new Date('2025-02-10T08:00:00'));
 
   messages.forEach(message => {
-    Bsky.postMessage(accessJwt, message, Bluesky.BotType.tester);
+    Bsky.postMessage!(accessJwt, message, Bluesky.BotType.tester);
   });
 }
 
 function __test(): void {
-  HoYoLABSubscriber.notifyTodays(new Date());
+  HoYoLABSubscriber.notifyTodays!(new Date());
 }

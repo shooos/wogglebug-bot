@@ -34,7 +34,7 @@ function saveSpiralAbyssImage({ fileName, imageType, base64 }: Genshin.SpiralAby
 function successSaveSpiralAbyssImage(fileId: string, hours: number) {
   Logger.log(`Completed save spiral abyss image | FileId=${fileId}`);
 
-  Genshin.spiralAbyss.countDownCallback(fileId, hours);
+  Genshin.spiralAbyss!.countDownCallback!(fileId, hours);
 }
 
 function failureSaveSpiralAbyssImage(error: Error) {

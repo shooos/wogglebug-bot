@@ -3,7 +3,7 @@
   const createImageClientUrl = `https://script.google.com/macros/s/${latestWebAppId}/exec`;
   const PHANTOM_JS_CLOUD_API_KEY = PropertiesService.getScriptProperties().getProperty('PHANTOM_JS_CLOUD_API_KEY');
 
-  Genshin.spiralAbyss.createImage = (hours) => {
+  Genshin.spiralAbyss!.createImage = (hours) => {
     Logger.log(`Start to create spiral abyss image | Hours=${hours}`);
 
     const requestJson = encodeURIComponent(JSON.stringify({

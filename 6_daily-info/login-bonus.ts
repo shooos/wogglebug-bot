@@ -15,7 +15,7 @@
       return null;
     }
 
-    let topMessage: string;
+    let topMessage: string = '';
     if (morning) {
       topMessage = `🔔今日のログインボーナスを受け取りに行こう！`;
     } else if (night) {
@@ -36,12 +36,12 @@
     const unicodeString = new Bluesky.UnicodeString(body)
 
     const facets = [
-      Bsky.detectCustomFacet(unicodeString, /(原神ログインボーナス)/gim, 'https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481&lang=ja-jp'),
-      Bsky.detectCustomFacet(unicodeString, /(ゼンゼロログインボーナス)/gim, 'https://act.hoyolab.com/bbs/event/signin/zzz/e202406031448091.html?act_id=e202406031448091&lang=ja-jp'),
-      Bsky.detectCustomFacet(unicodeString, /(スタレログインボーナス)/gim, 'https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311&lang=ja-jp'),
+      Bsky.detectCustomFacet!(unicodeString, /(原神ログインボーナス)/gim, 'https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481&lang=ja-jp'),
+      Bsky.detectCustomFacet!(unicodeString, /(ゼンゼロログインボーナス)/gim, 'https://act.hoyolab.com/bbs/event/signin/zzz/e202406031448091.html?act_id=e202406031448091&lang=ja-jp'),
+      Bsky.detectCustomFacet!(unicodeString, /(スタレログインボーナス)/gim, 'https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311&lang=ja-jp'),
     ];
 
-    const imageSize = Image.getRectangleSize(imageBlob);
+    const imageSize = Image.getRectangleSize!(imageBlob);
 
     return {
       body,

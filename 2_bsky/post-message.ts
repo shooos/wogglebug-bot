@@ -34,7 +34,12 @@
     };
   }
 
-  const hundle = PropertiesService.getScriptProperties().getProperty('BLUESKY_HANDLE');
+  const handle: string = (() => {
+    const value = PropertiesService.getScriptProperties().getProperty('BLUESKY_HANDLE');
+    if (value == null) throw new Error(`Failed to get property of BLUESKY_HANDLE`);
+    return value;
+  })();
+
   const postUrl = 'https://bsky.social/xrpc/com.atproto.repo.createRecord';
   const enablePost = PropertiesService.getScriptProperties().getProperty('ENABLE_POST');
 
@@ -49,7 +54,7 @@
 
   function initializePayload(text: string, facets: Bluesky.Facet[]): Payload {
     return {
-      repo: hundle,
+      repo: handle,
       collection: 'app.bsky.feed.post',
       record: {
         text,
@@ -93,12 +98,12 @@
     };
 
     const text = `${body}\n\nPosted by ${botName}`;
-    const facets = (message.customFacets ?? []).concat(Bsky.detectFacets(new Bluesky.UnicodeString(text)));
+    const facets = (message.customFacets ?? []).concat(Bsky.detectFacets!(new Bluesky.UnicodeString(text)));
 
     const data: Payload = initializePayload(text, facets);
 
     const uploadedImages = images.map(image => {
-      const blob = Bsky.uploadImage(token, image.blob);
+      const blob = Bsky.uploadImage!(token, image.blob);
 
       if (blob === null) return null;
 

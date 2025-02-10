@@ -9,7 +9,7 @@ const Utils = {
     if (response.getResponseCode() !== 200) return '';
 
     const matches = response.getContentText().match(/<title>(.*?)<\/title>/);
-    return matches[1];
+    return matches ? matches[1] : '';
   },
 
   /**

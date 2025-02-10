@@ -6,7 +6,7 @@
   };
 
   const weaponAscensionMaterials = ((dayOfWeek: number): Item[] => {
-    const monday_thirsday: Item[] = [
+    const monday_thursday: Item[] = [
       {
         domainName: 'セシリアの苗床',
         itemName: '高塔の王',
@@ -105,17 +105,17 @@
 
     return [
       [/* sunday */],
-      monday_thirsday,
+      monday_thursday,
       tuesday_friday,
       wednesday_saturday,
-      monday_thirsday,
+      monday_thursday,
       tuesday_friday,
       wednesday_saturday,
     ][dayOfWeek];
   });
 
   const talentsItemDomains = ((dayOfWeek: number): Item[] => {
-    const monday_thirsday: Item[] = [
+    const monday_thursday: Item[] = [
       {
         domainName: '忘却の峡谷',
         itemName: '自由',
@@ -199,10 +199,10 @@
 
     return [
       [/* sunday */],
-      monday_thirsday,
+      monday_thursday,
       tuesday_friday,
       wednesday_saturday,
-      monday_thirsday,
+      monday_thursday,
       tuesday_friday,
       wednesday_saturday,
     ][dayOfWeek];
@@ -253,7 +253,7 @@
 
     if (!morning) {
       Logger.log(`Unsubscribe domain message notification`);
-      return null;
+      return [];
     }
 
     const currentDay = currentDate.getDay();
@@ -262,7 +262,7 @@
       // 日曜日
       const talentImages: Bluesky.AttachImage[] = TALENT_DOMAIN_IMAGES.map(id => {
         const blob = DriveApp.getFileById(id).getBlob();
-        const size = Image.getRectangleSize(blob);
+        const size = Image.getRectangleSize!(blob);
 
         return {
           altText: 'Character Talent Materials',
@@ -273,7 +273,7 @@
 
       const weaponImages: Bluesky.AttachImage[] = WEAPON_ASCENSION_MATERIAL_IMAGES.map(id => {
         const blob = DriveApp.getFileById(id).getBlob();
-        const size = Image.getRectangleSize(blob);
+        const size = Image.getRectangleSize!(blob);
 
         return {
           altText: 'Character Talent Materials',
@@ -298,31 +298,28 @@
       const weapons = weaponAscensionMaterials(currentDay);
 
       const talentImage = getTalentDomainImage(currentDay);
-      const talentImageSize = Image.getRectangleSize(talentImage);
-
       const weaponImage = getWeaponAscensionMaterialImage(currentDay);
-      const weaponImageSize = Image.getRectangleSize(weaponImage);
 
       return [
         {
           body: `今日の天賦秘境のおしらせ📖 #原神
 
 ${talents.map(it => `${it.domainName}（${it.country}）：${it.itemName}`).join('\n')}`,
-          images: [{
+          images: talentImage ? [{
             altText: 'Character Talent Materials',
             blob: talentImage,
-            aspectRatio: { ...talentImageSize }
-          }],
+            aspectRatio: { ...Image.getRectangleSize!(talentImage) }
+          }] : [],
         },
         {
           body: `今日の武器突破素材のおしらせ⚔️ #原神
 
 ${weapons.map(it => `${it.domainName}（${it.country}）：${it.itemName}`).join('\n')}`,
-          images: [{
+          images: weaponImage ? [{
             altText: 'Weapon Ascension Materials',
             blob: weaponImage,
-            aspectRatio: { ...weaponImageSize }
-          }],
+            aspectRatio: { ...Image.getRectangleSize!(weaponImage) }
+          }] : [],
         },
       ];
     }

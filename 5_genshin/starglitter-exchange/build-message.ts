@@ -17,7 +17,7 @@
     '16KSd4d8DCwvoWd9qyVEHP3NlaXxTwBIs',
   ];
 
-  Genshin.starglitterExchange.buildMessage = (currentDate) => {
+  Genshin.starglitterExchange!.buildMessage = (currentDate) => {
     Logger.log(`Start build starglitter exchange message | CurrentDate=${Utils.formatDateToIsoString(currentDate)}`);
 
     const currentMonth = currentDate.getMonth();
@@ -30,7 +30,7 @@
     const nextChars = characters[nextMonth];
     const imageId = imageIds[currentMonth];
     const blob = DriveApp.getFileById(imageId).getBlob();
-    const imageSize = Image.getRectangleSize(blob);
+    const imageSize = Image.getRectangleSize!(blob);
 
     const body = `📢 今月のスターライト交換キャラクターは ${currentChars[0]} & ${currentChars[1]}
 👉 来月は ${nextChars[0]} & ${nextChars[1]}

@@ -120,7 +120,7 @@ ${randomMessages()} #原神`,
     const currentDay = currentDate.getDay();
 
     const imageBlob = getImageFileRandom().getBlob();
-    const imageSize = Image.getRectangleSize(imageBlob);
+    const imageSize = Image.getRectangleSize!(imageBlob);
 
     return {
       body: `今日は ${dateStr} ${MESSAGES[currentDay]}`,

@@ -1,7 +1,7 @@
 (() => {
   const API_KEY = PropertiesService.getScriptProperties().getProperty(`TinyPNG_API_KEY`);
   const authorization = Utilities.base64Encode(`api:${API_KEY}`, Utilities.Charset.UTF_8);
-  const headers = {
+  const headers: { [key: string]: string } = {
     Authorization: `Basic ${authorization}`,
   };
   const compressUrl = 'https://api.tinify.com/shrink';
@@ -62,14 +62,14 @@
       });
 
       if (response.getResponseCode() == 201) {
-        const compressedImageLocation: string = response.getHeaders()['Location'];
+        const compressedImageLocation: string = (response.getHeaders() as any)['Location'];
         const compressedSize: number = JSON.parse(response.getContentText()).output.size;
 
         Logger.log(`Success compressing image | ImageSize=${compressedSize}`);
 
         if (compressedSize > size) {
-          const resizeRacio = size / compressedSize;
-          const width = Image.getRectangleSize(target).width * resizeRacio;
+          const resizeRatio = size / compressedSize;
+          const width = Image.getRectangleSize!(target).width * resizeRatio;
 
           return executeResize(compressedImageLocation, width);
         } else {

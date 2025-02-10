@@ -11,12 +11,12 @@ namespace Bluesky {
       this.utf8 = this.encode(utf16)
     }
 
-    encode(str): GoogleAppsScript.Byte[] {
+    encode(str: string): GoogleAppsScript.Byte[] {
       return Utilities.newBlob(str).getBytes();
     }
 
     // helper to convert utf16 code-unit offsets to utf8 code-unit offsets
-    utf16IndexToUtf8Index(i): number {
+    utf16IndexToUtf8Index(i: number): number {
       return this.encode(this.utf16.slice(0, i)).length;
     }
   }

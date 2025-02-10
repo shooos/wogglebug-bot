@@ -3,15 +3,17 @@
     return imageUrls.map(url => {
       const rawBlob = Utils.fetchBlob(url);
 
+      if (!rawBlob) return null;
+
       const validBlob = rawBlob.getBytes().length > Bluesky.MAX_IMAGE_SIZE ?
-        Image.compress(rawBlob, Bluesky.MAX_IMAGE_SIZE) : rawBlob;
+        Image.compress!(rawBlob, Bluesky.MAX_IMAGE_SIZE) : rawBlob;
 
       if (!validBlob) {
         Logger.log(`Illegal image | ImageURL=${url}`);
         return null;
       }
 
-      const size = Image.getRectangleSize(validBlob);
+      const size = Image.getRectangleSize!(validBlob);
 
       return {
         altText: '',
@@ -107,7 +109,7 @@ ${messages.length === 0 ? '🔕 本日の公式ポストはありませんでし
       customFacets: posts.map(post => {
         const subject = post.subject.replaceAll(/[\r\n\|]/g, '');
         const regexp = new RegExp(`(${subject})`, 'gim');
-        return Bsky.detectCustomFacet(unicodeBody, regexp, post.articleUrl);
+        return Bsky.detectCustomFacet!(unicodeBody, regexp, post.articleUrl);
       }),
       images: createImage(
         posts.map(post => post.imageUrls[0]).filter(it => it != undefined).slice(0, 4)
