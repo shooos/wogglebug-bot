@@ -1,6 +1,5 @@
 (() => {
   const MONTH_LIST = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3];
-  const DIRECTION_UP = GoogleAppsScript.Spreadsheet.Direction.UP;
 
   function openSheet(): GoogleAppsScript.Spreadsheet.Sheet {
     const spreadSheet = SpreadsheetApp.openById('1T_qYwriDOLRrLWZFW9v0ygF_aj0NtrbpEGnZwltiXPo');
@@ -27,7 +26,7 @@
     }
 
     do {
-      range = range.getNextDataCell(DIRECTION_UP);
+      range = range.getNextDataCell(GoogleAppsScript.Spreadsheet.Direction.UP);
       row = range.getRowIndex();
     } while (range.getDisplayValue() !== date);
 
