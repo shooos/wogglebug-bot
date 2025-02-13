@@ -12,19 +12,21 @@ ${video.title}
     if (video.thumbnailUrl) {
       const rawBlob = Utils.fetchBlob(video.thumbnailUrl);
 
-      const validBlob = rawBlob.getBytes().length > Bluesky.MAX_IMAGE_SIZE ?
-        Image.compress(rawBlob, Bluesky.MAX_IMAGE_SIZE) : rawBlob;
+      const validBlob = rawBlob != null && rawBlob.getBytes().length > Bluesky.MAX_IMAGE_SIZE ?
+        Image.compress!(rawBlob, Bluesky.MAX_IMAGE_SIZE) : rawBlob;
 
-      const size = Image.getRectangleSize(validBlob);
+      if (validBlob) {
+        const size = Image.getRectangleSize!(validBlob);
 
-      message.images.push({
-        altText: `Video Thumbnail - ${video.title}`,
-        blob: validBlob,
-        aspectRatio: {
-          width: size.width,
-          height: size.height,
-        },
-      })
+        message.images.push({
+          altText: `Video Thumbnail - ${video.title}`,
+          blob: validBlob,
+          aspectRatio: {
+            width: size.width,
+            height: size.height,
+          },
+        });
+      }
     }
 
     return message;

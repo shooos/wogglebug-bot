@@ -22,6 +22,11 @@
     const mimeType = blob.getContentType();
     Logger.log(`Start uploading image to bsky | MimeType=${mimeType}`);
 
+    if (!mimeType) {
+      Logger.log(`Failed to upload image because mimeType is null`);
+      return null;
+    }
+
     const imageSize = blob.getBytes().length;
     if (imageSize > Bluesky.MAX_IMAGE_SIZE) {
       Logger.log(`Failed to upload image because image is too large | ImageSize=${imageSize}`);

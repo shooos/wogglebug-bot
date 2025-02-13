@@ -1,6 +1,6 @@
 (() => {
-  Genshin.spiralAbyss.buildMessage = (hours, image) => {
-    const imageSize = Image.getRectangleSize(image);
+  Genshin.spiralAbyss!.buildMessage = (hours, image) => {
+    const imageSize = Image.getRectangleSize!(image);
     const body = `次回の螺旋更新日まで あと [ ${hours} ] 時間！ #原神
 
 ✅ いけるとこまでいった？
