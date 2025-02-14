@@ -57,7 +57,7 @@
     }
 
     if (monthDiff > 0) {
-      const message = Genshin.imaginariumTheater!.buildMessage!({
+      const message = Genshin.imaginariumTheater!.buildNoticeMessage!({
         date: sheet.getRange(row, 1).getDisplayValue(),
         elementals: sheet.getRange(row, 2, 1, 3).getValues()[0],
         principalCastMembers: sheet.getRange(row, 5, 1, 6).getValues()[0],
@@ -79,7 +79,7 @@
     const sheet = openSheet();
     const row = getTargetMonthRow(currentDate.getMonth() + 1, sheet);
 
-    const message = Genshin.imaginariumTheater!.buildMessage!({
+    const message = Genshin.imaginariumTheater!.buildStartMessage!({
       date: sheet.getRange(row, 1).getDisplayValue(),
       elementals: sheet.getRange(row, 2, 1, 3).getValues()[0],
       principalCastMembers: sheet.getRange(row, 5, 1, 6).getValues()[0],

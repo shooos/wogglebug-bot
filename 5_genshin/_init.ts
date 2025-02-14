@@ -31,7 +31,8 @@ namespace Genshin {
     subscribe(): void;
     notice(token: string, botType: Bluesky.BotType): void;
     start(token: string, currentDate: Date, botType: Bluesky.BotType): void;
-    buildMessage(info: ImaginariumTheaterMessageModel): Bluesky.Message;
+    buildNoticeMessage(info: ImaginariumTheaterMessageModel): Bluesky.Message;
+    buildStartMessage(info: ImaginariumTheaterMessageModel): Bluesky.Message;
   }
 
   export interface SpiralAbyssImageData {

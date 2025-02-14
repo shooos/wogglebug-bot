@@ -23,10 +23,8 @@
     }
   }
 
-  Genshin.imaginariumTheater!.buildMessage = (info) => {
-    const body = `📢 #原神 ${info.date}からの幻想シアターは…👉
-
-【元素】 ${attachElementalIcon(info.elementals[0])}、${attachElementalIcon(info.elementals[1])}、${attachElementalIcon(info.elementals[2])}
+  function buildMessageBody(info: Genshin.ImaginariumTheaterMessageModel): string {
+    return `【元素】 ${attachElementalIcon(info.elementals[0])}、${attachElementalIcon(info.elementals[1])}、${attachElementalIcon(info.elementals[2])}
 
 【開幕キャスト】
 🎬 ${info.principalCastMembers[0]}
@@ -43,6 +41,12 @@
 📌 ${info.alternateCastMembers[3]}
 
 参照元： ${info.articleUrl}`;
+  }
+
+  Genshin.imaginariumTheater!.buildNoticeMessage = (info) => {
+    const body = `📢 #原神 ${info.date}からの幻想シアターは…👉
+
+${buildMessageBody(info)}`;
 
     return {
       body,
@@ -56,4 +60,23 @@
       }],
     };
   };
+
+  Genshin.imaginariumTheater!.buildStartMessage = (info) => {
+    const body = `📢 #原神 幻想シアターが開演！🎩
+今月のキャストは…👉
+
+${buildMessageBody(info)}`;
+
+    return {
+      body,
+      images: [{
+        altText: 'Imaginarium Theater',
+        blob: imageBlob,
+        aspectRatio: {
+          width: imageSize.width,
+          height: imageSize.height,
+        }
+      }],
+    }
+  }
 })();
