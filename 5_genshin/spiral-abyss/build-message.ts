@@ -9,7 +9,7 @@
     return {
       body,
       images: [{
-        altText: 'Imaginarium Theater',
+        altText: 'Spiral Abyss',
         blob: image,
         aspectRatio: {
           width: imageSize.width,
