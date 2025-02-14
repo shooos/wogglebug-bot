@@ -52,7 +52,7 @@ function periodicallyInformationPost(): void {
  * 深境螺旋が開始したことを Bsky にポストする
  */
 function noticeOpenSpiralAbyss(): void {
-
+  Genshin.spiralAbyss!.open!();
 }
 
 /**

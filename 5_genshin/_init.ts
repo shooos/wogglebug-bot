@@ -47,6 +47,7 @@ namespace Genshin {
     countDown(currentDate: Date): void;
     countDownCallback(fileId: string, hours: number): void;
     buildMessage(hours: number, image: GoogleAppsScript.Base.Blob): Bluesky.Message;
+    open(): void;
   }
 
   interface StarglitterExchange {
