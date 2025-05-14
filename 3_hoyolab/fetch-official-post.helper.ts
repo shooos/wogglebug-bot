@@ -6,7 +6,7 @@ const FetchOfficialPostHelper = (() => {
   };
 
   return {
-    execute(url: string): HoYo.Content {
+    execute(url: string): HoYo.Content | null {
       Logger.log(`Start fetching HoYoLAB posts | URL=${url}`);
 
       const response = UrlFetchApp.fetch(url, {
