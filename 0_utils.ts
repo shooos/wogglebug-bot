@@ -4,7 +4,7 @@ const Utils = {
   },
 
   fetchWebsiteTitle(url: string): string {
-    const response = UrlFetchApp.fetch(url, { method: 'get', contentType: 'text/html' });
+    const response = UrlFetchApp.fetch(url, { method: 'get', contentType: 'text/html', muteHttpExceptions: true });
 
     if (response.getResponseCode() !== 200) return '';
 
@@ -71,7 +71,7 @@ const Utils = {
    * @returns Blob
    */
   fetchBlob(location: string): GoogleAppsScript.Base.Blob | null {
-    const response = UrlFetchApp.fetch(location, { method: 'get' });
+    const response = UrlFetchApp.fetch(location, { method: 'get', muteHttpExceptions: true });
 
     if (response.getResponseCode() !== 200) {
       Logger.log(`Failed fetching blob | Location=${location}`);

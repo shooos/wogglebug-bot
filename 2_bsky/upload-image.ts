@@ -15,6 +15,7 @@
       contentType: mimeType,
       headers: requestHeaders,
       payload: blob,
+      muteHttpExceptions: true
     });
   }
 

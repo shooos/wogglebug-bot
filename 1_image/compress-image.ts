@@ -9,7 +9,7 @@
   function fetchCompressedImage(location: string): GoogleAppsScript.Base.Blob | null {
     Logger.log(`Start fetching compressed image | Location=${location}`);
 
-    const response = UrlFetchApp.fetch(location, { method: 'get' });
+    const response = UrlFetchApp.fetch(location, { method: 'get', muteHttpExceptions: true });
 
     if (response.getResponseCode() !== 200) {
       Logger.log(`Failed fetching compressed image | StatusCode=${response.getResponseCode()}`);
@@ -36,6 +36,7 @@
         method: 'post',
         headers,
         payload,
+        muteHttpExceptions: true
       });
 
       if (response.getResponseCode() == 200) {
@@ -59,6 +60,7 @@
         method: 'post',
         headers,
         payload: target,
+        muteHttpExceptions: true
       });
 
       if (response.getResponseCode() == 201) {

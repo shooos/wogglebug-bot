@@ -10,7 +10,7 @@
       url: `${createImageClientUrl}?hours=${hours}`,
       renderType: 'jpg',
     }));
-    UrlFetchApp.fetch(`https://PhantomJsCloud.com/api/browser/v2/${PHANTOM_JS_CLOUD_API_KEY}/?request=${requestJson}`);
+    UrlFetchApp.fetch(`https://PhantomJsCloud.com/api/browser/v2/${PHANTOM_JS_CLOUD_API_KEY}/?request=${requestJson}`, { muteHttpExceptions: true });
 
     Logger.log(`Fetched create image client`);
   }

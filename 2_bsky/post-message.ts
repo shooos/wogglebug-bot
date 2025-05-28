@@ -142,6 +142,7 @@
         contentType: 'application/json',
         headers,
         payload,
+        muteHttpExceptions: true
       });
 
       if (response.getResponseCode() >= 400) {

@@ -12,7 +12,8 @@ const FetchOfficialPostHelper = (() => {
       const response = UrlFetchApp.fetch(url, {
         method: 'get',
         contentType: 'application/json',
-        headers
+        headers,
+        muteHttpExceptions: true
       });
 
       if (response.getResponseCode() !== 200) {
