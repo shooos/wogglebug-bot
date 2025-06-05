@@ -41,13 +41,26 @@ namespace Genshin {
     base64: string;
   }
 
+  export interface SpiralAbyssInfo {
+    date: Date;
+    leyLineDisorders: {
+      floor11: string[];
+      floor12: string[];
+    };
+    blessingOfTheAbyssMoon: string;
+    articleUrl: string;
+  }
+
   interface SpiralAbyss {
     createImage(hours: number): void;
     saveImage(imageData: SpiralAbyssImageData): void;
     countDown(currentDate: Date): void;
     countDownCallback(fileId: string, hours: number): void;
     buildMessage(hours: number, image: GoogleAppsScript.Base.Blob): Bluesky.Message;
-    open(): void;
+    open(currentDate: Date): void;
+    subscribe(): void;
+    extractInfo(releasePost: ReleasePost): SpiralAbyssInfo[];
+    save(info: SpiralAbyssInfo): void;
   }
 
   interface StarglitterExchange {
@@ -61,6 +74,7 @@ namespace Genshin {
     imaginariumTheater: Partial<ImaginariumTheater>;
     spiralAbyss: Partial<SpiralAbyss>;
     starglitterExchange: Partial<StarglitterExchange>;
+    subscribe(): void;
   }
 };
 

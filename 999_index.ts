@@ -52,7 +52,7 @@ function periodicallyInformationPost(): void {
  * 深境螺旋が開始したことを Bsky にポストする
  */
 function noticeOpenSpiralAbyss(): void {
-  Genshin.spiralAbyss!.open!();
+  Genshin.spiralAbyss!.open!(new Date());
 }
 
 /**
@@ -70,10 +70,10 @@ function noticeStarlightShopCharacter(): void {
 }
 
 /**
- * 幻想シアター情報を収集する
+ * 原神リリース情報を収集する
  */
-function subscribeImaginariumTheaterInfo(): void {
-  Genshin.imaginariumTheater!.subscribe!();
+function subscribeGenshinReleaseInfo(): void {
+  Genshin.subscribe!();
 }
 
 /**

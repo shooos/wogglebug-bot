@@ -1,9 +1,12 @@
 (() => {
-  Genshin.imaginariumTheater.save = (info) => {
+  Genshin.imaginariumTheater!.save = (info) => {
     Logger.log(`Start saving imaginarium theater information | Date=${info.date}`);
 
     const activeSheet = SpreadsheetApp.openById('1T_qYwriDOLRrLWZFW9v0ygF_aj0NtrbpEGnZwltiXPo');
     const sheet = activeSheet.getSheetByName('幻想シアター');
+
+    if (!sheet) throw new Error('Spreadsheet Error | Sheet is not found.');
+
     const nextRow = sheet.getLastRow() + 1;
 
     sheet.getRange(nextRow, 1).setValue(Utilities.formatDate(info.date, 'JST', 'M月d日'));
