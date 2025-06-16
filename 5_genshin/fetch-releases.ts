@@ -6,7 +6,7 @@
 
     const newReleases: Genshin.ReleasePost[] = [];
     contents
-      .filter(it => it.subject.includes('正式リリース'))
+      .filter(it => it.subject.startsWith('Ver') && it.subject.includes('正式リリース'))
       .some(content => {
         if (content.id === lastFetchedId) return true;
         newReleases.push({
