@@ -8,7 +8,15 @@ function toDataUrl_(fileId: string): string {
 }
 
 function getImageDataUrl(): string {
-  const dataUrl = toDataUrl_('1lC8As90m_vQGV-bCDYpFinAz9ftJTrB7');
+  const imageIds = [
+    '1lC8As90m_vQGV-bCDYpFinAz9ftJTrB7',
+    '1acFlbzQb9MORW1BR5FbKHtSff46joKLJ',
+    '1OnD2xOvD8rpHUUPESQdtaQHAe5Vzyvop',
+    '1TmoJPnrggL-qZFac8W7LSysyIwGNDeh8',
+  ];
+  const index = Math.floor(Math.random() * imageIds.length);
+
+  const dataUrl = toDataUrl_(imageIds[index]);
   Logger.log(`Created spiral abyss image data url | DataUrlLength=${dataUrl.length}`);
 
   return dataUrl;
