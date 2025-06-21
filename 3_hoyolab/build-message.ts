@@ -95,7 +95,7 @@ ${event.articleUrl}
 
   function makeSummaryMessage(posts: HoYo.Content[], topMessage: string): Bluesky.Message {
     const escape = (str: string): string => {
-      return str.replaceAll(/[\r\n\|]/g, '').replaceAll(/\+/g, ' ');
+      return str.replaceAll(/[\r\n]/g, '').replaceAll(/[\|\+\[\]\(\)\*]/g, ' ');
     }
 
     const messages = posts.map(post => {
