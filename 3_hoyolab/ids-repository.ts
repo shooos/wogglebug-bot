@@ -11,24 +11,24 @@
     PropertiesService.getScriptProperties().setProperty(`LAST_POSTED_ID_${game.toUpperCase()}`, id);
   }
 
-  function getFaildPostIds(game: HoYo.Game): string[] {
-    const newAlivalIdsString = PropertiesService.getScriptProperties().getProperty(`FAILD_POST_IDS_${game.toUpperCase()}`);
-    if (newAlivalIdsString === null || newAlivalIdsString === '') {
+  function getFailedPostIds(game: HoYo.Game): string[] {
+    const newArrivalIdsString = PropertiesService.getScriptProperties().getProperty(`FAILD_POST_IDS_${game.toUpperCase()}`);
+    if (newArrivalIdsString === null || newArrivalIdsString === '') {
       return [];
     }
 
-    return newAlivalIdsString.split(',');
+    return newArrivalIdsString.split(',');
   }
 
-  function saveFaildPostIds(game: HoYo.Game, ids: string[]): void {
+  function saveFailedPostIds(game: HoYo.Game, ids: string[]): void {
     const idsString = ids.join(',');
     PropertiesService.getScriptProperties().setProperty(`FAILD_POST_IDS_${game.toUpperCase()}`, idsString);
   }
 
   HoYoLAB.Genshin.getLastPostedId = () => getLastPostedId(HoYo.Game.genshin);
   HoYoLAB.Genshin.saveLastPostedId = (id) => { saveLastPostedId(HoYo.Game.genshin, id) };
-  HoYoLAB.Genshin.getFaildPostIds = () => getFaildPostIds(HoYo.Game.genshin);
-  HoYoLAB.Genshin.saveFaildPostIds = (ids) => { saveFaildPostIds(HoYo.Game.genshin, ids) };
+  HoYoLAB.Genshin.getFailedPostIds = () => getFailedPostIds(HoYo.Game.genshin);
+  HoYoLAB.Genshin.saveFailedPostIds = (ids) => { saveFailedPostIds(HoYo.Game.genshin, ids) };
   HoYoLAB.Genshin.getLastPostedEventId = () => {
     const game = HoYo.Game.genshin;
     const lastPostedId = PropertiesService.getScriptProperties().getProperty(`LAST_POSTED_EVENT_ID_${game.toUpperCase()}`);
@@ -44,11 +44,11 @@
 
   HoYoLAB.ZZZ.getLastPostedId = () => getLastPostedId(HoYo.Game.zzz);
   HoYoLAB.ZZZ.saveLastPostedId = (id) => { saveLastPostedId(HoYo.Game.zzz, id) };
-  HoYoLAB.ZZZ.getFaildPostIds = () => getFaildPostIds(HoYo.Game.zzz);
-  HoYoLAB.ZZZ.saveFaildPostIds = (ids) => { saveFaildPostIds(HoYo.Game.zzz, ids) };
+  HoYoLAB.ZZZ.getFailedPostIds = () => getFailedPostIds(HoYo.Game.zzz);
+  HoYoLAB.ZZZ.saveFailedPostIds = (ids) => { saveFailedPostIds(HoYo.Game.zzz, ids) };
 
   HoYoLAB.StarRail.getLastPostedId = () => getLastPostedId(HoYo.Game.starRail);
   HoYoLAB.StarRail.saveLastPostedId = (id) => { saveLastPostedId(HoYo.Game.starRail, id) };
-  HoYoLAB.StarRail.getFaildPostIds = () => getFaildPostIds(HoYo.Game.starRail);
-  HoYoLAB.StarRail.saveFaildPostIds = (ids) => { saveFaildPostIds(HoYo.Game.starRail, ids) };
+  HoYoLAB.StarRail.getFailedPostIds = () => getFailedPostIds(HoYo.Game.starRail);
+  HoYoLAB.StarRail.saveFailedPostIds = (ids) => { saveFailedPostIds(HoYo.Game.starRail, ids) };
 })();

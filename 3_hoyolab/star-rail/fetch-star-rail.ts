@@ -1,5 +1,5 @@
 (() => {
-  HoYoLAB.StarRail.fetchNewAlivals = (lastPostedId) => {
+  HoYoLAB.StarRail.fetchNewArrivals = (lastPostedId) => {
     Logger.log(`Start fetcing StarRail new alival official posts | LastPostedId=${lastPostedId}`);
 
     const contents = FetchOfficialPostsHelper.execute(`https://bbs-api-os.hoyolab.com/community/post/wapi/userPost?size=20&uid=172534910`);

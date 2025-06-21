@@ -36,9 +36,9 @@ namespace HoYo {
   interface Functions {
     getLastPostedId(): string;
     saveLastPostedId(id: string): void;
-    getFaildPostIds(): string[];
-    saveFaildPostIds(ids: string[]): void;
-    fetchNewAlivals(lastPostedId: string): Content[];
+    getFailedPostIds(): string[];
+    saveFailedPostIds(ids: string[]): void;
+    fetchNewArrivals(lastPostedId: string): Content[];
     fetchTodaysPosts(currentDate: Date): Content[];
     fetchPost(id: string): Content | null;
     buildMessages(contents: Content[]): Bluesky.Message[];
@@ -49,7 +49,7 @@ namespace HoYo {
     Genshin: Partial<Functions> & Partial<{
       getLastPostedEventId(): string;
       saveLastPostedEventId(id: string): void;
-      fetchNewAlivalEvents(lastPostedId: string): Event[];
+      fetchNewArrivalEvents(lastPostedId: string): Event[];
       buildEventMessages(events: Event[]): Bluesky.Message[];
     }>;
     ZZZ: Partial<Functions>;

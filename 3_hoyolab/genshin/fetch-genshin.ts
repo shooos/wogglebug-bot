@@ -1,5 +1,5 @@
 (() => {
-  HoYoLAB.Genshin.fetchNewAlivals = (lastPostedId) => {
+  HoYoLAB.Genshin.fetchNewArrivals = (lastPostedId) => {
     Logger.log(`Start fetcing Genshin new alival official posts | LastPostedId=${lastPostedId}`);
 
     const contents = FetchOfficialPostsHelper.execute(`https://bbs-api-os.hoyolab.com/community/post/wapi/userPost?size=20&uid=1015537`);
@@ -15,7 +15,7 @@
     return newAlivails;
   }
 
-  HoYoLAB.Genshin.fetchNewAlivalEvents = (lastPostedId) => {
+  HoYoLAB.Genshin.fetchNewArrivalEvents = (lastPostedId) => {
     Logger.log(`Start fetcing Genshin new alival official events | LastPostedId=${lastPostedId}`);
 
     const events = FetchOfficialEventsHelper.execute(`https://bbs-api-os.hoyolab.com/community/community_contribution/wapi/event/list?gids=2&size=20`);
