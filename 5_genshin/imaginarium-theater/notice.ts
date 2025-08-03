@@ -20,15 +20,23 @@
 
     let range = lastRowRange;
     let row = range.getRowIndex();
+    let displayValue = range.getDisplayValue();
 
-    if (range.getDisplayValue() === date) {
+    Logger.log(`TargetMonth=${targetMonth}, LastRow=${lastRowRange.getRowIndex()}, Date=${date}, DisplayValue=${displayValue}`);
+
+    if (displayValue === date) {
       return row;
     }
 
     do {
-      range = range.getNextDataCell(GoogleAppsScript.Spreadsheet.Direction.UP);
+      range = sheet.getRange(row - 1, 1);
       row = range.getRowIndex();
-    } while (range.getDisplayValue() !== date);
+      displayValue = range.getDisplayValue();
+    } while (displayValue !== date && displayValue !== '' && row !== 1);
+
+    Logger.log(`FindedTargetRowIndex=${row}`);
+
+    if (row === 1) throw new Error(`NotFound: ${targetMonth}月1日`);
 
     return row;
   }
