@@ -7,14 +7,14 @@ function toDataUrl_(fileId: string): string {
   return `data:${blob.getContentType()};base64,${Utilities.base64Encode(blob.getBytes())}`;
 }
 
-function getImageDataUrl(): string {
+function getImageDataUrl(now: Date): string {
   const imageIds = [
     '1lC8As90m_vQGV-bCDYpFinAz9ftJTrB7',
     '1acFlbzQb9MORW1BR5FbKHtSff46joKLJ',
     '1OnD2xOvD8rpHUUPESQdtaQHAe5Vzyvop',
     '1TmoJPnrggL-qZFac8W7LSysyIwGNDeh8',
   ];
-  const index = Math.floor(Math.random() * imageIds.length);
+  const index = Math.floor(now.getTime() % imageIds.length);
 
   const dataUrl = toDataUrl_(imageIds[index]);
   Logger.log(`Created spiral abyss image data url | DataUrlLength=${dataUrl.length}`);
