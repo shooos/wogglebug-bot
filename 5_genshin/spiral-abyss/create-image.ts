@@ -10,7 +10,11 @@
       url: `${createImageClientUrl}?hours=${hours}`,
       renderType: 'jpg',
     }));
-    UrlFetchApp.fetch(`https://PhantomJsCloud.com/api/browser/v2/${PHANTOM_JS_CLOUD_API_KEY}/?request=${requestJson}`, { muteHttpExceptions: true });
+    const response = UrlFetchApp.fetch(`https://PhantomJsCloud.com/api/browser/v2/${PHANTOM_JS_CLOUD_API_KEY}/?request=${requestJson}`, { muteHttpExceptions: true });
+
+    if (response.getResponseCode() >= 400) {
+      throw Error(`Failed to fetch create image client | ResponseCode=${response.getResponseCode()}`);
+    }
 
     Logger.log(`Fetched create image client`);
   }
