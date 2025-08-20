@@ -105,5 +105,5 @@ function postToBsky(): void {
 }
 
 function __test(): void {
-  HoYoLABSubscriber.notifyTodays!(new Date());
+  Genshin.spiralAbyss!.countDown!(new Date('2025-08-15T10:00:00'));
 }

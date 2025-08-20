@@ -23,15 +23,15 @@
   }
 
   Genshin.spiralAbyss!.countDownCallback = (fileId, hours) => {
+    outputLogToFile(`Called to count down callback process | FileId=${fileId}, Hours=${hours}`);
     const imageFile = DriveApp.getFileById(fileId);
 
     const message = Genshin.spiralAbyss!.buildMessage!(hours, imageFile.getBlob());
-
     const token = Bsky.createSession!();
     Bsky.postMessage!(token, message, Bluesky.BotType.regular);
 
     imageFile.setTrashed(true);
 
-    Logger.log(`Spiral Abyss notification is completed`);
+    outputLogToFile(`Spiral Abyss notification is completed`);
   }
 })();

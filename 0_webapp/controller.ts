@@ -1,5 +1,5 @@
 function doGet(e: GoogleAppsScript.Events.DoGet): GoogleAppsScript.HTML.HtmlOutput {
-  Logger.log(`Start to get create image app`);
+  outputLogToFile(`Start to get create image app`);
 
   const hours = parseInt(e.parameter.hours);
   if (typeof hours !== 'number') {
@@ -10,11 +10,11 @@ function doGet(e: GoogleAppsScript.Events.DoGet): GoogleAppsScript.HTML.HtmlOutp
   template.hours = parseInt(e.parameter.hours);
   const output = template.evaluate();
 
-  Logger.log(`Generated html output`);
+  outputLogToFile(`Generated html output`);
 
   return output;
 }
 
 function clientLogger(message: string): void {
-  Logger.log(message);
+  outputLogToFile(message);
 }
