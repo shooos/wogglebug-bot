@@ -69,3 +69,9 @@ const HoYoLAB: HoYo.Games = {
 };
 
 const HoYoLABSubscriber: Partial<HoYo.Subscriber> = {};
+
+
+// 外部ライブラリを HtmlParser を利用するための無理やり型定義
+declare const HtmlParser: {
+  parse: (data: string) => any;
+};

@@ -105,5 +105,5 @@ function postToBsky(): void {
 }
 
 function __test(): void {
-  Genshin.spiralAbyss!.countDown!(new Date('2025-08-15T10:00:00'));
+  FetchOfficialPostHelper.execute(`https://bbs-api-os.hoyolab.com/community/post/wapi/getPostFull?post_id=40271715&read=1&scene=1`);
 }

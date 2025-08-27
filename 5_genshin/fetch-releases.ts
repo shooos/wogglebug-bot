@@ -9,9 +9,13 @@
       .filter(it => it.subject.startsWith('Ver') && it.subject.includes('正式リリース'))
       .some(content => {
         if (content.id === lastFetchedId) return true;
+
+        const post = FetchOfficialPostHelper.execute(`
+https://bbs-api-os.hoyolab.com/community/post/wapi/getPostFull?post_id=${content.id}&read=1&scene=1`);
+
         newReleases.push({
           id: content.id,
-          body: content.body,
+          body: post?.body ?? content.body,
         });
       });
 

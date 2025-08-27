@@ -5,6 +5,12 @@ const FetchOfficialPostHelper = (() => {
     'X-Rpc-Hour': Utils.extractHourString(new Date()),
   };
 
+  function extractTextContent(rawText: string): string {
+    const dom = HtmlParser.parse(rawText);
+    const extracted = dom.querySelectorAll('*').map((it: any) => it.textContent).join('');
+    return extracted;
+  }
+
   return {
     execute(url: string): HoYo.Content | null {
       Logger.log(`Start fetching HoYoLAB posts | URL=${url}`);
@@ -24,13 +30,16 @@ const FetchOfficialPostHelper = (() => {
       const contentText = response.getContentText();
       const json = JSON.parse(contentText);
       const post = json.data.post;
+
+      const body = extractTextContent(post.post.content);
+
       const content: HoYo.Content = {
         id: post.post.post_id,
         subject: post.post.subject,
         createdAt: new Date(post.post.created_at * 1000),
         articleUrl: `https://www.hoyolab.com/article/${post.post.post_id}`,
         imageUrls: post.cover_list.slice(0, 4).map(image => image.url),
-        body: post.post.desc,
+        body,
       };
 
       Logger.log(`Succeeded in fetching HoYoLAB post | Posts=${JSON.stringify({

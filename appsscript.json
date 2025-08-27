@@ -6,6 +6,11 @@
         "userSymbol": "ImgApp",
         "libraryId": "1T03nYHRho6XMWYcaumClcWr6ble65mAT8OLJqRFJ5lukPVogAN2NDl-y",
         "version": "11"
+      },
+      {
+        "userSymbol": "HtmlParser",
+        "libraryId": "1JTLPVXGW6Pq4zSAV5ED9XrWOPydVywumQZSOWN7l6KJ0UtWxtX3RbYO6",
+        "version": "2"
       }
     ]
   },
