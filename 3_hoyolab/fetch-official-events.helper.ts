@@ -29,7 +29,7 @@ const FetchOfficialEventsHelper = (() => {
 
       const contentText = response.getContentText();
       const json = JSON.parse(contentText);
-      const events: HoYo.Event[] = json.data.list.map(e => {
+      const events: HoYo.Event[] = json.data.list.map((e: any) => {
         const event: HoYo.Event = {
           id: e.id,
           subject: e.name,

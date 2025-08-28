@@ -38,7 +38,7 @@ const FetchOfficialPostHelper = (() => {
         subject: post.post.subject,
         createdAt: new Date(post.post.created_at * 1000),
         articleUrl: `https://www.hoyolab.com/article/${post.post.post_id}`,
-        imageUrls: post.cover_list.slice(0, 4).map(image => image.url),
+        imageUrls: post.cover_list.slice(0, 4).map((image: any) => image.url),
         body,
       };
 

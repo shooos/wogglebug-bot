@@ -1,10 +1,10 @@
 (() => {
   Videos.getLastCheckedPublishedAt = () => {
-    const value = PropertiesService
+    const value: string | null = PropertiesService
       .getScriptProperties()
       .getProperty(`LAST_CHECKED_VIDEOS_PUBLISHED_AT_${HoYo.Game.genshin.toUpperCase()}`);
 
-    return new Date(value);
+    return value ? new Date(value) : new Date();
   }
 
   Videos.saveLastCheckedPublishedAt = (value: Date) => {
