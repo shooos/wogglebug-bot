@@ -19,7 +19,7 @@ const FetchOfficialPostHelper = (() => {
         method: 'get',
         contentType: 'application/json',
         headers,
-        muteHttpExceptions: true
+        muteHttpExceptions: true,
       });
 
       if (response.getResponseCode() !== 200) {

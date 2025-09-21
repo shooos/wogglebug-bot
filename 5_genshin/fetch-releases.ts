@@ -10,8 +10,7 @@
       .some(content => {
         if (content.id === lastFetchedId) return true;
 
-        const post = FetchOfficialPostHelper.execute(`
-https://bbs-api-os.hoyolab.com/community/post/wapi/getPostFull?post_id=${content.id}&read=1&scene=1`);
+        const post = FetchOfficialPostHelper.execute(`https://bbs-api-os.hoyolab.com/community/post/wapi/getPostFull?post_id=${encodeURIComponent(content.id)}&read=1&scene=1`);
 
         newReleases.push({
           id: content.id,
