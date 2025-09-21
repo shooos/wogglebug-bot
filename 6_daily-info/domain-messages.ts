@@ -37,6 +37,11 @@
         itemName: '灼心を捧げる',
         country: 'ナタ'
       },
+      {
+        domainName: '失われた月の庭',
+        itemName: '奇妙な装置',
+        country: 'ナド・クライ',
+      },
     ];
     const tuesday_friday = [
       {
@@ -69,6 +74,11 @@
         itemName: '狂乱の聖主',
         country: 'ナタ'
       },
+      {
+        domainName: '失われた月の庭',
+        itemName: '長夜の灯火',
+        country: 'ナド・クライ',
+      },
     ];
     const wednesday_saturday = [
       {
@@ -100,6 +110,11 @@
         domainName: '古の眺望台',
         itemName: '神秘なる煙',
         country: 'ナタ'
+      },
+      {
+        domainName: '失われた月の庭',
+        itemName: '極北の末裔',
+        country: 'ナド・クライ',
       },
     ];
 
@@ -140,6 +155,10 @@
         domainName: '秘炎の幽墟',
         itemName: '角逐',
         country: 'ナタ',
+      }, {
+        domainName: '光なき深都',
+        itemName: '月光',
+        country: 'ナド・クライ',
       },
     ];
     const tuesday_friday = [
@@ -167,6 +186,10 @@
         domainName: '秘炎の幽墟',
         itemName: '焚燼',
         country: 'ナタ',
+      }, {
+        domainName: '光なき深都',
+        itemName: '楽園',
+        country: 'ナド・クライ',
       },
     ];
     const wednesday_saturday = [
@@ -194,6 +217,10 @@
         domainName: '秘炎の幽墟',
         itemName: '紛争',
         country: 'ナタ',
+      }, {
+        domainName: '光なき深都',
+        itemName: '流浪',
+        country: 'ナド・クライ',
       },
     ];
 
