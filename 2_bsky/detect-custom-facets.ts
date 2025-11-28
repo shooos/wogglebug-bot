@@ -24,4 +24,9 @@
       ]
     };
   }
+
+  Bsky.detectCustomFacets = (text, inputs) => {
+    inputs.map((regex, uri) => { });
+    return [];
+  }
 })();
