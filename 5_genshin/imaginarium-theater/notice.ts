@@ -28,6 +28,9 @@
       return row;
     }
 
+    const lastRowMonth = displayValue.matchAll(/(\d+)月/img).toArray()[0][1];
+    if (Number(lastRowMonth) < targetMonth) throw new Error(`NotFound: ${date}`);
+
     do {
       range = sheet.getRange(row - 1, 1);
       row = range.getRowIndex();
@@ -36,7 +39,7 @@
 
     Logger.log(`FindedTargetRowIndex=${row}`);
 
-    if (row === 1) throw new Error(`NotFound: ${targetMonth}月1日`);
+    if (row === 1) throw new Error(`NotFound: ${date}`);
 
     return row;
   }
