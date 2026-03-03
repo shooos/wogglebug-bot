@@ -46,9 +46,9 @@
 
       results.push({
         date,
-        elementals: [...(elementals[index].slice(2, 5))],
-        principalCastMembers: [...(principalCastMembers[index].slice(5, 11))],
-        alternateCastMembers: [...(alternateCastMembers[index].slice(12, 16))],
+        elementals: [...(elementals[index].slice(1, 4))],
+        principalCastMembers: [...(principalCastMembers[index].slice(1, 7))],
+        alternateCastMembers: [...(alternateCastMembers[index].slice(1, 5))],
         articleUrl: `https://www.hoyolab.com/article/${id}`,
       });
     });
