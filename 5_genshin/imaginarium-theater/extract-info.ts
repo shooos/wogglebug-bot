@@ -26,24 +26,29 @@
 
     const { id, body } = releasePost;
     outputLogToFile(body);
-    const matches = body.matchAll(/幻想シアターは(.{4,16})より開放されます。\s*指定元素タイプ[：|:]([炎雷氷水岩草風])元素.([炎雷氷水岩草風])元素.([炎雷氷水岩草風])元素\s*開幕キャスト[：|:]「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」\s*([^特別招待]+)特別招待キャスト[：|:]「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」/simg).toArray();
+    const matches = body.matchAll(/幻想シアターは(.{4,16})より開放されます。/simg).toArray();
 
     if (!matches.length) {
       throw new Error(`Failed extracting imaginarium theater information | PostId=${releasePost.id}`);
     }
 
-    const results: Genshin.ImaginariumTheaterInfo[] = [];
-    matches.forEach((match) => {
-      Logger.log(`Matched=${JSON.stringify(match)}`);
+    const dates = body.matchAll(/幻想シアターは(.{4,16})より開放されます。/simg).toArray();
+    const elementals = body.matchAll(/指定元素タイプ[：|:]([炎雷氷水岩草風])元素.([炎雷氷水岩草風])元素.([炎雷氷水岩草風])元素/simg).toArray();
+    const principalCastMembers = body.matchAll(/開幕キャスト[：|:]「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」/simg).toArray();
+    const alternateCastMembers = body.matchAll(/特別招待キャスト[：|:]「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」/simg).toArray();
 
-      const date = parseMixFormatDate(match[1]);
+    const results: Genshin.ImaginariumTheaterInfo[] = [];
+    matches.forEach((match, index) => {
+      Logger.log(`Matches index=${JSON.stringify(index)}`);
+
+      const date = parseMixFormatDate(dates[index][1]);
       if (!date) throw new Error('Failed to parse date');
 
       results.push({
         date,
-        elementals: [...match.slice(2, 5)],
-        principalCastMembers: [...match.slice(5, 11)],
-        alternateCastMembers: [...match.slice(12, 16)],
+        elementals: [...elementals[index].slice(2, 5)],
+        principalCastMembers: [...principalCastMembers[index].slice(5, 11)],
+        alternateCastMembers: [...alternateCastMembers[index].slice(12, 16)],
         articleUrl: `https://www.hoyolab.com/article/${id}`,
       });
     });
