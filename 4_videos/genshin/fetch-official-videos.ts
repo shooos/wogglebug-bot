@@ -3,7 +3,7 @@
     try {
       return XmlService.parse(xml);
     } catch {
-      Logger.log(`Failed to parse XML`);
+      Logger.log(`Failed to parse XML | XML Text=${xml}`);
       return null;
     }
   }
