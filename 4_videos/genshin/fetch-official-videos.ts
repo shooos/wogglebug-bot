@@ -1,9 +1,21 @@
 (() => {
+  const parseXml = (xml: string): GoogleAppsScript.XML_Service.Document | null => {
+    try {
+      return XmlService.parse(xml);
+    } catch {
+      Logger.log(`Failed to parse XML`);
+      return null;
+    }
+  }
+
   Videos.fetchGenshinOfficialVideos = (lastCheckedPublishedAt) => {
     Logger.log(`Start fetching genshin official videos | LastCheckedPublishedAt=${Utils.formatDateToIsoString(lastCheckedPublishedAt)}`);
 
     const ret = UrlFetchApp.fetch('https://www.youtube.com/feeds/videos.xml?channel_id=UCAVR6Q0YgYa8xwz8rdg9Mrg', { muteHttpExceptions: true });
-    const doc = XmlService.parse(ret.getContentText());
+    const doc = parseXml(ret.getContentText());
+
+    if (doc == null) return [];
+
     const root = doc.getRootElement();
     const atom = XmlService.getNamespace('http://www.w3.org/2005/Atom');
     const media = XmlService.getNamespace('media', 'http://search.yahoo.com/mrss/');
