@@ -11,6 +11,11 @@
         "userSymbol": "HtmlParser",
         "libraryId": "1JTLPVXGW6Pq4zSAV5ED9XrWOPydVywumQZSOWN7l6KJ0UtWxtX3RbYO6",
         "version": "2"
+      },
+      {
+        "userSymbol": "OAuth2",
+        "libraryId": "1B7FSrk5Zi6L1rSxxTDgDEUsPzlukDsi4KGuTMorsTQHhGBzBkMun4iDF",
+        "version": "43"
       }
     ]
   },
