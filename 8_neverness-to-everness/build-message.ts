@@ -1,14 +1,14 @@
 (() => {
   Nte.buildMessage = (message: Discord.Message): Bluesky.Message => {
-    const content = message.content;
-    const author = message.author;
-    const channel = message.channel;
+    const embed = message.embeds?.[0];
+
+    if (!embed) {
+      throw new Error(`Message has no embeds | Message ID=${message.id}`);
+    }
 
     return {
-      content,
-      author,
-      channel,
-      timestamp: new Date(),
-    };
+      body: `${embed.description || ''}`,
+      images: [],
+    }
   };
 })();
