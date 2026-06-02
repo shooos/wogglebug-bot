@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "clasp push && clasp deploy --deploymentId AKfycbzQC0F_nH0Vqv6OZE74rdmKhZ3hXMB8ZKU3xZhSA4EI --description 'Production Deploy'"
   },
   "author": "",
   "license": "MIT",
