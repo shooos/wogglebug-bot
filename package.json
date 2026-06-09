@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "clasp push && clasp deploy --deploymentId AKfycbzQC0F_nH0Vqv6OZE74rdmKhZ3hXMB8ZKU3xZhSA4EI --description 'Production Deploy'"
+    "deploy": "clasp push && clasp deploy --deploymentId AKfycbzoWkNpFh_Lz-Im9qDqAMBpbmS5wpKSgLC7KZ1p45T-GO88mbz8yXwESwvJPPKmY9y_MA --description 'Production Deploy'"
   },
   "author": "",
   "license": "MIT",
