@@ -1,0 +1,23 @@
+name: Discord to GAS Sync
+
+on:
+  schedule:
+    - cron: '*/5 7-23 * * *'
+      timezone: 'Asia/Tokyo'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch from Discord and Post to GAS
+        env:
+          DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          GAS_WEBAPP_URL: ${{ secrets.GAS_WEBAPP_URL }}
+        run: |
+          RESPONSE=$(curl -s -H "Authorization: Bot $DISCORD_BOT_TOKEN" \
+            "https://discord.com/api/v10/channels/$DISCORD_CHANNEL_ID/messages?limit=10")
+
+          curl -X POST -H "Content-Type: application/json" \
+            -d "$RESPONSE" \
+            "$GAS_WEBAPP_URL"

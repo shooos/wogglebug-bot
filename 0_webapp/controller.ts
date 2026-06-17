@@ -17,24 +17,39 @@ function doGet(e: GoogleAppsScript.Events.DoGet): GoogleAppsScript.HTML.HtmlOutp
 
 function doPost(e: GoogleAppsScript.Events.DoPost): void {
   const jsonString = e.postData.contents;
-  let message: Discord.Message;
+  let messages: Discord.Message[];
 
   try {
-    message = JSON.parse(jsonString);
+    messages = JSON.parse(jsonString);
   } catch (e) {
     outputLogToFile(`Failed to parse JSON | Error=${e} | JSON=${jsonString}`);
     throw new Error(`Failed to parse JSON | Error=${e}`);
   }
 
-  outputLogToFile(`Received messages from client | ${message.id}`);
+  outputLogToFile(`Received messages from client | MessagesLength=${messages.length}`);
 
-  if (message.author.bot || !message.embeds || message.embeds.length === 0) {
-    outputLogToFile(`Message is from bot or has no embeds | Message ID=${message.id}`);
-    return;
+  const lastReadMessageId = NTE.LAST_READ_MESSAGE_ID;
+
+  outputLogToFile(`Last read message ID | ID=${lastReadMessageId}`);
+
+  const bskyMessages: Bluesky.Message[] = [];
+
+  for (const message of messages) {
+    if (message.author.bot || !message.embeds || message.embeds.length === 0) {
+      outputLogToFile(`Message is from bot or has no embeds | Message ID=${message.id}`);
+      continue;
+    }
+
+    if (message.id === lastReadMessageId) {
+      outputLogToFile(`Found last read message | ID=${lastReadMessageId}`);
+      break;
+    }
+
+    const blueskyMessage = Nte.buildMessage!(message);
+    outputLogToFile(`Built Bluesky message | Message ID=${message.id} | Body=${blueskyMessage.body}`);
+
+    bskyMessages.push(blueskyMessage);
   }
-
-  const blueskyMessage = Nte.buildMessage!(message);
-  outputLogToFile(`Built Bluesky message | Message ID=${message.id} | Body=${blueskyMessage.body}`);
 }
 
 function clientLogger(message: string): void {
