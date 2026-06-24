@@ -15,7 +15,7 @@ function doGet(e: GoogleAppsScript.Events.DoGet): GoogleAppsScript.HTML.HtmlOutp
   return output;
 }
 
-function doPost(e: GoogleAppsScript.Events.DoPost): void {
+function doPost(e: GoogleAppsScript.Events.DoPost): GoogleAppsScript.Content.TextOutput {
   const jsonString = e.postData.contents;
   let messages: Discord.Message[];
 
@@ -50,6 +50,8 @@ function doPost(e: GoogleAppsScript.Events.DoPost): void {
 
     bskyMessages.push(blueskyMessage);
   }
+
+  return ContentService.createTextOutput(JSON.stringify({ success: true }));
 }
 
 function clientLogger(message: string): void {
