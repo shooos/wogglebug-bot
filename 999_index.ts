@@ -11,6 +11,7 @@ function subscribeHoYoOfficial(): void {
 
   HoYoLABSubscriber.subscribe!();
   VideosSubscriber.subscribe!();
+  Discord.kickGithubAction!();
 }
 
 /**
