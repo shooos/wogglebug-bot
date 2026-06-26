@@ -28,7 +28,7 @@ function doPost(e: GoogleAppsScript.Events.DoPost): GoogleAppsScript.Content.Tex
 
   outputLogToFile(`Received messages from client | Messages=${jsonString}`);
 
-  const lastReadMessageId = NTE.LAST_READ_MESSAGE_ID;
+  const lastReadMessageId = PropertiesService.getScriptProperties().getProperty('LAST_READ_ID_NTE');
 
   outputLogToFile(`Last read message ID | ID=${lastReadMessageId}`);
 
@@ -50,6 +50,15 @@ function doPost(e: GoogleAppsScript.Events.DoPost): GoogleAppsScript.Content.Tex
 
     bskyMessages.push(blueskyMessage);
   }
+
+  bskyMessages.reverse().forEach((msg) => {
+    Bsky.postMessage!(
+      PropertiesService.getScriptProperties().getProperty('BLUESKY_ACCESS_TOKEN')!,
+      msg,
+      Bluesky.BotType.regular);
+  });
+
+  PropertiesService.getScriptProperties().setProperty('LAST_READ_ID_NTE', messages[0].id);
 
   return ContentService.createTextOutput(JSON.stringify({ success: true }));
 }
