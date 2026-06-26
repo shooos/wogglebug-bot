@@ -1,5 +1,5 @@
 (() => {
-  Nte.buildMessage = (message: Discord.Message): Bluesky.Message => {
+  Nte.buildMessage = (message: DISCORD.Message): Bluesky.Message => {
     const embed = message.embeds?.[0];
 
     if (!embed) {

@@ -3,7 +3,7 @@ namespace NTE {
 
   export interface Functions {
     subscribe(after: Date): void;
-    buildMessage(message: Discord.Message): Bluesky.Message;
+    buildMessage(message: DISCORD.Message): Bluesky.Message;
   }
 }
 

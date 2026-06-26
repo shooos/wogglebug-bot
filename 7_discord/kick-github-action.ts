@@ -1,0 +1,33 @@
+(() => {
+  const OWNER = 'shooos';
+  const REPO = 'wogglebug-bot';
+  const WORKFLOW_ID = 'discord-sync.yml';
+  const GITHUB_TOKEN = PropertiesService.getScriptProperties().getProperty('GITHUB_ACCESS_TOKEN');
+  const url = `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_ID}/dispatches`;
+
+  Discord.kickGithubAction = () => {
+    const options: GoogleAppsScript.URL_Fetch.URLFetchRequestOptions = {
+      method: "post",
+      headers: {
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
+        Accept: "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28"
+      },
+      contentType: "application/json",
+      muteHttpExceptions: true
+    };
+
+    try {
+      const response = UrlFetchApp.fetch(url, options);
+      const responseCode = response.getResponseCode();
+
+      if (responseCode === 204) {
+        Logger.log("Successfully triggered GitHub Action workflow.");
+      } else {
+        Logger.log(`Failed to trigger GitHub Action workflow | Status=${responseCode}, Reason=${response.getContentText()}`);
+      }
+    } catch (e) {
+      Logger.log(`Error occurred while triggering GitHub Action workflow: ${e}`);
+    }
+  }
+})();

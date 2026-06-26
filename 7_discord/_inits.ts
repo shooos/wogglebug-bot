@@ -1,4 +1,4 @@
-namespace Discord {
+namespace DISCORD {
   export interface Message {
     id: string;
     content: string;
@@ -21,4 +21,10 @@ namespace Discord {
       width?: number;
     };
   }
+
+  export interface Functions {
+    kickGithubAction(): void;
+  }
 }
+
+const Discord: Partial<DISCORD.Functions> = {};

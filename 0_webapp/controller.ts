@@ -17,7 +17,7 @@ function doGet(e: GoogleAppsScript.Events.DoGet): GoogleAppsScript.HTML.HtmlOutp
 
 function doPost(e: GoogleAppsScript.Events.DoPost): GoogleAppsScript.Content.TextOutput {
   const jsonString = e.postData.contents;
-  let messages: Discord.Message[];
+  let messages: DISCORD.Message[];
 
   try {
     messages = JSON.parse(jsonString);
