@@ -46,19 +46,25 @@ function doPost(e: GoogleAppsScript.Events.DoPost): GoogleAppsScript.Content.Tex
     }
 
     const blueskyMessage = Nte.buildMessage!(message);
-    outputLogToFile(`Built Bluesky message | Message ID=${message.id} | Body=${blueskyMessage.body}`);
+    outputLogToFile(`Built Bluesky message | Message ID=${message.id}, Body=${blueskyMessage.body}`);
 
     bskyMessages.push(blueskyMessage);
   }
 
   bskyMessages.reverse().forEach((msg) => {
-    Bsky.postMessage!(
-      PropertiesService.getScriptProperties().getProperty('BLUESKY_ACCESS_TOKEN')!,
-      msg,
-      Bluesky.BotType.regular);
+    try {
+      Bsky.postMessage!(
+        Bsky.createSession!(),
+        msg,
+        Bluesky.BotType.regular);
+    } catch (error) {
+      outputLogToFile(`Failed to post message to Bluesky | Error=${error}`);
+    }
   });
 
   PropertiesService.getScriptProperties().setProperty('LAST_READ_ID_NTE', messages[0].id);
+
+  outputLogToFile(`Updated last read message ID | New ID=${messages[0].id}`);
 
   return ContentService.createTextOutput(JSON.stringify({ success: true }));
 }
