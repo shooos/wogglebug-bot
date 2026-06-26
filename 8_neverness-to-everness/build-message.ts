@@ -1,4 +1,6 @@
 (() => {
+  const MAX_BODY_LENGTH = 300 - 10 - 25 - 25 - 1 - 5;
+
   function createImage(imageUrls: string[]): Bluesky.AttachImage[] {
     return imageUrls.map(url => {
       const rawBlob = Utils.fetchBlob(url);
@@ -43,12 +45,12 @@
 
     const body = `#NTE公式Xポスト
 
-${embed.description}
+投稿日時 : ${Utils.formatToViewDate(new Date(embed.timestamp))}
 
-投稿日時 : ${Utils.formatToViewDate(new Date(embed.timestamp))}`;
+${embed.description}`;
 
     return {
-      body: `${embed.description || ''}`,
+      body: body.slice(0, MAX_BODY_LENGTH) + '…',
       images: createImage(embed.image?.url ? [embed.image.url] : []),
     }
   };
