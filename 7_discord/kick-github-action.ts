@@ -1,7 +1,7 @@
 (() => {
   const OWNER = 'shooos';
   const REPO = 'wogglebug-bot';
-  const WORKFLOW_ID = 'discord-sync.yml';
+  const WORKFLOW_ID = '28211588875';
   const GITHUB_TOKEN = PropertiesService.getScriptProperties().getProperty('GITHUB_ACCESS_TOKEN');
   const url = `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_ID}/dispatches`;
 
