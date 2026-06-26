@@ -26,7 +26,7 @@ function doPost(e: GoogleAppsScript.Events.DoPost): GoogleAppsScript.Content.Tex
     throw new Error(`Failed to parse JSON | Error=${e}`);
   }
 
-  outputLogToFile(`Received messages from client | MessagesLength=${messages.length}`);
+  outputLogToFile(`Received messages from client | Messages=${jsonString}`);
 
   const lastReadMessageId = NTE.LAST_READ_MESSAGE_ID;
 
@@ -35,8 +35,8 @@ function doPost(e: GoogleAppsScript.Events.DoPost): GoogleAppsScript.Content.Tex
   const bskyMessages: Bluesky.Message[] = [];
 
   for (const message of messages) {
-    if (message.author.bot || !message.embeds || message.embeds.length === 0) {
-      outputLogToFile(`Message is from bot or has no embeds | Message ID=${message.id}`);
+    if (!message.embeds || message.embeds.length === 0) {
+      outputLogToFile(`Message has no embeds | Message ID=${message.id}`);
       continue;
     }
 
