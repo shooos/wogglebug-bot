@@ -106,5 +106,6 @@ function postToBsky(): void {
 }
 
 function __test(): void {
-  FetchOfficialPostHelper.execute(`https://bbs-api-os.hoyolab.com/community/post/wapi/getPostFull?post_id=40271715&read=1&scene=1`);
+  const msg = DailyInfo.weeklyMessage!(new Date('2026-06-29T07:50:00+09:00'));
+  Logger.log(`Weekly message | Body=${msg?.body}`);
 }

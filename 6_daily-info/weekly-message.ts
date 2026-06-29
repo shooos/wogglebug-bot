@@ -1,4 +1,25 @@
 (() => {
+  const makeCharacterVoiceMap = (): Record<string, string[]> => {
+    const characterVoiceSpreadsheet = SpreadsheetApp.openById('1GJA_PYToRyNOicHrVsSuuYkiDRV1V6McvCnk4RbXYOA');
+    const characterVoiceSheet = characterVoiceSpreadsheet.getSheetByName('元素爆発Voice');
+    const lastRow = characterVoiceSheet?.getLastRow() || 0;
+    const dataRange = characterVoiceSheet?.getRange(2, 1, lastRow - 1, 7);
+    const characterVoiceData = dataRange?.getValues() || [];
+    const characterVoiceMap: Record<string, string[]> = characterVoiceData.reduce((map, row: string[]) => {
+      const characterName = row[0];
+      const voices = [row[1], row[2], row[3], row[4], row[5], row[6]];
+
+      if (!map[characterName]) {
+        map[characterName] = [];
+      }
+
+      map[characterName].push(...(voices.filter(voice => voice !== null && voice !== undefined && voice !== '')));
+      return map;
+    }, {} as Record<string, string[]>);
+
+    return characterVoiceMap;
+  };
+
   const randomMessages = (): string => {
     const messages = [
       '今日もテイワットを駆け巡ろう！',
@@ -31,6 +52,12 @@
     return messages[index];
   };
 
+  const resolveCharacterVoices = (charaName: string): string | null => {
+    const characterVoiceMap = makeCharacterVoiceMap();
+    const voices = characterVoiceMap[charaName];
+    return voices?.[Math.floor(Math.random() * voices.length)] || null;
+  }
+
   const getImageFileRandom = (): GoogleAppsScript.Drive.File => {
     const folder = DriveApp.getFolderById('1oRpbJGAYLuSk2Fy3optFbc4inwkTpMLl');
     const files = folder.getFiles();
@@ -54,9 +81,7 @@
 ✅ 討伐懸賞
 ✅ 住民リクエスト
 ✅ 深紅の願い
-✅ その他紀行ウィークリー任務
-
-明日のリセットに備えよう！ #原神`,
+✅ その他紀行ウィークリー任務`,
 
     // Monday
     `月曜日🌕
@@ -65,42 +90,30 @@
 ✅ 征討領域の報酬がリセット
 ✅ 討伐懸賞の挑戦回数がリセット
 ✅ 住民リクエストの進捗がリセット
-✅ 深紅の願いの挑戦回数がリセット
-
-今週もテイワットを駆け巡ろう！ #原神`,
+✅ 深紅の願いの挑戦回数がリセット`,
 
     // Tuesday
-    `火曜日🔥
-
-${randomMessages()} #原神`,
+    `火曜日🔥`,
 
     // Wednesday
-    `水曜日💧
-
-${randomMessages()} #原神`,
+    `水曜日💧`,
 
     // Thursday
     `木曜日🌳
 
 ✅ 各聖遺物ショップの購入回数がリセット
-（石榴、琳琅、張順、山城健太、アフシン、クラッサ、エクチュア、レコ）
-
-${randomMessages()} #原神`,
+（石榴、琳琅、張順、山城健太、アフシン、クラッサ、エクチュア、レコ）`,
 
     // Friday
     `金曜日✨
 
 ✅ 塵歌壺に周遊する壺の精霊が到来
-✅ 深紅の願いの挑戦回数がリセット
-
-${randomMessages()} #原神`,
+✅ 深紅の願いの挑戦回数がリセット`,
 
     // Saturday
     `土曜日🪨
 
-✅ フレンドの塵歌壺で周遊する壺の精霊から買い物ができるようになった
-
-${randomMessages()} #原神`,
+✅ フレンドの塵歌壺で周遊する壺の精霊から買い物ができるようになった`,
   ];
 
   DailyInfo.weeklyMessage = (currentDate) => {
@@ -119,11 +132,18 @@ ${randomMessages()} #原神`,
     const dateStr = Utils.formatToViewDateJPN(currentDate);
     const currentDay = currentDate.getDay();
 
-    const imageBlob = getImageFileRandom().getBlob();
+    const imageFile = getImageFileRandom();
+    const imageBlob = imageFile.getBlob();
     const imageSize = Image.getRectangleSize!(imageBlob);
 
+    const charaName = imageFile.getName().split('.')[0];
+    const voice = resolveCharacterVoices(charaName);
+
     return {
-      body: `今日は ${dateStr} ${MESSAGES[currentDay]}`,
+      body: ` #原神
+今日は ${dateStr} ${MESSAGES[currentDay]}
+
+🔊 ${voice || ''}`,
       images: [
         {
           altText: '',
