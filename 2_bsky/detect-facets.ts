@@ -20,6 +20,10 @@
           uri = uri.slice(0, -1)
           index.end--
         }
+        // ignore URLs that end with the ellipsis character '…'
+        if (uri.endsWith('…')) {
+          continue
+        }
         facets.push({
           index: {
             byteStart: text.utf16IndexToUtf8Index(index.start),
