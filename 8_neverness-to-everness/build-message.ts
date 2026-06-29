@@ -47,8 +47,10 @@
 
 ${embed.description}`;
 
+    const hasExceeded = body.length > Bluesky.MAX_BODY_LENGTH;
+
     return {
-      body: body.slice(0, Bluesky.MAX_BODY_LENGTH) + '…',
+      body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '…' : body}`,
       images: createImage(embed.image?.url ? [embed.image.url] : []),
     }
   };

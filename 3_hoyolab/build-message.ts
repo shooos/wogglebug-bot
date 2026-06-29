@@ -36,8 +36,9 @@ ${content.articleUrl}
 
 ${content.body}`;
 
+      const hasExceeded = body.length > Bluesky.MAX_BODY_LENGTH;
       return {
-        body: body.slice(0, Bluesky.MAX_BODY_LENGTH) + '…',
+        body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '…' : body}`,
         images: createImage(content.imageUrls),
       }
     });
@@ -53,8 +54,9 @@ ${content.articleUrl}
 
 ${content.body}`;
 
+      const hasExceeded = body.length > Bluesky.MAX_BODY_LENGTH;
       return {
-        body: body.slice(0, Bluesky.MAX_BODY_LENGTH) + '…',
+        body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '…' : body}`,
         images: createImage(content.imageUrls),
       }
     });
@@ -70,8 +72,9 @@ ${content.articleUrl}
 
 ${content.body}`;
 
+      const hasExceeded = body.length > Bluesky.MAX_BODY_LENGTH;
       return {
-        body: body.slice(0, Bluesky.MAX_BODY_LENGTH) + '…',
+        body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '…' : body}`,
         images: createImage(content.imageUrls),
       }
     });
@@ -86,8 +89,9 @@ ${event.articleUrl}
 期間: ${Utils.formatToViewDate(event.startAt)} ～ ${Utils.formatToViewDate(event.endAt)}
 投稿日時 : ${Utils.formatToViewDate(event.createdAt)}`;
 
+      const hasExceeded = body.length > Bluesky.MAX_BODY_LENGTH;
       return {
-        body,
+        body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '…' : body}`,
         images: createImage(event.imageUrls),
       }
     });
