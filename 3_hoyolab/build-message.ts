@@ -111,14 +111,15 @@ ${event.articleUrl}
 ${messages.length === 0 ? '🔕 本日の公式ポストはありませんでした' : messages}`;
 
     const unicodeBody = new Bluesky.UnicodeString(body);
+    const facetTargets = posts.map(post => {
+      const subject = escape(post.subject);
+      const regexp = new RegExp(`(${subject})`, 'gim');
+      return { regex: regexp, uri: post.articleUrl };
+    });
 
     return {
       body,
-      customFacets: posts.map(post => {
-        const subject = escape(post.subject);
-        const regexp = new RegExp(`(${subject})`, 'gim');
-        return Bsky.detectCustomFacet!(unicodeBody, regexp, post.articleUrl);
-      }),
+      customFacets: Bsky.detectCustomFacets!(unicodeBody, facetTargets),
       images: createImage(
         posts.map(post => post.imageUrls[0]).filter(it => it != undefined).slice(0, 4)
       ),
