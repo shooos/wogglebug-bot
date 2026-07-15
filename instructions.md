@@ -62,13 +62,13 @@ PowerShell から実行することを想定しています。`package.json` の
 
 ```powershell
 # 依存をインストール
-# npm install
+# pnpm install
 
 # ビルド（package.json の build を優先）
-# npm run build
+# pnpm run build
 
 # clasp に push（.clasp.json の認証が必要）
-# npx clasp push
+# pnpm exec clasp push
 ```
 
 検出ヒューリスティクスの注意点

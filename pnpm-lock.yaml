@@ -1,0 +1,32 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    devDependencies:
+      '@types/google-apps-script':
+        specifier: ^1.0.86
+        version: 1.0.100
+      '@types/google-apps-script-oauth2':
+        specifier: ^43.0.0
+        version: 43.0.0
+
+packages:
+
+  '@types/google-apps-script-oauth2@43.0.0':
+    resolution: {integrity: sha512-n2d/X6CFFgFvwy3jwa/lpj4Yxag3T8wdYBijkh2hq2DJmHSry6YsJuwXlvd67i19k6wKijOXnIv9UdXtwvH03w==}
+
+  '@types/google-apps-script@1.0.100':
+    resolution: {integrity: sha512-POgcjcDbrjYJYf3Av6j5n+z9/z/WulCNh9Gj199HgrcgRLzcQLg5ALw6jdWcgBkzgTLNYZSe7/01aOfiNzzn9g==}
+
+snapshots:
+
+  '@types/google-apps-script-oauth2@43.0.0':
+    dependencies:
+      '@types/google-apps-script': 1.0.100
+
+  '@types/google-apps-script@1.0.100': {}
