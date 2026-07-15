@@ -66,7 +66,7 @@ const logFile = openLogFile(new Date());
 
 function outputLogToFile(log: string): void {
   try {
-    const timestamp = Utils.formatToViewDate(new Date());
+    const timestamp = Utils.formatToViewDateTimeMillis(new Date());
     const logMessage = `${timestamp} --- ${log}`;
     const logs = logFile.getBlob().getDataAsString();
     const newContent = logMessage.concat(`\n${logs}`);

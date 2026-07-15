@@ -35,6 +35,16 @@ const Utils = {
   },
 
   /**
+   * yyyy-MM-dd HH:mm:ss:SSS にフォーマットして返す
+   * タイムゾーンは Asia/Tokyo
+   * @param date Date 日時
+   * @returns フォーマット済み日時文字列
+   */
+  formatToViewDateTimeMillis(date: Date): string {
+    return Utilities.formatDate(date, 'Asia/Tokyo', 'yyyy-MM-dd HH:mm:ss:SSS');
+  },
+
+  /**
    * yyyy年M月d日 にフォーマットして返す
    * タイムゾーンは Asia/Tokyo
    * 
