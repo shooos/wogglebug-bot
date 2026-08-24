@@ -1,5 +1,5 @@
 /**
- * HoYoVerse 公式情報を収集して Bsky 連携する
+ * HoYoVerse 公式情報を収集して Bluesky 連携する
  */
 function subscribeHoYoOfficial(): void {
   const currentHours = new Date().getHours();
