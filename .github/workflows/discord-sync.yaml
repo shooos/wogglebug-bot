@@ -14,7 +14,7 @@ jobs:
           GAS_WEBAPP_URL: ${{ secrets.GAS_WEBAPP_URL }}
         run: |
           RESPONSE=$(curl -s -v -H "Authorization: Bot $DISCORD_BOT_TOKEN" \
-            "https://discord.com/api/v10/channels/$DISCORD_CHANNEL_ID/messages?limit=10")
+            "https://discord.com/api/v10/channels/$DISCORD_CHANNEL_ID/messages?limit=7")
 
           export RESPONSE
 
