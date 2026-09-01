@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   function genshin(): void {
     const lastPostedId = HoYoLAB.Genshin.getLastPostedId!();
     const newArrivals = HoYoLAB.Genshin.fetchNewArrivals!(lastPostedId);
@@ -9,7 +9,7 @@
     const eventMessages = HoYoLAB.Genshin.buildEventMessages!(newArrivalEvents.toReversed());
 
     if (!messages.length && !eventMessages.length) {
-      Logger.log(`No need to notify about Genshin`);
+      Utils.log(`No need to notify about Genshin`);
       return;
     }
 
@@ -28,7 +28,7 @@
     const messages = HoYoLAB.ZZZ.buildMessages!(newArrivals.toReversed());
 
     if (!messages.length) {
-      Logger.log(`No need to notify about ZZZ`);
+      Utils.log(`No need to notify about ZZZ`);
       return;
     }
 
@@ -46,7 +46,7 @@
     const messages = HoYoLAB.StarRail.buildMessages!(newArrivals.toReversed());
 
     if (!messages.length) {
-      Logger.log(`No need to notify about Star Rail`);
+      Utils.log(`No need to notify about Star Rail`);
       return;
     }
 
@@ -64,3 +64,5 @@
     starRail();
   }
 })();
+
+

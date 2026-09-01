@@ -1,7 +1,7 @@
-(() => {
+﻿(() => {
   const makeCharacterVoiceMap = (): Record<string, string[]> => {
     const characterVoiceSpreadsheet = SpreadsheetApp.openById('1GJA_PYToRyNOicHrVsSuuYkiDRV1V6McvCnk4RbXYOA');
-    const characterVoiceSheet = characterVoiceSpreadsheet.getSheetByName('元素爆発Voice');
+    const characterVoiceSheet = characterVoiceSpreadsheet.getSheetByName('蜈・ｴ辷・匱Voice');
     const lastRow = characterVoiceSheet?.getLastRow() || 0;
     const dataRange = characterVoiceSheet?.getRange(2, 1, lastRow - 1, 7);
     const characterVoiceData = dataRange?.getValues() || [];
@@ -22,29 +22,29 @@
 
   const randomMessages = (): string => {
     const messages = [
-      '今日もテイワットを駆け巡ろう！',
-      '特産品のリポップ確認は大丈夫かな？',
-      '魚のリポップ確認は大丈夫かな？',
-      '変わったヒルチャールでも探してみようか！',
-      '刹那樹脂は使ったかな？',
-      '今週の刹那樹脂、買い忘れてない？',
-      '今日はどこを探索しようか',
-      '聖遺物厳選は順調かな？',
-      '魔神任務は順調かな？',
-      '世界任務は順調かな？',
-      '今週のウィークリー任務は順調？',
-      '今期の深境螺旋は順調？',
-      '目当てのキャラは引けたかな？',
-      '目当ての武器は引けたかな？',
-      '隠し宝箱でも探しに出かけよっか！',
-      'テイワット探索楽しんでる？',
-      '今日はフォンテーヌ探索でもしてみよう！',
-      '今日はモンド探索でもしてみよう！',
-      '今日は璃月探索でもしてみよう！',
-      '今日は稲妻探索でもしてみよう！',
-      '今日はスメール探索でもしてみよう！',
-      '今日はナタ探索でもしてみよう！',
-      '塵歌壺の畑の収穫も忘れないようにね！',
+      '莉頑律繧ゅユ繧､繝ｯ繝・ヨ繧帝ｧ・￠蟾｡繧阪≧・・,
+      '迚ｹ逕｣蜩√・繝ｪ繝昴ャ繝礼｢ｺ隱阪・螟ｧ荳亥､ｫ縺九↑・・,
+      '鬲壹・繝ｪ繝昴ャ繝礼｢ｺ隱阪・螟ｧ荳亥､ｫ縺九↑・・,
+      '螟峨ｏ縺｣縺溘ヲ繝ｫ繝√Ε繝ｼ繝ｫ縺ｧ繧よ爾縺励※縺ｿ繧医≧縺具ｼ・,
+      '蛻ｹ驍｣讓ｹ閼ゅ・菴ｿ縺｣縺溘°縺ｪ・・,
+      '莉企ｱ縺ｮ蛻ｹ驍｣讓ｹ閼ゅ∬ｲｷ縺・ｿ倥ｌ縺ｦ縺ｪ縺・ｼ・,
+      '莉頑律縺ｯ縺ｩ縺薙ｒ謗｢邏｢縺励ｈ縺・°',
+      '閨夜⊆迚ｩ蜴ｳ驕ｸ縺ｯ鬆・ｪｿ縺九↑・・,
+      '鬲皮･樔ｻｻ蜍吶・鬆・ｪｿ縺九↑・・,
+      '荳也阜莉ｻ蜍吶・鬆・ｪｿ縺九↑・・,
+      '莉企ｱ縺ｮ繧ｦ繧｣繝ｼ繧ｯ繝ｪ繝ｼ莉ｻ蜍吶・鬆・ｪｿ・・,
+      '莉頑悄縺ｮ豺ｱ蠅・楴譌九・鬆・ｪｿ・・,
+      '逶ｮ蠖薙※縺ｮ繧ｭ繝｣繝ｩ縺ｯ蠑輔￠縺溘°縺ｪ・・,
+      '逶ｮ蠖薙※縺ｮ豁ｦ蝎ｨ縺ｯ蠑輔￠縺溘°縺ｪ・・,
+      '髫縺怜ｮ晉ｮｱ縺ｧ繧よ爾縺励↓蜃ｺ縺九￠繧医▲縺具ｼ・,
+      '繝・う繝ｯ繝・ヨ謗｢邏｢讌ｽ縺励ｓ縺ｧ繧具ｼ・,
+      '莉頑律縺ｯ繝輔か繝ｳ繝・・繝梧爾邏｢縺ｧ繧ゅ＠縺ｦ縺ｿ繧医≧・・,
+      '莉頑律縺ｯ繝｢繝ｳ繝画爾邏｢縺ｧ繧ゅ＠縺ｦ縺ｿ繧医≧・・,
+      '莉頑律縺ｯ迺・怦謗｢邏｢縺ｧ繧ゅ＠縺ｦ縺ｿ繧医≧・・,
+      '莉頑律縺ｯ遞ｲ螯ｻ謗｢邏｢縺ｧ繧ゅ＠縺ｦ縺ｿ繧医≧・・,
+      '莉頑律縺ｯ繧ｹ繝｡繝ｼ繝ｫ謗｢邏｢縺ｧ繧ゅ＠縺ｦ縺ｿ繧医≧・・,
+      '莉頑律縺ｯ繝翫ち謗｢邏｢縺ｧ繧ゅ＠縺ｦ縺ｿ繧医≧・・,
+      '蝪ｵ豁悟｣ｺ縺ｮ逡代・蜿守ｩｫ繧ょｿ倥ｌ縺ｪ縺・ｈ縺・↓縺ｭ・・,
     ];
 
     const index = Math.floor(Math.random() * messages.length);
@@ -74,50 +74,50 @@
 
   const MESSAGES = [
     // Sunday
-    `日曜日🌞
-やり忘れたことはない？
+    `譌･譖懈律捲
+繧・ｊ蠢倥ｌ縺溘％縺ｨ縺ｯ縺ｪ縺・ｼ・
 
-✅ 征討領域
-✅ 討伐懸賞
-✅ 住民リクエスト
-✅ 深紅の願い
-✅ その他紀行ウィークリー任務`,
+笨・蠕∬ｨ朱伜沺
+笨・險惹ｼ先・雉・
+笨・菴乗ｰ代Μ繧ｯ繧ｨ繧ｹ繝・
+笨・豺ｱ邏・・鬘倥＞
+笨・縺昴・莉也ｴ陦後え繧｣繝ｼ繧ｯ繝ｪ繝ｼ莉ｻ蜍兪,
 
     // Monday
-    `月曜日🌕
+    `譛域屆譌･剣
 
-✅ 紀行ウィークリー任務がリセット
-✅ 征討領域の報酬がリセット
-✅ 討伐懸賞の挑戦回数がリセット
-✅ 住民リクエストの進捗がリセット
-✅ 深紅の願いの挑戦回数がリセット`,
+笨・邏陦後え繧｣繝ｼ繧ｯ繝ｪ繝ｼ莉ｻ蜍吶′繝ｪ繧ｻ繝・ヨ
+笨・蠕∬ｨ朱伜沺縺ｮ蝣ｱ驟ｬ縺後Μ繧ｻ繝・ヨ
+笨・險惹ｼ先・雉槭・謖第姶蝗樊焚縺後Μ繧ｻ繝・ヨ
+笨・菴乗ｰ代Μ繧ｯ繧ｨ繧ｹ繝医・騾ｲ謐励′繝ｪ繧ｻ繝・ヨ
+笨・豺ｱ邏・・鬘倥＞縺ｮ謖第姶蝗樊焚縺後Μ繧ｻ繝・ヨ`,
 
     // Tuesday
-    `火曜日🔥`,
+    `轣ｫ譖懈律櫨`,
 
     // Wednesday
-    `水曜日💧`,
+    `豌ｴ譖懈律挑`,
 
     // Thursday
-    `木曜日🌳
+    `譛ｨ譖懈律元
 
-✅ 各聖遺物ショップの購入回数がリセット
-（石榴、琳琅、張順、山城健太、アフシン、クラッサ、エクチュア、レコ）`,
+笨・蜷・＊驕ｺ迚ｩ繧ｷ繝ｧ繝・・縺ｮ雉ｼ蜈･蝗樊焚縺後Μ繧ｻ繝・ヨ
+・育浹讎ｴ縲∫正逅・∝ｼｵ鬆・∝ｱｱ蝓主▼螟ｪ縲√い繝輔す繝ｳ縲√け繝ｩ繝・し縲√お繧ｯ繝√Η繧｢縲√Ξ繧ｳ・荏,
 
     // Friday
-    `金曜日✨
+    `驥第屆譌･笨ｨ
 
-✅ 塵歌壺に周遊する壺の精霊が到来
-✅ 深紅の願いの挑戦回数がリセット`,
+笨・蝪ｵ豁悟｣ｺ縺ｫ蜻ｨ驕翫☆繧句｣ｺ縺ｮ邊ｾ髴翫′蛻ｰ譚･
+笨・豺ｱ邏・・鬘倥＞縺ｮ謖第姶蝗樊焚縺後Μ繧ｻ繝・ヨ`,
 
     // Saturday
-    `土曜日🪨
+    `蝨滓屆譌･ｪｨ
 
-✅ フレンドの塵歌壺で周遊する壺の精霊から買い物ができるようになった`,
+笨・繝輔Ξ繝ｳ繝峨・蝪ｵ豁悟｣ｺ縺ｧ蜻ｨ驕翫☆繧句｣ｺ縺ｮ邊ｾ髴翫°繧芽ｲｷ縺・黄縺後〒縺阪ｋ繧医≧縺ｫ縺ｪ縺｣縺歔,
   ];
 
   DailyInfo.weeklyMessage = (currentDate) => {
-    Logger.log(`Subscribe weekly message notification`);
+    Utils.log(`Subscribe weekly message notification`);
 
     const currentHours = currentDate.getHours();
     const currentMinutes = currentDate.getMinutes();
@@ -125,7 +125,7 @@
     const night = currentHours === 20 && currentMinutes > 44;
 
     if (!morning && !night) {
-      Logger.log(`Unsubscribe weekly message notification`);
+      Utils.log(`Unsubscribe weekly message notification`);
       return null;
     }
 
@@ -140,10 +140,10 @@
     const voice = resolveCharacterVoices(charaName);
 
     return {
-      body: ` #原神
-今日は ${dateStr} ${MESSAGES[currentDay]}
+      body: ` #蜴溽･・
+莉頑律縺ｯ ${dateStr} ${MESSAGES[currentDay]}
 
-🔊 ${voice || ''}`,
+矧 ${voice || ''}`,
       images: [
         {
           altText: '',
@@ -157,3 +157,5 @@
     };
   };
 })();
+
+

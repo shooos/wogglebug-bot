@@ -1,4 +1,4 @@
-const FetchOfficialEventsHelper = (() => {
+﻿const FetchOfficialEventsHelper = (() => {
   const headers = {
     'Accept-Language': 'ja-JP,ja;q=0.9',
     'X-Rpc-Language': 'ja-jp',
@@ -13,7 +13,7 @@ const FetchOfficialEventsHelper = (() => {
 
   return {
     execute(url: string): HoYo.Event[] {
-      Logger.log(`Start fetching HoYoLAB events | URL=${url}`);
+      Utils.log(`Start fetching HoYoLAB events | URL=${url}`);
 
       const response = UrlFetchApp.fetch(url, {
         method: 'get',
@@ -23,7 +23,7 @@ const FetchOfficialEventsHelper = (() => {
       });
 
       if (response.getResponseCode() !== 200) {
-        Logger.log(`Failed fetching HoYoLAB events | StatusCode=${response.getResponseCode()}`);
+        Utils.log(`Failed fetching HoYoLAB events | StatusCode=${response.getResponseCode()}`);
         return [];
       }
 
@@ -44,7 +44,7 @@ const FetchOfficialEventsHelper = (() => {
         return event;
       });
 
-      Logger.log(`Succeeded in fetching HoYoLAB events | Events=${JSON.stringify(events.map(c => ({
+      Utils.log(`Succeeded in fetching HoYoLAB events | Events=${JSON.stringify(events.map(c => ({
         id: c.id,
         subject: c.subject,
         createdAt: Utils.formatToViewDate(c.createdAt),
@@ -55,3 +55,5 @@ const FetchOfficialEventsHelper = (() => {
     }
   }
 })();
+
+

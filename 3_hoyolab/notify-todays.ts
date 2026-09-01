@@ -1,10 +1,10 @@
-(() => {
+﻿(() => {
   function genshin(currentDate: Date): void {
     const todaysPosts = HoYoLAB.Genshin.fetchTodaysPosts!(currentDate);
     const message = HoYoLAB.Genshin.buildSummaryMessage!(todaysPosts.toReversed());
 
     if (!message) {
-      Logger.log(`No need to notify about Genshin`);
+      Utils.log(`No need to notify about Genshin`);
       return;
     }
 
@@ -17,7 +17,7 @@
     const message = HoYoLAB.ZZZ.buildSummaryMessage!(todaysPosts.toReversed());
 
     if (!message) {
-      Logger.log(`No need to notify about ZZZ`);
+      Utils.log(`No need to notify about ZZZ`);
       return;
     }
 
@@ -30,7 +30,7 @@
     const message = HoYoLAB.StarRail.buildSummaryMessage!(todaysPosts.toReversed());
 
     if (!message) {
-      Logger.log(`No need to notify about StarRail`);
+      Utils.log(`No need to notify about StarRail`);
       return;
     }
 
@@ -44,3 +44,5 @@
     starRail(currentDate);
   }
 })();
+
+

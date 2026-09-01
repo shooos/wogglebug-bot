@@ -1,12 +1,12 @@
-(() => {
+﻿(() => {
   Genshin.fetchReleases = (lastFetchedId) => {
-    Logger.log(`Start fetching Genshin releases posts | LastFetchedId=${lastFetchedId}`);
+    Utils.log(`Start fetching Genshin releases posts | LastFetchedId=${lastFetchedId}`);
 
     const contents = FetchOfficialPostsHelper.execute(`https://bbs-api-os.hoyolab.com/community/post/wapi/userPost?size=15&uid=1015537`);
 
     const newReleases: Genshin.ReleasePost[] = [];
     contents
-      .filter(it => it.subject.endsWith('正式リリース'))
+      .filter(it => it.subject.endsWith('豁｣蠑上Μ繝ｪ繝ｼ繧ｹ'))
       .some(content => {
         if (content.id === lastFetchedId) return true;
 
@@ -18,8 +18,10 @@
         });
       });
 
-    Logger.log(`Success fetching Genshin releases posts | Posts=${JSON.stringify(newReleases.map(it => it.id))}`);
+    Utils.log(`Success fetching Genshin releases posts | Posts=${JSON.stringify(newReleases.map(it => it.id))}`);
 
     return newReleases.toReversed();
   }
 })();
+
+

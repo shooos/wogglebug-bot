@@ -19,10 +19,18 @@
       }
     ]
   },
-  "exceptionLogging": "STACKDRIVER",
+  "exceptionLogging": "CLOUD_LOGGING",
   "runtimeVersion": "V8",
   "webapp": {
     "access": "ANYONE_ANONYMOUS",
     "executeAs": "USER_DEPLOYING"
-  }
+  },
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/logging.read",
+    "https://www.googleapis.com/auth/logging.write",
+    "https://www.googleapis.com/auth/cloud-platform",
+    "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/script.external_request"
+  ]
 }

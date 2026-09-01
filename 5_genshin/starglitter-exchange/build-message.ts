@@ -1,11 +1,11 @@
-(() => {
+﻿(() => {
   const STARGLITTER_EXCHANGE_CHARACTERS = [
-    ['フィッシュル', '香菱'],
-    ['北斗', 'ノエル'],
-    ['凝光', '行秋'],
-    ['アンバー', 'レザー'],
-    ['リサ', 'ベネット'],
-    ['ガイア', 'バーバラ'],
+    ['繝輔ぅ繝・す繝･繝ｫ', '鬥呵廠'],
+    ['蛹玲沫', '繝弱お繝ｫ'],
+    ['蜃晏・', '陦檎ｧ・],
+    ['繧｢繝ｳ繝舌・', '繝ｬ繧ｶ繝ｼ'],
+    ['繝ｪ繧ｵ', '繝吶ロ繝・ヨ'],
+    ['繧ｬ繧､繧｢', '繝舌・繝舌Λ'],
   ];
 
   const STARGLITTER_EXCHANGE_IMAGE_IDS = [
@@ -18,7 +18,7 @@
   ];
 
   Genshin.starglitterExchange!.buildMessage = (currentDate) => {
-    Logger.log(`Start build starglitter exchange message | CurrentDate=${Utils.formatDateToIsoString(currentDate)}`);
+    Utils.log(`Start build starglitter exchange message | CurrentDate=${Utils.formatDateToIsoString(currentDate)}`);
 
     const currentMonth = currentDate.getMonth();
     const nextMonth = new Date(currentDate.setMonth(currentMonth + 1)).getMonth();
@@ -32,12 +32,12 @@
     const blob = DriveApp.getFileById(imageId).getBlob();
     const imageSize = Image.getRectangleSize!(blob);
 
-    const body = `📢 今月のスターライト交換キャラクターは ${currentChars[0]} & ${currentChars[1]}
-👉 来月は ${nextChars[0]} & ${nextChars[1]}
+    const body = `討 莉頑怦縺ｮ繧ｹ繧ｿ繝ｼ繝ｩ繧､繝井ｺ､謠帙く繝｣繝ｩ繧ｯ繧ｿ繝ｼ縺ｯ ${currentChars[0]} & ${currentChars[1]}
+痩 譚･譛医・ ${nextChars[0]} & ${nextChars[1]}
 
-スターライトのご利用は計画的に！ #原神`;
+繧ｹ繧ｿ繝ｼ繝ｩ繧､繝医・縺泌茜逕ｨ縺ｯ險育判逧・↓・・#蜴溽･杼;
 
-    Logger.log(`Completed build starglitter exchange message | Body=${body}`);
+    Utils.log(`Completed build starglitter exchange message | Body=${body}`);
 
     return {
       body,
@@ -52,3 +52,5 @@
     };
   };
 })();
+
+

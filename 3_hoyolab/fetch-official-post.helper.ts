@@ -1,4 +1,4 @@
-const FetchOfficialPostHelper = (() => {
+﻿const FetchOfficialPostHelper = (() => {
   const headers = {
     'Accept-Language': 'ja-JP,ja;q=0.9',
     'X-Rpc-Language': 'ja-jp',
@@ -13,7 +13,7 @@ const FetchOfficialPostHelper = (() => {
 
   return {
     execute(url: string): HoYo.Content | null {
-      Logger.log(`Start fetching HoYoLAB posts | URL=${url}`);
+      Utils.log(`Start fetching HoYoLAB posts | URL=${url}`);
 
       const response = UrlFetchApp.fetch(url, {
         method: 'get',
@@ -23,7 +23,7 @@ const FetchOfficialPostHelper = (() => {
       });
 
       if (response.getResponseCode() !== 200) {
-        Logger.log(`Failed fetching HoYoLAB post | StatusCode=${response.getResponseCode()}`);
+        Utils.log(`Failed fetching HoYoLAB post | StatusCode=${response.getResponseCode()}`);
         return null;
       }
 
@@ -42,7 +42,7 @@ const FetchOfficialPostHelper = (() => {
         body,
       };
 
-      Logger.log(`Succeeded in fetching HoYoLAB post | Posts=${JSON.stringify({
+      Utils.log(`Succeeded in fetching HoYoLAB post | Posts=${JSON.stringify({
         id: content.id,
         subject: content.subject,
         createdAt: Utils.formatToViewDate(content.createdAt),
@@ -53,3 +53,5 @@ const FetchOfficialPostHelper = (() => {
     }
   }
 })();
+
+

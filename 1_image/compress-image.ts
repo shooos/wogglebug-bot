@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   const API_KEY = PropertiesService.getScriptProperties().getProperty(`TinyPNG_API_KEY`);
   const authorization = Utilities.base64Encode(`api:${API_KEY}`, Utilities.Charset.UTF_8);
   const headers: { [key: string]: string } = {
@@ -7,12 +7,12 @@
   const compressUrl = 'https://api.tinify.com/shrink';
 
   function fetchCompressedImage(location: string): GoogleAppsScript.Base.Blob | null {
-    Logger.log(`Start fetching compressed image | Location=${location}`);
+    Utils.log(`Start fetching compressed image | Location=${location}`);
 
     const response = UrlFetchApp.fetch(location, { method: 'get', muteHttpExceptions: true });
 
     if (response.getResponseCode() !== 200) {
-      Logger.log(`Failed fetching compressed image | StatusCode=${response.getResponseCode()}`);
+      Utils.log(`Failed fetching compressed image | StatusCode=${response.getResponseCode()}`);
       return null;
     }
 
@@ -20,7 +20,7 @@
   }
 
   function executeResize(compressedImageLocation: string, width: number): GoogleAppsScript.Base.Blob | null {
-    Logger.log(`Start resizing image | CompressedImageLocation=${compressedImageLocation}, Width=${width}`);
+    Utils.log(`Start resizing image | CompressedImageLocation=${compressedImageLocation}, Width=${width}`);
 
     headers['Content-Type'] = 'application/json';
 
@@ -41,15 +41,15 @@
 
       if (response.getResponseCode() == 200) {
         const resized = response.getBlob();
-        Logger.log(`Success resizing image | ImageSize=${resized.getBytes().length}`);
+        Utils.log(`Success resizing image | ImageSize=${resized.getBytes().length}`);
 
         return resized;
       } else {
-        Logger.log('Failed to compress image | ResponseCode=%s', response.getResponseCode());
+        Utils.log('Failed to compress image | ResponseCode=%s', response.getResponseCode());
         return null;
       }
     } catch (e) {
-      Logger.log('Failed to compress image | Error=%s', e);
+      Utils.log('Failed to compress image | Error=%s', e);
       return null;
     }
   }
@@ -67,7 +67,7 @@
         const compressedImageLocation: string = (response.getHeaders() as any)['Location'];
         const compressedSize: number = JSON.parse(response.getContentText()).output.size;
 
-        Logger.log(`Success compressing image | ImageSize=${compressedSize}`);
+        Utils.log(`Success compressing image | ImageSize=${compressedSize}`);
 
         if (compressedSize > size) {
           const resizeRatio = size / compressedSize;
@@ -81,13 +81,13 @@
         return null;
       }
     } catch (e) {
-      Logger.log('Failed to compress image | Error=%s', e);
+      Utils.log('Failed to compress image | Error=%s', e);
       return null;
     }
   }
 
   Image.compress = (target, size) => {
-    Logger.log(`Start compressing image | ImageSize=${target.getBytes().length}, TargetSize=${size}`);
+    Utils.log(`Start compressing image | ImageSize=${target.getBytes().length}, TargetSize=${size}`);
 
     let retryCount = 0;
     const compressed = executeCompression(target, size);
@@ -95,11 +95,13 @@
     if (compressed == null) return null;
 
     if (compressed.getBytes().length > size) {
-      Logger.log(`Failed compressing image | Reason=Exceeded Size Limit`);
+      Utils.log(`Failed compressing image | Reason=Exceeded Size Limit`);
       return null;
     }
 
-    Logger.log(`Finish compressing image | RetryCount=${retryCount}`);
+    Utils.log(`Finish compressing image | RetryCount=${retryCount}`);
     return compressed;
   }
 })();
+
+

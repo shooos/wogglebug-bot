@@ -49,30 +49,7 @@ function failureSaveSpiralAbyssImage(error: Error) {
   outputLogToFile(`Failed to save spiral abyss image | Reason=${error.message}`);
 }
 
-function openLogFile(now: Date): GoogleAppsScript.Drive.File {
-  const logDir = DriveApp.getFolderById('1qkMmXsPo0qhNX8AEnD9QorlUVWuxXxZK');
-  const yyyym = `${now.getFullYear()}${now.getMonth()}`;
-  const fileName = `log_${yyyym}.txt`;
-  const logFiles = logDir.getFilesByName(fileName);
-
-  if (logFiles.hasNext()) {
-    return logFiles.next();
-  } else {
-    return logDir.createFile(fileName, '');
-  }
-}
-
-const logFile = openLogFile(new Date());
-
 function outputLogToFile(log: string): void {
-  try {
-    const timestamp = Utils.formatToViewDateTimeMillis(new Date());
-    const logMessage = `${timestamp} --- ${log}`;
-    const logs = logFile.getBlob().getDataAsString();
-    const newContent = logMessage.concat(`\n${logs}`);
-    logFile.setContent(newContent);
-  } catch (e) {
-    Utilities.sleep(50);
-    outputLogToFile(log);
-  }
+  const timestamp = Utils.formatToViewDateTimeMillis(new Date());
+  Utils.sendToCloudLogging(`${timestamp} --- ${log}`, 'INFO');
 }

@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   const OWNER = 'shooos';
   const REPO = 'wogglebug-bot';
   const WORKFLOW_ID = 'discord-sync.yaml';
@@ -6,7 +6,7 @@
   const url = `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_ID}/dispatches`;
 
   Discord.kickGithubAction = () => {
-    Logger.log(`Triggering GitHub Action workflow. | URL=${url}`);
+    Utils.log(`Triggering GitHub Action workflow. | URL=${url}`);
 
     const options: GoogleAppsScript.URL_Fetch.URLFetchRequestOptions = {
       method: "post",
@@ -25,12 +25,14 @@
       const responseCode = response.getResponseCode();
 
       if (responseCode < 300) {
-        Logger.log("Successfully triggered GitHub Action workflow.");
+        Utils.log("Successfully triggered GitHub Action workflow.");
       } else {
-        Logger.log(`Failed to trigger GitHub Action workflow | Status=${responseCode}, Reason=${response.getContentText()}`);
+        Utils.log(`Failed to trigger GitHub Action workflow | Status=${responseCode}, Reason=${response.getContentText()}`);
       }
     } catch (e) {
-      Logger.log(`Error occurred while triggering GitHub Action workflow: ${e}`);
+      Utils.log(`Error occurred while triggering GitHub Action workflow: ${e}`);
     }
   }
 })();
+
+

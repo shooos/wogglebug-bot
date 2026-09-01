@@ -1,11 +1,11 @@
-/**
- * HoYoVerse 公式情報を収集して Bluesky 連携する
+﻿/**
+ * HoYoVerse 蜈ｬ蠑乗ュ蝣ｱ繧貞庶髮・＠縺ｦ Bluesky 騾｣謳ｺ縺吶ｋ
  */
 function subscribeHoYoOfficial(): void {
   const currentHours = new Date().getHours();
 
   if (currentHours >= 23 || currentHours < 8) {
-    Logger.log(`Skip subscribing to official info as out of hours | Hours=${currentHours}`);
+    Utils.log(`Skip subscribing to official info as out of hours | Hours=${currentHours}`);
     return;
   }
 
@@ -15,7 +15,7 @@ function subscribeHoYoOfficial(): void {
 }
 
 /**
- * 1日の終わりに HoYoLAB 公式情報をまとめて Bsky 通知する
+ * 1譌･縺ｮ邨ゅｏ繧翫↓ HoYoLAB 蜈ｬ蠑乗ュ蝣ｱ繧偵∪縺ｨ繧√※ Bsky 騾夂衍縺吶ｋ
  */
 function notifyTodaysHoYoLABOfficialPosts(): void {
   const currentDate = new Date();
@@ -24,10 +24,10 @@ function notifyTodaysHoYoLABOfficialPosts(): void {
 }
 
 /**
- * Bsky に定期的にお知らせをポストする
+ * Bsky 縺ｫ螳壽悄逧・↓縺顔衍繧峨○繧偵・繧ｹ繝医☆繧・
  */
 function periodicallyInformationPost(): void {
-  Logger.log(`Start periodical information post`);
+  Utils.log(`Start periodical information post`);
 
   const currentDate = new Date();
   const messages = [
@@ -38,7 +38,7 @@ function periodicallyInformationPost(): void {
   ].filter(it => it !== null);
 
   if (!messages.length) {
-    Logger.log(`No information`);
+    Utils.log(`No information`);
   }
 
   const accessJwt = Bsky.createSession!();
@@ -46,39 +46,39 @@ function periodicallyInformationPost(): void {
     Bsky.postMessage!(accessJwt, message, Bluesky.BotType.regular);
   });
 
-  Logger.log(`Completed periodical information post`);
+  Utils.log(`Completed periodical information post`);
 }
 
 /**
- * 深境螺旋が開始したことを Bsky にポストする
+ * 豺ｱ蠅・楴譌九′髢句ｧ九＠縺溘％縺ｨ繧・Bsky 縺ｫ繝昴せ繝医☆繧・
  */
 function noticeOpenSpiralAbyss(): void {
   Genshin.spiralAbyss!.open!(new Date());
 }
 
 /**
- * 深境螺旋がリセット間近であることを Bsky にポストする
+ * 豺ｱ蠅・楴譌九′繝ｪ繧ｻ繝・ヨ髢楢ｿ代〒縺ゅｋ縺薙→繧・Bsky 縺ｫ繝昴せ繝医☆繧・
  */
 function noticeCountdownResetSpiralAbyss(): void {
   Genshin.spiralAbyss!.countDown!(new Date());
 }
 
 /**
- * スターライト交換が更新されたことを Bsky にポストする
+ * 繧ｹ繧ｿ繝ｼ繝ｩ繧､繝井ｺ､謠帙′譖ｴ譁ｰ縺輔ｌ縺溘％縺ｨ繧・Bsky 縺ｫ繝昴せ繝医☆繧・
  */
 function noticeStarlightShopCharacter(): void {
 
 }
 
 /**
- * 原神リリース情報を収集する
+ * 蜴溽･槭Μ繝ｪ繝ｼ繧ｹ諠・ｱ繧貞庶髮・☆繧・
  */
 function subscribeGenshinReleaseInfo(): void {
   Genshin.subscribe!();
 }
 
 /**
- * 幻想シアター情報を bsky にポストする
+ * 蟷ｻ諠ｳ繧ｷ繧｢繧ｿ繝ｼ諠・ｱ繧・bsky 縺ｫ繝昴せ繝医☆繧・
  */
 function noticeImaginariumTheaterInfo(): void {
   const accessJwt = Bsky.createSession!();
@@ -86,7 +86,7 @@ function noticeImaginariumTheaterInfo(): void {
 }
 
 /**
- * 幻想シアターの開幕を通知する
+ * 蟷ｻ諠ｳ繧ｷ繧｢繧ｿ繝ｼ縺ｮ髢句ｹ輔ｒ騾夂衍縺吶ｋ
  */
 function startImaginariumTheater(): void {
   const accessJwt = Bsky.createSession!();
@@ -94,7 +94,7 @@ function startImaginariumTheater(): void {
 }
 
 /**
- * 任意の内容を tester として bsky に投稿する
+ * 莉ｻ諢上・蜀・ｮｹ繧・tester 縺ｨ縺励※ bsky 縺ｫ謚慕ｨｿ縺吶ｋ
  */
 function postToBsky(): void {
   const accessJwt = Bsky.createSession!();
@@ -107,5 +107,7 @@ function postToBsky(): void {
 
 function __test(): void {
   const msg = DailyInfo.weeklyMessage!(new Date('2026-06-29T07:50:00+09:00'));
-  Logger.log(`Weekly message | Body=${msg?.body}`);
+  Utils.log(`Weekly message | Body=${msg?.body}`);
 }
+
+

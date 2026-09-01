@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   const uploadUrl = 'https://bsky.social/xrpc/com.atproto.repo.uploadBlob';
 
   function request(
@@ -21,28 +21,30 @@
 
   Bsky.uploadImage = (token, blob) => {
     const mimeType = blob.getContentType();
-    Logger.log(`Start uploading image to bsky | MimeType=${mimeType}`);
+    Utils.log(`Start uploading image to bsky | MimeType=${mimeType}`);
 
     if (!mimeType) {
-      Logger.log(`Failed to upload image because mimeType is null`);
+      Utils.log(`Failed to upload image because mimeType is null`);
       return null;
     }
 
     const imageSize = blob.getBytes().length;
     if (imageSize > Bluesky.MAX_IMAGE_SIZE) {
-      Logger.log(`Failed to upload image because image is too large | ImageSize=${imageSize}`);
+      Utils.log(`Failed to upload image because image is too large | ImageSize=${imageSize}`);
       return null;
     }
 
     const response = request(token, mimeType, blob);
 
     if (response.getResponseCode() >= 400) {
-      Logger.log(`Failed to upload image because request is failure | StatusCode=${response.getResponseCode()}`);
+      Utils.log(`Failed to upload image because request is failure | StatusCode=${response.getResponseCode()}`);
       return null;
     }
 
-    Logger.log(`Success uploading image to bsky`);
+    Utils.log(`Success uploading image to bsky`);
 
     return JSON.parse(response.getContentText()).blob;
   }
 })();
+
+

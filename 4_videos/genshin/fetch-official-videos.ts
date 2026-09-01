@@ -1,15 +1,15 @@
-(() => {
+﻿(() => {
   const parseXml = (xml: string): GoogleAppsScript.XML_Service.Document | null => {
     try {
       return XmlService.parse(xml);
     } catch {
-      Logger.log(`Failed to parse XML | XML Text=${xml}`);
+      Utils.log(`Failed to parse XML | XML Text=${xml}`);
       return null;
     }
   }
 
   Videos.fetchGenshinOfficialVideos = (lastCheckedPublishedAt) => {
-    Logger.log(`Start fetching genshin official videos | LastCheckedPublishedAt=${Utils.formatDateToIsoString(lastCheckedPublishedAt)}`);
+    Utils.log(`Start fetching genshin official videos | LastCheckedPublishedAt=${Utils.formatDateToIsoString(lastCheckedPublishedAt)}`);
 
     const ret = UrlFetchApp.fetch('https://www.youtube.com/feeds/videos.xml?channel_id=UCAVR6Q0YgYa8xwz8rdg9Mrg', { muteHttpExceptions: true });
     const doc = parseXml(ret.getContentText());
@@ -39,7 +39,7 @@
       };
     }).filter(it => new Date(it.published) > lastCheckedPublishedAt);
 
-    Logger.log(`Success fetching genshin official videos | Videos=${JSON.stringify(
+    Utils.log(`Success fetching genshin official videos | Videos=${JSON.stringify(
       videos.map(v => ({
         id: v.id,
         title: v.title,
@@ -50,3 +50,5 @@
     return videos;
   }
 })();
+
+

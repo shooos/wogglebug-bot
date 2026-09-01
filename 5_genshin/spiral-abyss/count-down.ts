@@ -1,10 +1,10 @@
-(() => {
+﻿(() => {
   function hoursDiff(dateInitial: Date, dateFinal: Date): number {
     return Math.floor((dateFinal.getTime() - dateInitial.getTime()) / (60 * 60 * 1000));
   }
 
   Genshin.spiralAbyss!.countDown = (currentDate) => {
-    Logger.log(`Start to count down notification of Spiral Abyss | CurrentDate=${Utils.formatToViewDate(currentDate)}`);
+    Utils.log(`Start to count down notification of Spiral Abyss | CurrentDate=${Utils.formatToViewDate(currentDate)}`);
 
     const day16 = new Date()
     day16.setDate(16);
@@ -12,10 +12,10 @@
 
     const hours = hoursDiff(currentDate, day16);
 
-    Logger.log(`Count-down Spiral Abyss | RemainingHours=${hours}`);
+    Utils.log(`Count-down Spiral Abyss | RemainingHours=${hours}`);
 
     if (hours <= 0 || hours > 72) {
-      Logger.log(`No need to notification`);
+      Utils.log(`No need to notification`);
       return null;
     }
 
@@ -35,3 +35,5 @@
     outputLogToFile(`Spiral Abyss notification is completed`);
   }
 })();
+
+
