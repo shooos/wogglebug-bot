@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   Genshin.starglitterExchange!.subscribe = (currentDate) => {
     Utils.info(`Subscribe starglitter exchange characters`);
 

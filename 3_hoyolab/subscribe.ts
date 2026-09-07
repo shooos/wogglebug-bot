@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   function genshin(): void {
     const lastPostedId = HoYoLAB.Genshin.getLastPostedId!();
     const newArrivals = HoYoLAB.Genshin.fetchNewArrivals!(lastPostedId);

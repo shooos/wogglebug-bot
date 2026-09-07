@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   const imageId = '1CzfxDs1IHUHq5aFNeChSHMXMH5MVALGq';
   const imageBlob = DriveApp.getFileById(imageId).getBlob();
 

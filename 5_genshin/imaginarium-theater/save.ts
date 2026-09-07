@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   Genshin.imaginariumTheater!.save = (info) => {
     Utils.info(`Start saving imaginarium theater information | Date=${info.date}`);
 

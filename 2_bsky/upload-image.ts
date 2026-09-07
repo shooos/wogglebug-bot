@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   const uploadUrl = 'https://bsky.social/xrpc/com.atproto.repo.uploadBlob';
 
   function request(

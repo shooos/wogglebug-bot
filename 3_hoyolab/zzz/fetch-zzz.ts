@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   HoYoLAB.ZZZ.fetchNewArrivals = (lastPostedId) => {
     Utils.info(`Start fetching ZenlessZoneZero new arrival official posts | LastPostedId=${lastPostedId}`);
 

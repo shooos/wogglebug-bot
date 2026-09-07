@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   const OWNER = 'shooos';
   const REPO = 'wogglebug-bot';
   const WORKFLOW_ID = 'discord-sync.yaml';

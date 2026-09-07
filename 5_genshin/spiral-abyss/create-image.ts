@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   const latestWebAppId = PropertiesService.getScriptProperties().getProperty('LATEST_WEB_APP_ID');
   const createImageClientUrl = `https://script.google.com/macros/s/${latestWebAppId}/exec`;
   const PHANTOM_JS_CLOUD_API_KEY = PropertiesService.getScriptProperties().getProperty('PHANTOM_JS_CLOUD_API_KEY');

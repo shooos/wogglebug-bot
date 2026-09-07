@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   Genshin.fetchReleases = (lastFetchedId) => {
     Utils.info(`Start fetching Genshin releases posts | LastFetchedId=${lastFetchedId}`);
 

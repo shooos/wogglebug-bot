@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   const imageBlob = DriveApp.getFileById('1gqqFqbwYWzd5AtzhpJzHgLPwciyixZk0').getBlob();
 
   function openSheet(): GoogleAppsScript.Spreadsheet.Sheet {

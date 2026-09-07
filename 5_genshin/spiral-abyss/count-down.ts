@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   function hoursDiff(dateInitial: Date, dateFinal: Date): number {
     return Math.floor((dateFinal.getTime() - dateInitial.getTime()) / (60 * 60 * 1000));
   }

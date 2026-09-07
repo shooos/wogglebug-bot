@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   const STARGLITTER_EXCHANGE_CHARACTERS = [
     ['フィッシュル', '香菱'],
     ['北斗', 'ノエル'],

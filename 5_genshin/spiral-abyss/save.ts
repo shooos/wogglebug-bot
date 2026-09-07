@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   function buildLeyLineDeorders(data: Genshin.SpiralAbyssInfo['leyLineDisorders']): string {
     let text = '';
     if (data.floor11.length) {

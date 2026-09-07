@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   function parseMixFormatDate(dateString: string): Date | undefined {
     function parse(dateString: string, format: string): Date | null {
       try {

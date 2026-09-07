@@ -1,4 +1,4 @@
-﻿/**
+/**
  * HoYoVerse 公式情報を収集して Bluesky 連携する
  */
 function subscribeHoYoOfficial(): void {
@@ -109,6 +109,3 @@ function __test(): void {
   const msg = DailyInfo.weeklyMessage!(new Date('2026-06-29T07:50:00+09:00'));
   Utils.log(`Weekly message | Body=${msg?.body}`);
 }
-
-
-

@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   const makeCharacterVoiceMap = (): Record<string, string[]> => {
     const characterVoiceSpreadsheet = SpreadsheetApp.openById('1GJA_PYToRyNOicHrVsSuuYkiDRV1V6McvCnk4RbXYOA');
     const characterVoiceSheet = characterVoiceSpreadsheet.getSheetByName('蜈・ｴ辷・匱Voice');

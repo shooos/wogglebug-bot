@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   function createImage(imageUrls: string[]): Bluesky.AttachImage[] {
     return imageUrls.map(url => {
       const rawBlob = Utils.fetchBlob(url);

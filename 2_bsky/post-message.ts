@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
 
   interface Payload {
     repo: string;

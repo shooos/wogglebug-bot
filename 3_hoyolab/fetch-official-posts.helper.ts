@@ -1,4 +1,4 @@
-﻿const FetchOfficialPostsHelper = (() => {
+const FetchOfficialPostsHelper = (() => {
   const headers = {
     'Accept-Language': 'ja-JP,ja;q=0.9',
     'X-Rpc-Language': 'ja-jp',

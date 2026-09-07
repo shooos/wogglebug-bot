@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   HoYoLAB.Genshin.fetchNewArrivals = (lastPostedId) => {
     Utils.info(`Start fetcing Genshin new alival official posts | LastPostedId=${lastPostedId}`);
 

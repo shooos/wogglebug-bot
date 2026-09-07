@@ -1,4 +1,4 @@
-﻿const Utils = {
+const Utils = {
   getUTCNowIsoString(): string {
     return Utilities.formatDate(new Date(), 'UTC', "yyyy-MM-dd'T'HH:mm:ss'Z'");
   },

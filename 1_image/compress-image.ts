@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   const API_KEY = PropertiesService.getScriptProperties().getProperty(`TinyPNG_API_KEY`);
   const authorization = Utilities.base64Encode(`api:${API_KEY}`, Utilities.Charset.UTF_8);
   const headers: { [key: string]: string } = {

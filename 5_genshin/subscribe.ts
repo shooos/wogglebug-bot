@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   Genshin.subscribe = () => {
     Utils.info(`Start subscribing Genshin information`);
 

@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   function genshin(currentDate: Date): void {
     const todaysPosts = HoYoLAB.Genshin.fetchTodaysPosts!(currentDate);
     const message = HoYoLAB.Genshin.buildSummaryMessage!(todaysPosts.toReversed());

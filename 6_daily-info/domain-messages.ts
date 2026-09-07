@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   interface Item {
     domainName: string;
     itemName: string;

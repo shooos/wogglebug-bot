@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   const parseXml = (xml: string): GoogleAppsScript.XML_Service.Document | null => {
     try {
       return XmlService.parse(xml);

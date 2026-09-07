@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   HoYoLAB.StarRail.fetchNewArrivals = (lastPostedId) => {
     Utils.info(`Start fetcing StarRail new alival official posts | LastPostedId=${lastPostedId}`);
 
