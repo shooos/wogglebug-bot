@@ -4,7 +4,7 @@
   }
 
   Genshin.spiralAbyss!.countDown = (currentDate) => {
-    Utils.log(`Start to count down notification of Spiral Abyss | CurrentDate=${Utils.formatToViewDate(currentDate)}`);
+    Utils.info(`Start to count down notification of Spiral Abyss | CurrentDate=${Utils.formatToViewDate(currentDate)}`);
 
     const day16 = new Date()
     day16.setDate(16);
@@ -12,10 +12,10 @@
 
     const hours = hoursDiff(currentDate, day16);
 
-    Utils.log(`Count-down Spiral Abyss | RemainingHours=${hours}`);
+    Utils.info(`Count-down Spiral Abyss | RemainingHours=${hours}`);
 
     if (hours <= 0 || hours > 72) {
-      Utils.log(`No need to notification`);
+      Utils.info(`No need to notification`);
       return null;
     }
 
@@ -35,5 +35,3 @@
     outputLogToFile(`Spiral Abyss notification is completed`);
   }
 })();
-
-

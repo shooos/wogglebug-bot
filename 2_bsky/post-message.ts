@@ -89,7 +89,7 @@
 
   Bsky.postMessage = (token, message, postedBy) => {
     const { body, images, linkUrl } = message;
-    Utils.log(`Start posting to bsky | Message=${body.slice(0, 24)}, ImagesCount=${images.length}, LinkUrl=${linkUrl}, PostedBy=${postedBy}`);
+    Utils.info(`Start posting to bsky | Message=${body.slice(0, 24)}, ImagesCount=${images.length}, LinkUrl=${linkUrl}, PostedBy=${postedBy}`);
 
     const botName = getBotName(postedBy);
 
@@ -132,7 +132,7 @@
     let result: Bluesky.Result = Bluesky.Result.pending;
 
     if (enablePost !== '1') {
-      Utils.log(`Is disabled posting to bsky`);
+      Utils.warn(`Is disabled posting to bsky`);
       return Bluesky.Result.success;
     }
 
@@ -146,22 +146,20 @@
       });
 
       if (response.getResponseCode() >= 400) {
-        Utils.log(`Failed posting to bsky | StatusCode=${response.getResponseCode()}`);
+        Utils.warn(`Failed posting to bsky | StatusCode=${response.getResponseCode()}`);
         result = Bluesky.Result.failure;
       } else {
-        Utils.log(`Succeeded in posting to bsky!`);
+        Utils.info(`Succeeded in posting to bsky!`);
         result = Bluesky.Result.success;
       }
     } catch (e) {
-      Utils.log(`Failed posting to bsky | Error=${e}`);
+      Utils.warn(`Failed posting to bsky | Error=${e}`);
       result = Bluesky.Result.failure;
     }
 
-    // 諡俶據騾｣謚輔ｒ驕ｿ縺代ｋ縺溘ａ縺ｫ謚慕ｨｿ蠕後＠縺ｰ繧峨￥蠕・▽
+    // 高速連投を避けるために投稿後しばらく待つ
     Utilities.sleep(5000);
 
     return result;
   }
 })();
-
-

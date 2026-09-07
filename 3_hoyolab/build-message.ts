@@ -9,7 +9,7 @@
         Image.compress!(rawBlob, Bluesky.MAX_IMAGE_SIZE) : rawBlob;
 
       if (!validBlob) {
-        Utils.log(`Illegal image | ImageURL=${url}`);
+        Utils.warn(`Illegal image | ImageURL=${url}`);
         return null;
       }
 
@@ -28,17 +28,17 @@
 
   HoYoLAB.Genshin.buildMessages = (contents) => {
     return contents.map(content => {
-      const body = `HoYoLAB 蜴溽･槫・蠑上・繧ｹ繝磯夂衍 #蜴溽･・#蜴溽･槫・蠑乗ュ蝣ｱ
+      const body = `HoYoLAB 原神公式ポスト通知 #原神 #原神公式情報
 
 ${content.subject}
 ${content.articleUrl}
-謚慕ｨｿ譌･譎・: ${Utils.formatToViewDate(content.createdAt)}
+投稿日時 : ${Utils.formatToViewDate(content.createdAt)}
 
 ${content.body}`;
 
       const hasExceeded = body.length > Bluesky.MAX_BODY_LENGTH;
       return {
-        body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '窶ｦ' : body}`,
+        body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '…' : body}`,
         images: createImage(content.imageUrls),
       }
     });
@@ -46,17 +46,17 @@ ${content.body}`;
 
   HoYoLAB.ZZZ.buildMessages = (contents) => {
     return contents.map(content => {
-      const body = `HoYoLAB 繧ｼ繝ｳ繝ｬ繧ｹ繧ｾ繝ｼ繝ｳ繧ｼ繝ｭ蜈ｬ蠑上・繧ｹ繝磯夂衍 #繧ｼ繝ｳ繧ｼ繝ｭ #ZZZ蜈ｬ蠑乗ュ蝣ｱ
+      const body = `HoYoLAB ゼンレスゾーンゼロ公式ポスト通知 #ゼンゼロ #ZZZ公式情報
 
 ${content.subject}
 ${content.articleUrl}
-謚慕ｨｿ譌･譎・: ${Utils.formatToViewDate(content.createdAt)}
+投稿日時 : ${Utils.formatToViewDate(content.createdAt)}
 
 ${content.body}`;
 
       const hasExceeded = body.length > Bluesky.MAX_BODY_LENGTH;
       return {
-        body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '窶ｦ' : body}`,
+        body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '…' : body}`,
         images: createImage(content.imageUrls),
       }
     });
@@ -64,17 +64,17 @@ ${content.body}`;
 
   HoYoLAB.StarRail.buildMessages = (contents) => {
     return contents.map(content => {
-      const body = `HoYoLAB 蟠ｩ螢翫せ繧ｿ繝ｼ繝ｬ繧､繝ｫ蜈ｬ蠑上・繧ｹ繝磯夂衍 #蟠ｩ螢翫せ繧ｿ繝ｼ繝ｬ繧､繝ｫ #繧ｹ繧ｿ繝ｬ蜈ｬ蠑乗ュ蝣ｱ
+      const body = `HoYoLAB 崩壊スターレイル公式ポスト通知 #崩壊スターレイル #スタレ公式情報
 
 ${content.subject}
 ${content.articleUrl}
-謚慕ｨｿ譌･譎・: ${Utils.formatToViewDate(content.createdAt)}
+投稿日時 : ${Utils.formatToViewDate(content.createdAt)}
 
 ${content.body}`;
 
       const hasExceeded = body.length > Bluesky.MAX_BODY_LENGTH;
       return {
-        body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '窶ｦ' : body}`,
+        body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '…' : body}`,
         images: createImage(content.imageUrls),
       }
     });
@@ -82,16 +82,16 @@ ${content.body}`;
 
   HoYoLAB.Genshin.buildEventMessages = (events) => {
     return events.map(event => {
-      const body = `HoYoLAB 蜴溽･槫・蠑上う繝吶Φ繝磯夂衍 #蜴溽･・#蜴溽･槫・蠑乗ュ蝣ｱ
+      const body = `HoYoLAB 原神公式イベント通知 #原神 #原神公式情報
 
 ${event.subject}
 ${event.articleUrl}
-譛滄俣: ${Utils.formatToViewDate(event.startAt)} ・・${Utils.formatToViewDate(event.endAt)}
-謚慕ｨｿ譌･譎・: ${Utils.formatToViewDate(event.createdAt)}`;
+期間: ${Utils.formatToViewDate(event.startAt)} ～ ${Utils.formatToViewDate(event.endAt)}
+投稿日時 : ${Utils.formatToViewDate(event.createdAt)}`;
 
       const hasExceeded = body.length > Bluesky.MAX_BODY_LENGTH;
       return {
-        body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '窶ｦ' : body}`,
+        body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '…' : body}`,
         images: createImage(event.imageUrls),
       }
     });
@@ -108,7 +108,7 @@ ${event.articleUrl}
     }).join('\n\n');
     const body = `湯 ${topMessage} 湯
 
-${messages.length === 0 ? '舶 譛ｬ譌･縺ｮ蜈ｬ蠑上・繧ｹ繝医・縺ゅｊ縺ｾ縺帙ｓ縺ｧ縺励◆' : messages}`;
+${messages.length === 0 ? '🔕 本日の公式ポストはありませんでした' : messages}`;
 
     const unicodeBody = new Bluesky.UnicodeString(body);
     const facetTargets = posts.map(post => {
@@ -127,16 +127,17 @@ ${messages.length === 0 ? '舶 譛ｬ譌･縺ｮ蜈ｬ蠑上・繧ｹ繝医�
   }
 
   HoYoLAB.Genshin.buildSummaryMessage = (posts) => {
-    return makeSummaryMessage(posts, '譛ｬ譌･縺ｮ蜴溽･槫・蠑上・繧ｹ繝医∪縺ｨ繧・);
+    return makeSummaryMessage(posts, '本日の原神公式ポストまとめ');
   }
 
   HoYoLAB.ZZZ.buildSummaryMessage = (posts) => {
-    return makeSummaryMessage(posts, '譛ｬ譌･縺ｮ繧ｼ繝ｳ繝ｬ繧ｹ繧ｾ繝ｼ繝ｳ繧ｼ繝ｭ蜈ｬ蠑上・繧ｹ繝医∪縺ｨ繧・);
+    return makeSummaryMessage(posts, '本日のゼンレスゾーンゼロ公式ポストまとめ');
   }
 
   HoYoLAB.StarRail.buildSummaryMessage = (posts) => {
-    return makeSummaryMessage(posts, '譛ｬ譌･縺ｮ蟠ｩ螢翫せ繧ｿ繝ｼ繝ｬ繧､繝ｫ蜈ｬ蠑上・繧ｹ繝医∪縺ｨ繧・);
+    return makeSummaryMessage(posts, '本日の崩壊スターレイル公式ポストまとめ');
   }
 })();
+
 
 

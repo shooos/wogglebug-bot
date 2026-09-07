@@ -8,113 +8,113 @@
   const weaponAscensionMaterials = ((dayOfWeek: number): Item[] => {
     const monday_thursday: Item[] = [
       {
-        domainName: '繧ｻ繧ｷ繝ｪ繧｢縺ｮ闍怜ｺ・,
-        itemName: '鬮伜｡斐・邇・,
-        country: '繝｢繝ｳ繝・,
+        domainName: 'セシリアの苗床',
+        itemName: '高塔の王',
+        country: 'モンド',
       },
       {
-        domainName: '髴・峭騾｣螻ｱ蟇・ｮｮ',
-        itemName: '蟄､髮ｲ蟇呈棊',
-        country: '迺・怦',
+        domainName: '震雷連山密宮',
+        itemName: '孤雲寒林',
+        country: '璃月',
       },
       {
-        domainName: '遐よｵ√ヮ蠎ｭ',
-        itemName: '驕豬ｷ螟ｷ蝨ｰ',
-        country: '遞ｲ螯ｻ',
+        domainName: '砂流ノ庭',
+        itemName: '遠海夷地',
+        country: '稲妻',
       },
       {
-        domainName: '譛蛾ゅ・蝪・,
-        itemName: '髱呵ｬ舌↑譽ｮ縺ｮ縺励★縺・,
-        country: '繧ｹ繝｡繝ｼ繝ｫ',
+        domainName: '有頂の塔',
+        itemName: '静謐な森のしずく',
+        country: 'スメール',
       },
       {
-        domainName: '豺ｱ貎ｮ縺ｮ菴咎渊',
-        itemName: '謔荵・・蠑ｦ',
-        country: '繝輔か繝ｳ繝・・繝・,
+        domainName: '深潮の余韻',
+        itemName: '悠久の弦',
+        country: 'フォンテーヌ',
       },
       {
-        domainName: '蜿､縺ｮ逵ｺ譛帛床',
-        itemName: '轣ｼ蠢・ｒ謐ｧ縺偵ｋ',
-        country: '繝翫ち'
+        domainName: '古の眺望台',
+        itemName: '灼心を捧げる',
+        country: 'ナタ'
       },
       {
-        domainName: '螟ｱ繧上ｌ縺滓怦縺ｮ蠎ｭ',
-        itemName: '螂・ｦ吶↑陬・ｽｮ',
-        country: '繝翫ラ繝ｻ繧ｯ繝ｩ繧､',
+        domainName: '失われた月の庭',
+        itemName: '奇妙な装置',
+        country: 'ナド・クライ',
       },
     ];
     const tuesday_friday = [
       {
-        domainName: '繧ｻ繧ｷ繝ｪ繧｢縺ｮ闍怜ｺ・,
-        itemName: '蜃幃｢ｨ螂皮蕎',
-        country: '繝｢繝ｳ繝・,
+        domainName: 'セシリアの苗床',
+        itemName: '凛風奔狼',
+        country: 'モンド',
       },
       {
-        domainName: '髴・峭騾｣螻ｱ蟇・ｮｮ',
-        itemName: '髴ｧ豬ｷ髮ｲ髢・,
-        country: '迺・怦',
+        domainName: '震雷連山密宮',
+        itemName: '霧海雲間',
+        country: '璃月',
       },
       {
-        domainName: '遐よｵ√ヮ蠎ｭ',
-        itemName: '魑ｴ逾槫ｾ｡髴・,
-        country: '遞ｲ螯ｻ',
+        domainName: '砂流ノ庭',
+        itemName: '鳴神御霊',
+        country: '稲妻',
       },
       {
-        domainName: '譛蛾ゅ・蝪・,
-        itemName: '繧ｪ繧｢繧ｷ繧ｹ繧ｬ繝ｼ繝・Φ',
-        country: '繧ｹ繝｡繝ｼ繝ｫ',
+        domainName: '有頂の塔',
+        itemName: 'オアシスガーデン',
+        country: 'スメール',
       },
       {
-        domainName: '豺ｱ貎ｮ縺ｮ菴咎渊',
-        itemName: '邏碑＊縺ｪ髮ｫ',
-        country: '繝輔か繝ｳ繝・・繝・,
+        domainName: '深潮の余韻',
+        itemName: '純聖な雫',
+        country: 'フォンテーヌ',
       },
       {
-        domainName: '蜿､縺ｮ逵ｺ譛帛床',
-        itemName: '迢ゆｹｱ縺ｮ閨紋ｸｻ',
-        country: '繝翫ち'
+        domainName: '古の眺望台',
+        itemName: '狂乱の聖主',
+        country: 'ナタ'
       },
       {
-        domainName: '螟ｱ繧上ｌ縺滓怦縺ｮ蠎ｭ',
-        itemName: '髟ｷ螟懊・轣ｯ轣ｫ',
-        country: '繝翫ラ繝ｻ繧ｯ繝ｩ繧､',
+        domainName: '失われた月の庭',
+        itemName: '長夜の灯火',
+        country: 'ナド・クライ',
       },
     ];
     const wednesday_saturday = [
       {
-        domainName: '繧ｻ繧ｷ繝ｪ繧｢縺ｮ闍怜ｺ・,
-        itemName: '迯・甥謌ｦ螢ｫ',
-        country: '繝｢繝ｳ繝・,
+        domainName: 'セシリアの苗床',
+        itemName: '獅牙戦士',
+        country: 'モンド',
       },
       {
-        domainName: '髴・峭騾｣螻ｱ蟇・ｮｮ',
-        itemName: '貍・ｻ偵・髫暮延',
-        country: '迺・怦',
+        domainName: '震雷連山密宮',
+        itemName: '漆黒の隕鉄',
+        country: '璃月',
       },
       {
-        domainName: '遐よｵ√ヮ蠎ｭ',
-        itemName: '莉頑・蜉・判',
-        country: '遞ｲ螯ｻ',
+        domainName: '砂流ノ庭',
+        itemName: '今昔劇画',
+        country: '稲妻',
       },
       {
-        domainName: '譛蛾ゅ・蝪・,
-        itemName: '辜域律讓ｩ螽・,
-        country: '繧ｹ繝｡繝ｼ繝ｫ',
+        domainName: '有頂の塔',
+        itemName: '烈日権威',
+        country: 'スメール',
       },
       {
-        domainName: '豺ｱ貎ｮ縺ｮ菴咎渊',
-        itemName: '辟｡蝙｢縺ｪ豬ｷ',
-        country: '繝輔か繝ｳ繝・・繝・,
+        domainName: '深潮の余韻',
+        itemName: '無垢な海',
+        country: 'フォンテーヌ',
       },
       {
-        domainName: '蜿､縺ｮ逵ｺ譛帛床',
-        itemName: '逾樒ｧ倥↑繧狗・',
-        country: '繝翫ち'
+        domainName: '古の眺望台',
+        itemName: '神秘なる煙',
+        country: 'ナタ'
       },
       {
-        domainName: '螟ｱ繧上ｌ縺滓怦縺ｮ蠎ｭ',
-        itemName: '讌ｵ蛹励・譛ｫ陬・,
-        country: '繝翫ラ繝ｻ繧ｯ繝ｩ繧､',
+        domainName: '失われた月の庭',
+        itemName: '極北の末裔',
+        country: 'ナド・クライ',
       },
     ];
 
@@ -132,95 +132,95 @@
   const talentsItemDomains = ((dayOfWeek: number): Item[] => {
     const monday_thursday: Item[] = [
       {
-        domainName: '蠢伜唆縺ｮ蟲｡隹ｷ',
-        itemName: '閾ｪ逕ｱ',
-        country: '繝｢繝ｳ繝・,
+        domainName: '忘却の峡谷',
+        itemName: '自由',
+        country: 'モンド',
       }, {
-        domainName: '螟ｪ螻ｱ蠎・,
-        itemName: '郢∵・,
-        country: '迺・怦',
+        domainName: '太山府',
+        itemName: '繁栄',
+        country: '璃月',
       }, {
-        domainName: '闖ｫ濶ｲ繝主ｺｭ',
-        itemName: '豬ｮ荳・,
-        country: '遞ｲ螯ｻ',
+        domainName: '菫色ノ庭',
+        itemName: '浮世',
+        country: '稲妻',
       }, {
-        domainName: '辟｡蟄ｦ縺ｮ蝪・,
-        itemName: '蠢險',
-        country: '繧ｹ繝｡繝ｼ繝ｫ',
+        domainName: '無学の塔',
+        itemName: '忠言',
+        country: 'スメール',
       }, {
-        domainName: '闥ｼ逋ｽ縺ｮ驕ｺ譬・,
-        itemName: '蜈ｬ蟷ｳ',
-        country: '繝輔か繝ｳ繝・・繝・,
+        domainName: '蒼白の遺栄',
+        itemName: '公平',
+        country: 'フォンテーヌ',
       }, {
-        domainName: '遘倡ｎ縺ｮ蟷ｽ蠅・,
-        itemName: '隗帝・,
-        country: '繝翫ち',
+        domainName: '秘炎の幽墟',
+        itemName: '角逐',
+        country: 'ナタ',
       }, {
-        domainName: '蜈峨↑縺肴ｷｱ驛ｽ',
-        itemName: '譛亥・',
-        country: '繝翫ラ繝ｻ繧ｯ繝ｩ繧､',
+        domainName: '光なき深都',
+        itemName: '月光',
+        country: 'ナド・クライ',
       },
     ];
     const tuesday_friday = [
       {
-        domainName: '蠢伜唆縺ｮ蟲｡隹ｷ',
-        itemName: '謚嶺ｺ・,
-        country: '繝｢繝ｳ繝・,
+        domainName: '忘却の峡谷',
+        itemName: '抗争',
+        country: 'モンド',
       }, {
-        domainName: '螟ｪ螻ｱ蠎・,
-        itemName: '蜍､蜉ｴ',
-        country: '迺・怦',
+        domainName: '太山府',
+        itemName: '勤労',
+        country: '璃月',
       }, {
-        domainName: '闖ｫ濶ｲ繝主ｺｭ',
-        itemName: '鬚ｨ髮・,
-        country: '遞ｲ螯ｻ',
+        domainName: '菫色ノ庭',
+        itemName: '風雅',
+        country: '稲妻',
       }, {
-        domainName: '辟｡蟄ｦ縺ｮ蝪・,
-        itemName: '蜑ｵ諢・,
-        country: '繧ｹ繝｡繝ｼ繝ｫ',
+        domainName: '無学の塔',
+        itemName: '創意',
+        country: 'スメール',
       }, {
-        domainName: '闥ｼ逋ｽ縺ｮ驕ｺ譬・,
-        itemName: '豁｣鄒ｩ',
-        country: '繝輔か繝ｳ繝・・繝・,
+        domainName: '蒼白の遺栄',
+        itemName: '正義',
+        country: 'フォンテーヌ',
       }, {
-        domainName: '遘倡ｎ縺ｮ蟷ｽ蠅・,
-        itemName: '辟夂・',
-        country: '繝翫ち',
+        domainName: '秘炎の幽墟',
+        itemName: '焚燼',
+        country: 'ナタ',
       }, {
-        domainName: '蜈峨↑縺肴ｷｱ驛ｽ',
-        itemName: '讌ｽ蝨・,
-        country: '繝翫ラ繝ｻ繧ｯ繝ｩ繧､',
+        domainName: '光なき深都',
+        itemName: '楽園',
+        country: 'ナド・クライ',
       },
     ];
     const wednesday_saturday = [
       {
-        domainName: '蠢伜唆縺ｮ蟲｡隹ｷ',
-        itemName: '隧ｩ譁・,
-        country: '繝｢繝ｳ繝・,
+        domainName: '忘却の峡谷',
+        itemName: '詩文',
+        country: 'モンド',
       }, {
-        domainName: '螟ｪ螻ｱ蠎・,
-        itemName: '鮟・≡',
-        country: '迺・怦',
+        domainName: '太山府',
+        itemName: '黄金',
+        country: '璃月',
       }, {
-        domainName: '闖ｫ濶ｲ繝主ｺｭ',
-        itemName: '螟ｩ蜈・,
-        country: '遞ｲ螯ｻ',
+        domainName: '菫色ノ庭',
+        itemName: '天光',
+        country: '稲妻',
       }, {
-        domainName: '辟｡蟄ｦ縺ｮ蝪・,
-        itemName: '遽､陦・,
-        country: '繧ｹ繝｡繝ｼ繝ｫ',
+        domainName: '無学の塔',
+        itemName: '篤行',
+        country: 'スメール',
       }, {
-        domainName: '闥ｼ逋ｽ縺ｮ驕ｺ譬・,
-        itemName: '遘ｩ蠎・,
-        country: '繝輔か繝ｳ繝・・繝・,
+        domainName: '蒼白の遺栄',
+        itemName: '秩序',
+        country: 'フォンテーヌ',
       }, {
-        domainName: '遘倡ｎ縺ｮ蟷ｽ蠅・,
-        itemName: '邏帑ｺ・,
-        country: '繝翫ち',
+        domainName: '秘炎の幽墟',
+        itemName: '紛争',
+        country: 'ナタ',
       }, {
-        domainName: '蜈峨↑縺肴ｷｱ驛ｽ',
-        itemName: '豬∵ｵｪ',
-        country: '繝翫ラ繝ｻ繧ｯ繝ｩ繧､',
+        domainName: '光なき深都',
+        itemName: '流浪',
+        country: 'ナド・クライ',
       },
     ];
 
@@ -272,21 +272,21 @@
   }
 
   DailyInfo.domainMessages = (currentDate) => {
-    Utils.log(`Subscribe domain message notification`);
+    Utils.info(`Subscribe domain message notification`);
 
     const currentHours = currentDate.getHours();
     const currentMinutes = currentDate.getMinutes();
     const morning = currentHours === 8 && currentMinutes < 15;
 
     if (!morning) {
-      Utils.log(`Unsubscribe domain message notification`);
+      Utils.info(`Unsubscribe domain message notification`);
       return [];
     }
 
     const currentDay = currentDate.getDay();
 
     if (currentDay === 0) {
-      // 譌･譖懈律
+      // 日曜日
       const talentImages: Bluesky.AttachImage[] = TALENT_DOMAIN_IMAGES.map(id => {
         const blob = DriveApp.getFileById(id).getBlob();
         const size = Image.getRectangleSize!(blob);
@@ -311,16 +311,16 @@
 
       return [
         {
-          body: `譌･譖懈律縺ｯ蜈ｨ髢区叛・∝､ｩ雉ｦ邏譚舌・縺翫＆繧峨＞当 #蜴溽･杼,
+          body: `日曜日は全開放！天賦素材のおさらい📖 #原神`,
           images: talentImages,
         },
         {
-          body: `譌･譖懈律縺ｯ蜈ｨ髢区叛・∵ｭｦ蝎ｨ遯∫ｴ邏譚舌・縺翫＆繧峨＞笞費ｸ・#蜴溽･杼,
+          body: `日曜日は全開放！武器突破素材のおさらい⚔️ #原神`,
           images: weaponImages,
         },
       ];
     } else {
-      // 譛域屆譌･・槫悄譖懈律
+      // 月曜日～土曜日
       const talents = talentsItemDomains(currentDay);
       const weapons = weaponAscensionMaterials(currentDay);
 
@@ -329,9 +329,9 @@
 
       return [
         {
-          body: `莉頑律縺ｮ螟ｩ雉ｦ遘伜｢・・縺翫＠繧峨○当 #蜴溽･・
+          body: `今日の天賦秘境のおしらせ📖 #原神
 
-${talents.map(it => `${it.domainName}・・{it.country}・会ｼ・{it.itemName}`).join('\n')}`,
+${talents.map(it => `${it.domainName}（${it.country}）：${it.itemName}`).join('\n')}`,
           images: talentImage ? [{
             altText: 'Character Talent Materials',
             blob: talentImage,
@@ -339,9 +339,9 @@ ${talents.map(it => `${it.domainName}・・{it.country}・会ｼ・{it.itemName}
           }] : [],
         },
         {
-          body: `莉頑律縺ｮ豁ｦ蝎ｨ遯∫ｴ邏譚舌・縺翫＠繧峨○笞費ｸ・#蜴溽･・
+          body: `今日の武器突破素材のおしらせ⚔️ #原神
 
-${weapons.map(it => `${it.domainName}・・{it.country}・会ｼ・{it.itemName}`).join('\n')}`,
+${weapons.map(it => `${it.domainName}（${it.country}）：${it.itemName}`).join('\n')}`,
           images: weaponImage ? [{
             altText: 'Weapon Ascension Materials',
             blob: weaponImage,
@@ -352,5 +352,6 @@ ${weapons.map(it => `${it.domainName}・・{it.country}・会ｼ・{it.itemName}
     }
   }
 })();
+
 
 

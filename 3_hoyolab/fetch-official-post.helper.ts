@@ -13,7 +13,7 @@
 
   return {
     execute(url: string): HoYo.Content | null {
-      Utils.log(`Start fetching HoYoLAB posts | URL=${url}`);
+      Utils.info(`Start fetching HoYoLAB posts | URL=${url}`);
 
       const response = UrlFetchApp.fetch(url, {
         method: 'get',
@@ -23,7 +23,7 @@
       });
 
       if (response.getResponseCode() !== 200) {
-        Utils.log(`Failed fetching HoYoLAB post | StatusCode=${response.getResponseCode()}`);
+        Utils.warn(`Failed fetching HoYoLAB post | StatusCode=${response.getResponseCode()}`);
         return null;
       }
 
@@ -42,7 +42,7 @@
         body,
       };
 
-      Utils.log(`Succeeded in fetching HoYoLAB post | Posts=${JSON.stringify({
+      Utils.info(`Succeeded in fetching HoYoLAB post | Posts=${JSON.stringify({
         id: content.id,
         subject: content.subject,
         createdAt: Utils.formatToViewDate(content.createdAt),
@@ -53,5 +53,6 @@
     }
   }
 })();
+
 
 

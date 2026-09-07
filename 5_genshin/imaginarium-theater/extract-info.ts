@@ -10,8 +10,8 @@
 
     const formats = [
       'yyyy/MM/dd hh:mm',
-      'M譛・譌･',
-      'y蟷ｴM譛・譌･',
+      'M月d日',
+      'y年M月d日',
     ];
 
     for (let format of formats) {
@@ -22,24 +22,24 @@
   }
 
   Genshin.imaginariumTheater!.extractInfo = (releasePost) => {
-    Utils.log(`Start extracting imaginarium theater information | PostId=${releasePost.id}`);
+    Utils.info(`Start extracting imaginarium theater information | PostId=${releasePost.id}`);
 
     const { id, body } = releasePost;
     outputLogToFile(body);
-    const matches = body.matchAll(/蟷ｻ諠ｳ繧ｷ繧｢繧ｿ繝ｼ縺ｯ(.{4,16})繧医ｊ髢区叛縺輔ｌ縺ｾ縺吶・simg).toArray();
+    const matches = body.matchAll(/幻想シアターは(.{4,16})より開放されます。/simg).toArray();
 
     if (!matches.length) {
       throw new Error(`Failed extracting imaginarium theater information | PostId=${releasePost.id}`);
     }
 
-    const dates = body.matchAll(/蟷ｻ諠ｳ繧ｷ繧｢繧ｿ繝ｼ縺ｯ(.{4,16})繧医ｊ髢区叛縺輔ｌ縺ｾ縺吶・simg).toArray();
-    const elementals = body.matchAll(/謖・ｮ壼・邏繧ｿ繧､繝夕・嘶:]([轤朱峭豌ｷ豌ｴ蟯ｩ闕蛾｢ｨ])蜈・ｴ.([轤朱峭豌ｷ豌ｴ蟯ｩ闕蛾｢ｨ])蜈・ｴ.([轤朱峭豌ｷ豌ｴ蟯ｩ闕蛾｢ｨ])蜈・ｴ/simg).toArray();
-    const principalCastMembers = body.matchAll(/髢句ｹ輔く繝｣繧ｹ繝・・嘶:]縲啓^縲後江*繝ｻ([^縲後江*)・・轤朱峭豌ｷ豌ｴ蟯ｩ闕蛾｢ｨ]・峨阪啓^縲後江*繝ｻ([^縲後江*)・・轤朱峭豌ｷ豌ｴ蟯ｩ闕蛾｢ｨ]・峨阪啓^縲後江*繝ｻ([^縲後江*)・・轤朱峭豌ｷ豌ｴ蟯ｩ闕蛾｢ｨ]・峨阪啓^縲後江*繝ｻ([^縲後江*)・・轤朱峭豌ｷ豌ｴ蟯ｩ闕蛾｢ｨ]・峨阪啓^縲後江*繝ｻ([^縲後江*)・・轤朱峭豌ｷ豌ｴ蟯ｩ闕蛾｢ｨ]・峨阪啓^縲後江*繝ｻ([^縲後江*)・・轤朱峭豌ｷ豌ｴ蟯ｩ闕蛾｢ｨ]・峨・simg).toArray();
-    const alternateCastMembers = body.matchAll(/迚ｹ蛻･諡帛ｾ・く繝｣繧ｹ繝・・嘶:]縲啓^縲後江*繝ｻ([^縲後江*)・・轤朱峭豌ｷ豌ｴ蟯ｩ闕蛾｢ｨ]・峨阪啓^縲後江*繝ｻ([^縲後江*)・・轤朱峭豌ｷ豌ｴ蟯ｩ闕蛾｢ｨ]・峨阪啓^縲後江*繝ｻ([^縲後江*)・・轤朱峭豌ｷ豌ｴ蟯ｩ闕蛾｢ｨ]・峨阪啓^縲後江*繝ｻ([^縲後江*)・・轤朱峭豌ｷ豌ｴ蟯ｩ闕蛾｢ｨ]・峨・simg).toArray();
+    const dates = body.matchAll(/幻想シアターは(.{4,16})より開放されます。/simg).toArray();
+    const elementals = body.matchAll(/指定元素タイプ[：|:]([炎雷氷水岩草風])元素.([炎雷氷水岩草風])元素.([炎雷氷水岩草風])元素/simg).toArray();
+    const principalCastMembers = body.matchAll(/開幕キャスト[：|:]「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」/simg).toArray();
+    const alternateCastMembers = body.matchAll(/特別招待キャスト[：|:]「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」「[^「」]*・([^「」]*)（[炎雷氷水岩草風]）」/simg).toArray();
 
     const results: Genshin.ImaginariumTheaterInfo[] = [];
     matches.forEach((match, index) => {
-      Utils.log(`Matches index=${JSON.stringify(index)}`);
+      Utils.info(`Matches index=${JSON.stringify(index)}`);
 
       const date = parseMixFormatDate(dates[index][1]);
       if (!date) throw new Error('Failed to parse date');
@@ -53,10 +53,8 @@
       });
     });
 
-    Utils.log(`Finish extracting imaginarium theater information | Results=${JSON.stringify(results)}`);
+    Utils.info(`Finish extracting imaginarium theater information | Results=${JSON.stringify(results)}`);
 
     return results;
   }
 })();
-
-

@@ -4,7 +4,7 @@
     const message = HoYoLAB.Genshin.buildSummaryMessage!(todaysPosts.toReversed());
 
     if (!message) {
-      Utils.log(`No need to notify about Genshin`);
+      Utils.info(`No need to notify about Genshin`);
       return;
     }
 
@@ -17,7 +17,7 @@
     const message = HoYoLAB.ZZZ.buildSummaryMessage!(todaysPosts.toReversed());
 
     if (!message) {
-      Utils.log(`No need to notify about ZZZ`);
+      Utils.info(`No need to notify about ZZZ`);
       return;
     }
 
@@ -30,7 +30,7 @@
     const message = HoYoLAB.StarRail.buildSummaryMessage!(todaysPosts.toReversed());
 
     if (!message) {
-      Utils.log(`No need to notify about StarRail`);
+      Utils.info(`No need to notify about StarRail`);
       return;
     }
 
@@ -44,5 +44,6 @@
     starRail(currentDate);
   }
 })();
+
 
 

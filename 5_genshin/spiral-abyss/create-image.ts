@@ -4,7 +4,7 @@
   const PHANTOM_JS_CLOUD_API_KEY = PropertiesService.getScriptProperties().getProperty('PHANTOM_JS_CLOUD_API_KEY');
 
   Genshin.spiralAbyss!.createImage = (hours) => {
-    Utils.log(`Start to create spiral abyss image | Hours=${hours}`);
+    Utils.info(`Start to create spiral abyss image | Hours=${hours}`);
 
     const requestJson = encodeURIComponent(JSON.stringify({
       url: `${createImageClientUrl}?hours=${hours}`,
@@ -16,8 +16,6 @@
       throw new Error(`Failed to fetch create image client | ResponseCode=${response.getResponseCode()}`);
     }
 
-    Utils.log(`Fetched create image client`);
+    Utils.info(`Fetched create image client`);
   }
 })();
-
-

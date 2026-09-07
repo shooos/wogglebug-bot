@@ -9,7 +9,7 @@
     const eventMessages = HoYoLAB.Genshin.buildEventMessages!(newArrivalEvents.toReversed());
 
     if (!messages.length && !eventMessages.length) {
-      Utils.log(`No need to notify about Genshin`);
+      Utils.info(`No need to notify about Genshin`);
       return;
     }
 
@@ -28,7 +28,7 @@
     const messages = HoYoLAB.ZZZ.buildMessages!(newArrivals.toReversed());
 
     if (!messages.length) {
-      Utils.log(`No need to notify about ZZZ`);
+      Utils.info(`No need to notify about ZZZ`);
       return;
     }
 
@@ -46,7 +46,7 @@
     const messages = HoYoLAB.StarRail.buildMessages!(newArrivals.toReversed());
 
     if (!messages.length) {
-      Utils.log(`No need to notify about Star Rail`);
+      Utils.info(`No need to notify about Star Rail`);
       return;
     }
 
@@ -64,5 +64,6 @@
     starRail();
   }
 })();
+
 
 

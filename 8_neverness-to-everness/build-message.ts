@@ -9,7 +9,7 @@
         Image.compress!(rawBlob, Bluesky.MAX_IMAGE_SIZE) : rawBlob;
 
       if (!validBlob) {
-        Utils.log(`Illegal image | ImageURL=${url}`);
+        Utils.warn(`Illegal image | ImageURL=${url}`);
         return null;
       }
 
@@ -41,19 +41,17 @@
       throw new Error(`Embed has no timestamp | Message ID=${message.id}`);
     }
 
-    const body = `#NTE蜈ｬ蠑醜繝昴せ繝・
+    const body = `#NTE公式Xポスト
 
-謚慕ｨｿ譌･譎・: ${Utils.formatToViewDate(new Date(embed.timestamp))}
+投稿日時 : ${Utils.formatToViewDate(new Date(embed.timestamp))}
 
 ${embed.description}`;
 
     const hasExceeded = body.length > Bluesky.MAX_BODY_LENGTH;
 
     return {
-      body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '窶ｦ' : body}`,
+      body: `${hasExceeded ? body.slice(0, Bluesky.MAX_BODY_LENGTH) + '…' : body}`,
       images: createImage(embed.image?.url ? [embed.image.url] : []),
     }
   };
 })();
-
-

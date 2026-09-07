@@ -7,12 +7,12 @@
   const compressUrl = 'https://api.tinify.com/shrink';
 
   function fetchCompressedImage(location: string): GoogleAppsScript.Base.Blob | null {
-    Utils.log(`Start fetching compressed image | Location=${location}`);
+    Utils.info(`Start fetching compressed image | Location=${location}`);
 
     const response = UrlFetchApp.fetch(location, { method: 'get', muteHttpExceptions: true });
 
     if (response.getResponseCode() !== 200) {
-      Utils.log(`Failed fetching compressed image | StatusCode=${response.getResponseCode()}`);
+      Utils.warn(`Failed fetching compressed image | StatusCode=${response.getResponseCode()}`);
       return null;
     }
 
@@ -20,7 +20,7 @@
   }
 
   function executeResize(compressedImageLocation: string, width: number): GoogleAppsScript.Base.Blob | null {
-    Utils.log(`Start resizing image | CompressedImageLocation=${compressedImageLocation}, Width=${width}`);
+    Utils.info(`Start resizing image | CompressedImageLocation=${compressedImageLocation}, Width=${width}`);
 
     headers['Content-Type'] = 'application/json';
 
@@ -41,15 +41,15 @@
 
       if (response.getResponseCode() == 200) {
         const resized = response.getBlob();
-        Utils.log(`Success resizing image | ImageSize=${resized.getBytes().length}`);
+        Utils.info(`Success resizing image | ImageSize=${resized.getBytes().length}`);
 
         return resized;
       } else {
-        Utils.log('Failed to compress image | ResponseCode=%s', response.getResponseCode());
+        Utils.warn('Failed to compress image | ResponseCode=%s', response.getResponseCode());
         return null;
       }
     } catch (e) {
-      Utils.log('Failed to compress image | Error=%s', e);
+      Utils.warn('Failed to compress image | Error=%s', e);
       return null;
     }
   }
@@ -67,7 +67,7 @@
         const compressedImageLocation: string = (response.getHeaders() as any)['Location'];
         const compressedSize: number = JSON.parse(response.getContentText()).output.size;
 
-        Utils.log(`Success compressing image | ImageSize=${compressedSize}`);
+        Utils.info(`Success compressing image | ImageSize=${compressedSize}`);
 
         if (compressedSize > size) {
           const resizeRatio = size / compressedSize;
@@ -81,13 +81,13 @@
         return null;
       }
     } catch (e) {
-      Utils.log('Failed to compress image | Error=%s', e);
+      Utils.warn('Failed to compress image | Error=%s', e);
       return null;
     }
   }
 
   Image.compress = (target, size) => {
-    Utils.log(`Start compressing image | ImageSize=${target.getBytes().length}, TargetSize=${size}`);
+    Utils.info(`Start compressing image | ImageSize=${target.getBytes().length}, TargetSize=${size}`);
 
     let retryCount = 0;
     const compressed = executeCompression(target, size);
@@ -95,13 +95,15 @@
     if (compressed == null) return null;
 
     if (compressed.getBytes().length > size) {
-      Utils.log(`Failed compressing image | Reason=Exceeded Size Limit`);
+      Utils.warn(`Failed compressing image | Reason=Exceeded Size Limit`);
       return null;
     }
 
-    Utils.log(`Finish compressing image | RetryCount=${retryCount}`);
+    Utils.info(`Finish compressing image | RetryCount=${retryCount}`);
     return compressed;
   }
 })();
+
+
 
 

@@ -1,15 +1,15 @@
 ﻿(() => {
   Genshin.imaginariumTheater!.save = (info) => {
-    Utils.log(`Start saving imaginarium theater information | Date=${info.date}`);
+    Utils.info(`Start saving imaginarium theater information | Date=${info.date}`);
 
     const activeSheet = SpreadsheetApp.openById('1T_qYwriDOLRrLWZFW9v0ygF_aj0NtrbpEGnZwltiXPo');
-    const sheet = activeSheet.getSheetByName('蟷ｻ諠ｳ繧ｷ繧｢繧ｿ繝ｼ');
+    const sheet = activeSheet.getSheetByName('幻想シアター');
 
     if (!sheet) throw new Error('Spreadsheet Error | Sheet is not found.');
 
     const nextRow = sheet.getLastRow() + 1;
 
-    sheet.getRange(nextRow, 1).setValue(Utilities.formatDate(info.date, 'JST', 'M譛・譌･'));
+    sheet.getRange(nextRow, 1).setValue(Utilities.formatDate(info.date, 'JST', 'M月d日'));
 
     sheet.getRange(nextRow, 2).setValue(info.elementals[0]);
     sheet.getRange(nextRow, 3).setValue(info.elementals[1]);
@@ -29,8 +29,6 @@
 
     sheet.getRange(nextRow, 15).setValue(info.articleUrl);
 
-    Utils.log(`Success saving imageinarium theater information`);
+    Utils.info(`Success saving imageinarium theater information`);
   }
 })();
-
-

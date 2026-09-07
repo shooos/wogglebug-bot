@@ -13,7 +13,7 @@
 
   return {
     execute(url: string): HoYo.Event[] {
-      Utils.log(`Start fetching HoYoLAB events | URL=${url}`);
+      Utils.info(`Start fetching HoYoLAB events | URL=${url}`);
 
       const response = UrlFetchApp.fetch(url, {
         method: 'get',
@@ -23,7 +23,7 @@
       });
 
       if (response.getResponseCode() !== 200) {
-        Utils.log(`Failed fetching HoYoLAB events | StatusCode=${response.getResponseCode()}`);
+        Utils.warn(`Failed fetching HoYoLAB events | StatusCode=${response.getResponseCode()}`);
         return [];
       }
 
@@ -44,7 +44,7 @@
         return event;
       });
 
-      Utils.log(`Succeeded in fetching HoYoLAB events | Events=${JSON.stringify(events.map(c => ({
+      Utils.info(`Succeeded in fetching HoYoLAB events | Events=${JSON.stringify(events.map(c => ({
         id: c.id,
         subject: c.subject,
         createdAt: Utils.formatToViewDate(c.createdAt),
@@ -55,5 +55,6 @@
     }
   }
 })();
+
 
 

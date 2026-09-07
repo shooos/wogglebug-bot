@@ -27,12 +27,13 @@
       if (responseCode < 300) {
         Utils.log("Successfully triggered GitHub Action workflow.");
       } else {
-        Utils.log(`Failed to trigger GitHub Action workflow | Status=${responseCode}, Reason=${response.getContentText()}`);
+        Utils.warn(`Failed to trigger GitHub Action workflow | Status=${responseCode}, Reason=${response.getContentText()}`);
       }
     } catch (e) {
-      Utils.log(`Error occurred while triggering GitHub Action workflow: ${e}`);
+      Utils.error(`Error occurred while triggering GitHub Action workflow: ${e}`);
     }
   }
 })();
+
 
 

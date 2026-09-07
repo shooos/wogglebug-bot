@@ -3,9 +3,9 @@
 
   function openSheet(): GoogleAppsScript.Spreadsheet.Sheet {
     const spreadSheet = SpreadsheetApp.openById('1T_qYwriDOLRrLWZFW9v0ygF_aj0NtrbpEGnZwltiXPo');
-    const sheet = spreadSheet.getSheetByName('蟷ｻ諠ｳ繧ｷ繧｢繧ｿ繝ｼ');
+    const sheet = spreadSheet.getSheetByName('幻想シアター');
 
-    if (!sheet) throw new Error('Failed to get sheet | SheetName=蟷ｻ諠ｳ繧ｷ繧｢繧ｿ繝ｼ');
+    if (!sheet) throw new Error('Failed to get sheet | SheetName=幻想シアター');
 
     return sheet;
   }
@@ -16,19 +16,19 @@
 
   function getTargetMonthRow(targetMonth: number, sheet: GoogleAppsScript.Spreadsheet.Sheet): number {
     const lastRowRange = sheet.getRange(sheet.getLastRow(), 1);
-    const date = `${targetMonth}譛・譌･`;
+    const date = `${targetMonth}月1日`;
 
     let range = lastRowRange;
     let row = range.getRowIndex();
     let displayValue = range.getDisplayValue();
 
-    Utils.log(`TargetMonth=${targetMonth}, LastRow=${lastRowRange.getRowIndex()}, Date=${date}, DisplayValue=${displayValue}`);
+    Utils.info(`TargetMonth=${targetMonth}, LastRow=${lastRowRange.getRowIndex()}, Date=${date}, DisplayValue=${displayValue}`);
 
     if (displayValue === date) {
       return row;
     }
 
-    const lastRowMonth = displayValue.matchAll(/(\d+)譛・img).toArray()[0][1];
+    const lastRowMonth = displayValue.matchAll(/(\d+)月/img).toArray()[0][1];
     if (Number(lastRowMonth) < targetMonth) throw new Error(`NotFound: ${date}`);
 
     do {
@@ -37,7 +37,7 @@
       displayValue = range.getDisplayValue();
     } while (displayValue !== date && displayValue !== '' && row !== 1);
 
-    Utils.log(`FindedTargetRowIndex=${row}`);
+    Utils.info(`FindedTargetRowIndex=${row}`);
 
     if (row === 1) throw new Error(`NotFound: ${date}`);
 
@@ -45,11 +45,11 @@
   }
 
   Genshin.imaginariumTheater!.notice = (token, botType) => {
-    Utils.log(`Start to notice of Imaginarium theater information`);
+    Utils.info(`Start to notice of Imaginarium theater information`);
 
     const sheet = openSheet();
     const lastRowDateValue = getLastRowDateValue(sheet);
-    const match = lastRowDateValue.match(/(\d+)譛・);
+    const match = lastRowDateValue.match(/(\d+)月/);
     if (!match) throw new Error('Failed to get last row month');
 
     const lastRowMonth = parseInt(match[1]);
@@ -59,7 +59,7 @@
 
     const monthDiff = MONTH_LIST.slice(currentMonthIndex).findIndex(m => m === lastRowMonth);
 
-    Utils.log(`Calculated variables | LastRowMonth=${lastRowMonth}, CurrentMonth=${currentMonth}, MonthDiff=${monthDiff}`);
+    Utils.info(`Calculated variables | LastRowMonth=${lastRowMonth}, CurrentMonth=${currentMonth}, MonthDiff=${monthDiff}`);
 
     const lastRow = sheet.getLastRow();
     let row = lastRow;
@@ -80,12 +80,12 @@
 
       Utils.log('Finish to notice of Imaginarium theater information');
     } else {
-      Utils.log(`No message to notify`);
+      Utils.info(`No message to notify`);
     }
   }
 
   Genshin.imaginariumTheater!.start = (token, currentDate, botType) => {
-    Utils.log(`Start to notice of open Imaginarium theater information`);
+    Utils.info(`Start to notice of open Imaginarium theater information`);
 
     const sheet = openSheet();
     const row = getTargetMonthRow(currentDate.getMonth() + 1, sheet);
@@ -101,5 +101,3 @@
     Bsky.postMessage!(token, message, botType);
   }
 })();
-
-

@@ -51,5 +51,6 @@ function failureSaveSpiralAbyssImage(error: Error) {
 
 function outputLogToFile(log: string): void {
   const timestamp = Utils.formatToViewDateTimeMillis(new Date());
-  Utils.sendToCloudLogging(`${timestamp} --- ${log}`, 'INFO');
+  const message = `${timestamp} --- ${log}`;
+  Utils.info(message);
 }

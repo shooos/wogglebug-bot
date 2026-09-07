@@ -1,6 +1,6 @@
 ﻿(() => {
   Genshin.subscribe = () => {
-    Utils.log(`Start subscribing Genshin information`);
+    Utils.info(`Start subscribing Genshin information`);
 
     const lastFetchedId = Genshin.propertyRepository!.getLastFetchedId();
     const releases = Genshin.fetchReleases!(lastFetchedId);
@@ -21,8 +21,6 @@
 
     if (releases.length) Genshin.propertyRepository!.saveLastFetchedId(releases[0].id);
 
-    Utils.log(`Finish subscribing Genshin information`);
+    Utils.info(`Finish subscribing Genshin information`);
   }
 })();
-
-

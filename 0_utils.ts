@@ -64,10 +64,26 @@
     }
   },
 
-  log(messageOrFormat: unknown, ...args: unknown[]): void {
+  info(messageOrFormat: unknown, ...args: unknown[]): void {
     const formattedMessage = Utils.formatLogMessage(messageOrFormat, args);
     console.log(formattedMessage);
     Utils.sendToCloudLogging(formattedMessage, 'INFO');
+  },
+
+  log(messageOrFormat: unknown, ...args: unknown[]): void {
+    Utils.info(messageOrFormat, ...args);
+  },
+
+  warn(messageOrFormat: unknown, ...args: unknown[]): void {
+    const formattedMessage = Utils.formatLogMessage(messageOrFormat, args);
+    console.warn(formattedMessage);
+    Utils.sendToCloudLogging(formattedMessage, 'WARNING');
+  },
+
+  error(messageOrFormat: unknown, ...args: unknown[]): void {
+    const formattedMessage = Utils.formatLogMessage(messageOrFormat, args);
+    console.error(formattedMessage);
+    Utils.sendToCloudLogging(formattedMessage, 'ERROR');
   },
 
   fetchWebsiteTitle(url: string): string {
@@ -80,83 +96,81 @@
   },
 
   /**
-   * 貂｡縺輔ｌ縺滓律譎よュ蝣ｱ縺九ｉ Asia/Tokyo 繧ｿ繧､繝繧ｾ繝ｼ繝ｳ縺ｮ譎・HH)驛ｨ蛻・・縺ｿ謚懊″蜃ｺ縺励※霑斐☆縲・
-   * 24譎る俣陦ｨ險・
+   * 渡された日時情報から Asia/Tokyo タイムゾーンの時(HH)部分のみ抜き出して返す。
+   * 24時間表記
    * 
-   * @param datetime Date 譌･譎・
-   * @returns 迴ｾ蝨ｨ譎・HH)
+   * @param datetime Date 日時
+   * @returns 現在時(HH)
    */
   extractHourString(datetime: Date): string {
     return Utilities.formatDate(datetime, 'Asia/Tokyo', 'HH');
   },
 
   /**
-   * yyyy-MM-dd HH:mm 縺ｫ繝輔か繝ｼ繝槭ャ繝医＠縺ｦ霑斐☆
-   * 繧ｿ繧､繝繧ｾ繝ｼ繝ｳ縺ｯ Asia/Tokyo
+   * yyyy-MM-dd HH:mm にフォーマットして返す
+   * タイムゾーンは Asia/Tokyo
    * 
-   * @param date Date 譌･譎・
-   * @returns 繝輔か繝ｼ繝槭ャ繝域ｸ医∩譌･譎よ枚蟄怜・
+   * @param date Date 日時
+   * @returns フォーマット済み日時文字列
    */
   formatToViewDate(date: Date): string {
     return Utilities.formatDate(date, 'Asia/Tokyo', 'yyyy-MM-dd HH:mm');
   },
 
   /**
-   * yyyy-MM-dd HH:mm:ss:SSS 縺ｫ繝輔か繝ｼ繝槭ャ繝医＠縺ｦ霑斐☆
-   * 繧ｿ繧､繝繧ｾ繝ｼ繝ｳ縺ｯ Asia/Tokyo
-   * @param date Date 譌･譎・
-   * @returns 繝輔か繝ｼ繝槭ャ繝域ｸ医∩譌･譎よ枚蟄怜・
+   * yyyy-MM-dd HH:mm:ss:SSS にフォーマットして返す
+   * タイムゾーンは Asia/Tokyo
+   * @param date Date 日時
+   * @returns フォーマット済み日時文字列
    */
   formatToViewDateTimeMillis(date: Date): string {
     return Utilities.formatDate(date, 'Asia/Tokyo', 'yyyy-MM-dd HH:mm:ss:SSS');
   },
 
   /**
-   * yyyy蟷ｴM譛・譌･ 縺ｫ繝輔か繝ｼ繝槭ャ繝医＠縺ｦ霑斐☆
-   * 繧ｿ繧､繝繧ｾ繝ｼ繝ｳ縺ｯ Asia/Tokyo
+   * yyyy年M月d日 にフォーマットして返す
+   * タイムゾーンは Asia/Tokyo
    * 
-   * @param date Date 譌･譎・
-   * @returns 繝輔か繝ｼ繝槭ャ繝域ｸ医∩譌･譎よ枚蟄怜・
+   * @param date Date 日時
+   * @returns フォーマット済み日時文字列
    */
   formatToViewDateJPN(date: Date): string {
-    return Utilities.formatDate(date, 'Asia/Tokyo', 'yyyy蟷ｴM譛・譌･');
+    return Utilities.formatDate(date, 'Asia/Tokyo', 'yyyy年M月d日');
   },
 
   /**
-   * HH:mm 縺ｫ繝輔か繝ｼ繝槭ャ繝医＠縺ｦ霑斐☆
-   * @param date Date 譌･譎・
-   * @returns 繝輔か繝ｼ繝槭ャ繝域ｸ医∩譎ょ綾譁・ｭ怜・
+   * HH:mm にフォーマットして返す
+   * @param date Date 日時
+   * @returns フォーマット済み時刻文字列
    */
   formatToViewTime(date: Date): String {
     return Utilities.formatDate(date, 'Asia/Tokyo', 'HH:mm');
   },
 
   /**
-   * ISO-8601譁・ｭ怜・陦ｨ迴ｾ縺ｫ繝輔か繝ｼ繝槭ャ繝医＠縺ｦ霑斐☆
+   * ISO-8601文字列表現にフォーマットして返す
    * 
-   * @param date Date 譌･譎・
-   * @returns 繝輔か繝ｼ繝槭ャ繝域ｸ医∩譌･譎よ枚蟄怜・
+   * @param date Date 日時
+   * @returns フォーマット済み日時文字列
    */
   formatDateToIsoString(date: Date): string {
     return Utilities.formatDate(date, 'Asia/Tokyo', "yyyy-MM-dd'T'HH:mm:ss'Z'");
   },
 
   /**
-   * Blob繧貞叙蠕励＠縺ｦ霑斐☆
+   * Blobを取得して返す
    * 
-   * @param location 蜿門ｾ怜ｯｾ雎｡縺ｮURL
+   * @param location 取得対象のURL
    * @returns Blob
    */
   fetchBlob(location: string): GoogleAppsScript.Base.Blob | null {
     const response = UrlFetchApp.fetch(location, { method: 'get', muteHttpExceptions: true });
 
     if (response.getResponseCode() !== 200) {
-      Utils.log(`Failed fetching blob | Location=${location}`);
+      Logger.log(`Failed fetching blob | Location=${location}`);
       return null;
     }
 
     return response.getBlob();
   },
 }
-
-

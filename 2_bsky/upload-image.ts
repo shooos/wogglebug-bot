@@ -21,30 +21,28 @@
 
   Bsky.uploadImage = (token, blob) => {
     const mimeType = blob.getContentType();
-    Utils.log(`Start uploading image to bsky | MimeType=${mimeType}`);
+    Utils.info(`Start uploading image to bsky | MimeType=${mimeType}`);
 
     if (!mimeType) {
-      Utils.log(`Failed to upload image because mimeType is null`);
+      Utils.warn(`Failed to upload image because mimeType is null`);
       return null;
     }
 
     const imageSize = blob.getBytes().length;
     if (imageSize > Bluesky.MAX_IMAGE_SIZE) {
-      Utils.log(`Failed to upload image because image is too large | ImageSize=${imageSize}`);
+      Utils.warn(`Failed to upload image because image is too large | ImageSize=${imageSize}`);
       return null;
     }
 
     const response = request(token, mimeType, blob);
 
     if (response.getResponseCode() >= 400) {
-      Utils.log(`Failed to upload image because request is failure | StatusCode=${response.getResponseCode()}`);
+      Utils.warn(`Failed to upload image because request is failure | StatusCode=${response.getResponseCode()}`);
       return null;
     }
 
-    Utils.log(`Success uploading image to bsky`);
+    Utils.info(`Success uploading image to bsky`);
 
     return JSON.parse(response.getContentText()).blob;
   }
 })();
-
-
