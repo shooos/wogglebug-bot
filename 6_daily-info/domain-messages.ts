@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   interface Item {
     domainName: string;
     itemName: string;
@@ -42,6 +42,11 @@
         itemName: '奇妙な装置',
         country: 'ナド・クライ',
       },
+      {
+        domainName: '妄執の傷跡',
+        itemName: '蒼星軍勢',
+        country: 'スネージナヤ',
+      },
     ];
     const tuesday_friday = [
       {
@@ -79,6 +84,11 @@
         itemName: '長夜の灯火',
         country: 'ナド・クライ',
       },
+      {
+        domainName: '妄執の傷跡',
+        itemName: '蔵に眠る霊薬',
+        country: 'スネージナヤ',
+      },
     ];
     const wednesday_saturday = [
       {
@@ -115,6 +125,11 @@
         domainName: '失われた月の庭',
         itemName: '極北の末裔',
         country: 'ナド・クライ',
+      },
+      {
+        domainName: '妄執の傷跡',
+        itemName: '氷の皇帝',
+        country: 'スネージナヤ',
       },
     ];
 
@@ -160,6 +175,11 @@
         itemName: '月光',
         country: 'ナド・クライ',
       },
+      {
+        domainName: '荒れ果てた聖跡',
+        itemName: '慈愛',
+        country: 'スネージナヤ',
+      },
     ];
     const tuesday_friday = [
       {
@@ -191,6 +211,11 @@
         itemName: '楽園',
         country: 'ナド・クライ',
       },
+      {
+        domainName: '荒れ果てた聖跡',
+        itemName: '不屈',
+        country: 'スネージナヤ',
+      },
     ];
     const wednesday_saturday = [
       {
@@ -221,6 +246,11 @@
         domainName: '光なき深都',
         itemName: '流浪',
         country: 'ナド・クライ',
+      },
+      {
+        domainName: '荒れ果てた聖跡',
+        itemName: '栄光',
+        country: 'スネージナヤ',
       },
     ];
 
