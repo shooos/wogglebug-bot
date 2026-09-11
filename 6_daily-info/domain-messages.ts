@@ -5,6 +5,11 @@
     country: string;
   };
 
+  /**
+   * 曜日に応じた武器突破素材の秘境情報を返す
+   * @param dayOfWeek 
+   * @returns 
+   */
   const weaponAscensionMaterials = ((dayOfWeek: number): Item[] => {
     const monday_thursday: Item[] = [
       {

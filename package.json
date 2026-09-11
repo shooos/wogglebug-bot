@@ -4,7 +4,7 @@
   "packageManager": "pnpm@9.12.2",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
     "deploy": "clasp push && clasp deploy --deploymentId AKfycbzoWkNpFh_Lz-Im9qDqAMBpbmS5wpKSgLC7KZ1p45T-GO88mbz8yXwESwvJPPKmY9y_MA --description 'Production Deploy'"
   },
   "author": "",
@@ -12,6 +12,8 @@
   "description": "",
   "devDependencies": {
     "@types/google-apps-script": "^1.0.86",
-    "@types/google-apps-script-oauth2": "^43.0.0"
+    "@types/google-apps-script-oauth2": "^43.0.0",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.9"
   }
 }
