@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest run",
-    "deploy": "clasp push && clasp deploy --deploymentId AKfycbzoWkNpFh_Lz-Im9qDqAMBpbmS5wpKSgLC7KZ1p45T-GO88mbz8yXwESwvJPPKmY9y_MA --description 'Production Deploy'"
+    "deploy": "clasp push --force && clasp deploy --deploymentId AKfycbzoWkNpFh_Lz-Im9qDqAMBpbmS5wpKSgLC7KZ1p45T-GO88mbz8yXwESwvJPPKmY9y_MA --description 'Production Deploy'"
   },
   "author": "",
   "license": "MIT",

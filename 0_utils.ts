@@ -41,6 +41,12 @@ const Utils = {
       const payload = {
         logName: `projects/${projectId}/logs/wogglebug-bot`,
         entries: [{
+          resource: {
+            type: 'global',
+            labels: {
+              project_id: projectId,
+            },
+          },
           severity: level,
           textPayload: `[${new Date().toISOString()}] ${message}`,
         }],
