@@ -22,7 +22,7 @@ const loadUtils = (): UtilsContext => {
 
   const requests: UtilsContext['requests'] = [];
   const context = {
-    Utils: { sendToCloudLogging: () => undefined },
+    Utils: { sendToCloudLogging: (_message: string, _level?: string): void => { } },
     requests,
     __setUtils: (utils: UtilsContext['Utils']) => {
       context.Utils = utils;
