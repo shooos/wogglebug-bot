@@ -104,9 +104,9 @@ ${event.articleUrl}
 
     const messages = posts.map(post => {
       const subject = escape(post.subject);
-      return `謄 ${subject}`;
+      return `📣 ${subject} @ ${Utils.formatToViewTime(post.createdAt)}`;
     }).join('\n\n');
-    const body = `湯 ${topMessage} 湯
+    const body = `📒 ${topMessage} 📒
 
 ${messages.length === 0 ? '🔕 本日の公式ポストはありませんでした' : messages}`;
 
@@ -138,6 +138,3 @@ ${messages.length === 0 ? '🔕 本日の公式ポストはありませんでし
     return makeSummaryMessage(posts, '本日の崩壊スターレイル公式ポストまとめ');
   }
 })();
-
-
-
