@@ -1,4 +1,12 @@
-const Utils = {
+const Utils = (() => {
+  let currentExecutionId: string | null = null;
+
+  return {
+  beginExecution(): string {
+    currentExecutionId = Utilities.getUuid();
+    return currentExecutionId;
+  },
+
   getUTCNowIsoString(): string {
     return Utilities.formatDate(new Date(), 'UTC', "yyyy-MM-dd'T'HH:mm:ss'Z'");
   },
@@ -30,7 +38,7 @@ const Utils = {
     return String(messageOrFormat ?? '');
   },
 
-  sendToCloudLogging(message: string, level: 'DEBUG' | 'INFO' | 'WARNING' | 'ERROR' = 'INFO'): void {
+  sendToCloudLogging(message: string, level: 'DEBUG' | 'INFO' | 'WARNING' | 'ERROR' = 'INFO', fields: Record<string, unknown> = {}): void {
     const projectId = PropertiesService.getScriptProperties().getProperty('GCP_PROJECT_ID');
     if (!projectId) {
       console.log(`Cloud Logging skipped because GCP_PROJECT_ID is not set | Message=${message}`);
@@ -48,7 +56,11 @@ const Utils = {
             },
           },
           severity: level,
-          textPayload: `[${new Date().toISOString()}] ${message}`,
+          jsonPayload: {
+            message,
+            ...fields,
+            ...(currentExecutionId ? { executionId: currentExecutionId } : {}),
+          },
         }],
       };
 
@@ -170,13 +182,20 @@ const Utils = {
    * @returns Blob
    */
   fetchBlob(location: string): GoogleAppsScript.Base.Blob | null {
-    const response = UrlFetchApp.fetch(location, { method: 'get', muteHttpExceptions: true });
+    try {
+      const response = UrlFetchApp.fetch(location, { method: 'get', muteHttpExceptions: true });
+      const responseCode = response.getResponseCode();
 
-    if (response.getResponseCode() !== 200) {
-      Logger.log(`Failed fetching blob | Location=${location}`);
+      if (responseCode !== 200) {
+        Utils.warn(`Failed fetching blob | Location=${location}, StatusCode=${responseCode}`);
+        return null;
+      }
+
+      return response.getBlob();
+    } catch (error) {
+      Utils.error(`Failed fetching blob | Location=${location}, Error=${error}`);
       return null;
     }
-
-    return response.getBlob();
   },
-}
+  };
+})();

@@ -1,7 +1,7 @@
 (() => {
   const makeCharacterVoiceMap = (): Record<string, string[]> => {
     const characterVoiceSpreadsheet = SpreadsheetApp.openById('1GJA_PYToRyNOicHrVsSuuYkiDRV1V6McvCnk4RbXYOA');
-    const characterVoiceSheet = characterVoiceSpreadsheet.getSheetByName('蜈・ｴ辷・匱Voice');
+    const characterVoiceSheet = characterVoiceSpreadsheet.getSheetByName('元素爆発Voice');
     const lastRow = characterVoiceSheet?.getLastRow() || 0;
     const dataRange = characterVoiceSheet?.getRange(2, 1, lastRow - 1, 7);
     const characterVoiceData = dataRange?.getValues() || [];

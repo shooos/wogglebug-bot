@@ -36,13 +36,28 @@
 
     const response = request(token, mimeType, blob);
 
-    if (response.getResponseCode() >= 400) {
-      Utils.warn(`Failed to upload image because request is failure | StatusCode=${response.getResponseCode()}`);
+    const responseCode = response.getResponseCode();
+    if (responseCode < 200 || responseCode >= 300) {
+      Utils.warn(`Failed to upload image because request is failure | StatusCode=${responseCode}`);
+      return null;
+    }
+
+    let result: unknown;
+    try {
+      result = JSON.parse(response.getContentText());
+    } catch (error) {
+      Utils.error(`Failed to upload image because response is invalid | Error=${error}`);
+      return null;
+    }
+
+    const uploadedBlob = (result as { blob?: unknown }).blob;
+    if (typeof uploadedBlob !== 'object' || uploadedBlob === null) {
+      Utils.error(`Failed to upload image because response has no blob`);
       return null;
     }
 
     Utils.info(`Success uploading image to bsky`);
 
-    return JSON.parse(response.getContentText()).blob;
+    return uploadedBlob as GoogleAppsScript.Base.Blob;
   }
 })();

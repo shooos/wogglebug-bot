@@ -13,9 +13,28 @@
       payload: JSON.stringify(credencials),
       muteHttpExceptions: true
     });
-    const contentText = response.getContentText();
-    const result = JSON.parse(contentText);
+    const responseCode = response.getResponseCode();
+    if (responseCode < 200 || responseCode >= 300) {
+      const error = `Failed creating Bluesky session | StatusCode=${responseCode}`;
+      Utils.error(error);
+      throw new Error(error);
+    }
 
-    return result.accessJwt;
+    let result: unknown;
+    try {
+      result = JSON.parse(response.getContentText());
+    } catch (error) {
+      Utils.error(`Failed creating Bluesky session | Reason=InvalidResponse, Error=${error}`);
+      throw error;
+    }
+
+    const accessJwt = (result as { accessJwt?: unknown }).accessJwt;
+    if (typeof accessJwt !== 'string' || accessJwt.length === 0) {
+      const error = `Failed creating Bluesky session | Reason=MissingAccessJwt`;
+      Utils.error(error);
+      throw new Error(error);
+    }
+
+    return accessJwt;
   }
 })();

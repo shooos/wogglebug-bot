@@ -10,9 +10,10 @@
     Utils.info(`Start fetching compressed image | Location=${location}`);
 
     const response = UrlFetchApp.fetch(location, { method: 'get', muteHttpExceptions: true });
+    const responseCode = response.getResponseCode();
 
-    if (response.getResponseCode() !== 200) {
-      Utils.warn(`Failed fetching compressed image | StatusCode=${response.getResponseCode()}`);
+    if (responseCode !== 200) {
+      Utils.warn(`Failed fetching compressed image | Location=${location}, StatusCode=${responseCode}`);
       return null;
     }
 
@@ -45,11 +46,11 @@
 
         return resized;
       } else {
-        Utils.warn('Failed to compress image | ResponseCode=%s', response.getResponseCode());
+        Utils.warn('Failed resizing image | Location=%s, StatusCode=%s', compressedImageLocation, response.getResponseCode());
         return null;
       }
     } catch (e) {
-      Utils.warn('Failed to compress image | Error=%s', e);
+      Utils.error('Failed resizing image | Location=%s, Error=%s', compressedImageLocation, e);
       return null;
     }
   }
@@ -63,9 +64,21 @@
         muteHttpExceptions: true
       });
 
-      if (response.getResponseCode() == 201) {
+      const responseCode = response.getResponseCode();
+      if (responseCode == 201) {
         const compressedImageLocation: string = (response.getHeaders() as any)['Location'];
-        const compressedSize: number = JSON.parse(response.getContentText()).output.size;
+        if (!compressedImageLocation) {
+          Utils.error(`Failed compressing image | Reason=MissingLocationHeader`);
+          return null;
+        }
+
+        let compressedSize: number;
+        try {
+          compressedSize = JSON.parse(response.getContentText()).output.size;
+        } catch (error) {
+          Utils.error(`Failed compressing image | Reason=InvalidResponse, Error=${error}`);
+          return null;
+        }
 
         Utils.info(`Success compressing image | ImageSize=${compressedSize}`);
 
@@ -78,10 +91,11 @@
           return fetchCompressedImage(compressedImageLocation);
         }
       } else {
+        Utils.warn(`Failed compressing image | StatusCode=${responseCode}`);
         return null;
       }
     } catch (e) {
-      Utils.warn('Failed to compress image | Error=%s', e);
+      Utils.error('Failed compressing image | Error=%s', e);
       return null;
     }
   }
@@ -103,7 +117,3 @@
     return compressed;
   }
 })();
-
-
-
-

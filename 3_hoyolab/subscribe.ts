@@ -1,4 +1,22 @@
 (() => {
+  function postMessages(messages: Bluesky.Message[]): boolean {
+    try {
+      const token = Bsky.createSession!();
+      const results = messages.map(message => Bsky.postMessage!(token, message, Bluesky.BotType.regular));
+      const failedCount = results.filter(result => result !== Bluesky.Result.success).length;
+
+      if (failedCount > 0) {
+        Utils.error(`Failed posting HoYoLAB messages | FailedCount=${failedCount}, TotalCount=${messages.length}`);
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      Utils.error(`Failed posting HoYoLAB messages | Error=${error}`);
+      return false;
+    }
+  }
+
   function genshin(): void {
     const lastPostedId = HoYoLAB.Genshin.getLastPostedId!();
     const newArrivals = HoYoLAB.Genshin.fetchNewArrivals!(lastPostedId);
@@ -13,10 +31,7 @@
       return;
     }
 
-    const token = Bsky.createSession!();
-    messages.concat(eventMessages).forEach(message => {
-      Bsky.postMessage!(token, message, Bluesky.BotType.regular);
-    });
+    if (!postMessages(messages.concat(eventMessages))) return;
 
     if (newArrivals.length) HoYoLAB.Genshin.saveLastPostedId!(newArrivals[0].id);
     if (newArrivalEvents.length) HoYoLAB.Genshin.saveLastPostedEventId!(newArrivalEvents[0].id);
@@ -32,10 +47,7 @@
       return;
     }
 
-    const token = Bsky.createSession!();
-    messages.forEach(message => {
-      Bsky.postMessage!(token, message, Bluesky.BotType.regular);
-    });
+    if (!postMessages(messages)) return;
 
     if (newArrivals.length) HoYoLAB.ZZZ.saveLastPostedId!(newArrivals[0].id);
   }
@@ -50,10 +62,7 @@
       return;
     }
 
-    const token = Bsky.createSession!();
-    messages.forEach(message => {
-      Bsky.postMessage!(token, message, Bluesky.BotType.regular);
-    });
+    if (!postMessages(messages)) return;
 
     if (newArrivals.length) HoYoLAB.StarRail.saveLastPostedId!(newArrivals[0].id);
   }

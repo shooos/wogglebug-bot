@@ -28,7 +28,19 @@ const FetchOfficialEventsHelper = (() => {
       }
 
       const contentText = response.getContentText();
-      const json = JSON.parse(contentText);
+      let json: any;
+      try {
+        json = JSON.parse(contentText);
+      } catch (error) {
+        Utils.error(`Failed parsing HoYoLAB events response | Error=${error}`);
+        return [];
+      }
+
+      if (!Array.isArray(json?.data?.list)) {
+        Utils.error(`Invalid HoYoLAB events response | Reason=MissingDataList`);
+        return [];
+      }
+
       const events: HoYo.Event[] = json.data.list.map((e: any) => {
         const event: HoYo.Event = {
           id: e.id,

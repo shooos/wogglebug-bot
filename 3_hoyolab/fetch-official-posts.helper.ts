@@ -22,7 +22,19 @@ const FetchOfficialPostsHelper = (() => {
       }
 
       const contentText = response.getContentText();
-      const json = JSON.parse(contentText);
+      let json: any;
+      try {
+        json = JSON.parse(contentText);
+      } catch (error) {
+        Utils.error(`Failed parsing HoYoLAB posts response | Error=${error}`);
+        return [];
+      }
+
+      if (!Array.isArray(json?.data?.list)) {
+        Utils.error(`Invalid HoYoLAB posts response | Reason=MissingDataList`);
+        return [];
+      }
+
       const contents: HoYo.Content[] = json.data.list.map((c: any) => {
         const content: HoYo.Content = {
           id: c.post.post_id,

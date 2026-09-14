@@ -1,4 +1,4 @@
-const FetchOfficialPostHelper = (() => {
+﻿const FetchOfficialPostHelper = (() => {
   const headers = {
     'Accept-Language': 'ja-JP,ja;q=0.9',
     'X-Rpc-Language': 'ja-jp',
@@ -28,7 +28,19 @@ const FetchOfficialPostHelper = (() => {
       }
 
       const contentText = response.getContentText();
-      const json = JSON.parse(contentText);
+      let json: any;
+      try {
+        json = JSON.parse(contentText);
+      } catch (error) {
+        Utils.error(`Failed parsing HoYoLAB post response | Error=${error}`);
+        return null;
+      }
+
+      if (!json?.data?.post) {
+        Utils.error(`Invalid HoYoLAB post response | Reason=MissingPost`);
+        return null;
+      }
+
       const post = json.data.post;
 
       const body = extractTextContent(post.post.content);
