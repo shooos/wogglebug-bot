@@ -101,6 +101,13 @@
   }
 
   Image.compress = (target, size) => {
+    const contentType = target.getContentType();
+    if (contentType?.toLowerCase() === 'image/gif') {
+      const imageSize = target.getBytes().length;
+      Utils.info(`Skip compressing GIF image | ImageSize=${imageSize}, TargetSize=${size}`);
+      return imageSize <= size ? target : null;
+    }
+
     Utils.info(`Start compressing image | ImageSize=${target.getBytes().length}, TargetSize=${size}`);
 
     let retryCount = 0;
