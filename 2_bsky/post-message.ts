@@ -146,7 +146,7 @@
       });
 
       if (response.getResponseCode() >= 400) {
-        Utils.warn(`Failed posting to bsky | StatusCode=${response.getResponseCode()}`);
+        Utils.logHttpFailure('Failed posting to bsky', response);
         result = Bluesky.Result.failure;
       } else {
         Utils.info(`Succeeded in posting to bsky!`);

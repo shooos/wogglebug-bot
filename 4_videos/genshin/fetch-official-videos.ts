@@ -14,7 +14,7 @@
     const ret = UrlFetchApp.fetch('https://www.youtube.com/feeds/videos.xml?channel_id=UCAVR6Q0YgYa8xwz8rdg9Mrg', { muteHttpExceptions: true });
     const responseCode = ret.getResponseCode();
     if (responseCode !== 200) {
-      Utils.warn(`Failed fetching genshin official videos | StatusCode=${responseCode}`);
+      Utils.logHttpFailure('Failed fetching genshin official videos', ret);
       return [];
     }
 

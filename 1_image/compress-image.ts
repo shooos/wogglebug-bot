@@ -13,7 +13,7 @@
     const responseCode = response.getResponseCode();
 
     if (responseCode !== 200) {
-      Utils.warn(`Failed fetching compressed image | Location=${location}, StatusCode=${responseCode}`);
+      Utils.logHttpFailure(`Failed fetching compressed image | Location=${location}`, response);
       return null;
     }
 
@@ -46,7 +46,7 @@
 
         return resized;
       } else {
-        Utils.warn('Failed resizing image | Location=%s, StatusCode=%s', compressedImageLocation, response.getResponseCode());
+        Utils.logHttpFailure(`Failed resizing image | Location=${compressedImageLocation}`, response);
         return null;
       }
     } catch (e) {
@@ -91,7 +91,7 @@
           return fetchCompressedImage(compressedImageLocation);
         }
       } else {
-        Utils.warn(`Failed compressing image | StatusCode=${responseCode}`);
+        Utils.logHttpFailure('Failed compressing image', response);
         return null;
       }
     } catch (e) {

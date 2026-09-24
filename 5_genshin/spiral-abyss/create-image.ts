@@ -13,7 +13,8 @@
     const response = UrlFetchApp.fetch(`https://PhantomJsCloud.com/api/browser/v2/${PHANTOM_JS_CLOUD_API_KEY}/?request=${requestJson}`, { muteHttpExceptions: true });
 
     if (response.getResponseCode() >= 400) {
-      throw new Error(`Failed to fetch create image client | ResponseCode=${response.getResponseCode()}`);
+      Utils.logHttpFailure('Failed to fetch create image client', response);
+      throw new Error(`Failed to fetch create image client | ResponseCode=${response.getResponseCode()} | Body=${response.getContentText()}`);
     }
 
     Utils.info(`Fetched create image client`);

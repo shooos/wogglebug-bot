@@ -17,7 +17,7 @@ const FetchOfficialPostsHelper = (() => {
       });
 
       if (response.getResponseCode() !== 200) {
-        Utils.warn(`Failed fetching HoYoLAB posts | StatusCode=${response.getResponseCode()}`);
+        Utils.logHttpFailure('Failed fetching HoYoLAB posts', response);
         return [];
       }
 

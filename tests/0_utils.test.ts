@@ -7,8 +7,10 @@ import { describe, expect, it } from 'vitest';
 interface UtilsContext {
   Utils: {
     sendToCloudLogging: (message: string, level?: string) => void;
+    logHttpFailure: (context: string, response: { getResponseCode: () => number; getContentText: () => string }) => void;
   };
   requests: Array<{ url: string; options: { payload: string } }>;
+  warnings: string[];
 }
 
 const loadUtils = (): UtilsContext => {
@@ -21,9 +23,11 @@ const loadUtils = (): UtilsContext => {
   }).outputText.replace('const Utils =', 'globalThis.__utils =') + '\n__setUtils(globalThis.__utils);';
 
   const requests: UtilsContext['requests'] = [];
+  const warnings: string[] = [];
   const context = {
     Utils: { sendToCloudLogging: (_message: string, _level?: string): void => { } },
     requests,
+    warnings,
     __setUtils: (utils: UtilsContext['Utils']) => {
       context.Utils = utils;
     },
@@ -45,11 +49,15 @@ const loadUtils = (): UtilsContext => {
       },
     },
     ScriptApp: { getOAuthToken: () => 'test-token' },
-    console: { log: () => undefined, warn: () => undefined, error: () => undefined },
+    console: {
+      log: () => undefined,
+      warn: (message: string) => warnings.push(message),
+      error: () => undefined,
+    },
     __setUtils: context.__setUtils,
   });
 
-  return { Utils: context.Utils, requests };
+  return { Utils: context.Utils, requests, warnings };
 };
 
 describe('Utils.sendToCloudLogging', () => {
@@ -67,5 +75,20 @@ describe('Utils.sendToCloudLogging', () => {
         labels: { project_id: 'test-project' },
       },
     });
+  });
+
+  it('logs the HTTP response body on request failures', () => {
+    const { Utils, warnings } = loadUtils();
+    const response = {
+      getResponseCode: () => 401,
+      getContentText: () => '{"error":"invalid_grant"}',
+    };
+
+    Utils.logHttpFailure('Failed creating Bluesky session', response);
+
+    expect(warnings).toEqual([
+      expect.stringContaining('StatusCode=401'),
+    ]);
+    expect(warnings[0]).toContain('Body={"error":"invalid_grant"}');
   });
 });

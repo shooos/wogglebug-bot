@@ -1,7 +1,7 @@
 const Utils = (() => {
   let currentExecutionId: string | null = null;
 
-  return {
+  const utils = {
   beginExecution(): string {
     currentExecutionId = Utilities.getUuid();
     return currentExecutionId;
@@ -83,25 +83,32 @@ const Utils = (() => {
   },
 
   info(messageOrFormat: unknown, ...args: unknown[]): void {
-    const formattedMessage = Utils.formatLogMessage(messageOrFormat, args);
+    const formattedMessage = utils.formatLogMessage(messageOrFormat, args);
     console.log(formattedMessage);
-    Utils.sendToCloudLogging(formattedMessage, 'INFO');
+    utils.sendToCloudLogging(formattedMessage, 'INFO');
   },
 
   log(messageOrFormat: unknown, ...args: unknown[]): void {
-    Utils.info(messageOrFormat, ...args);
+    utils.info(messageOrFormat, ...args);
   },
 
   warn(messageOrFormat: unknown, ...args: unknown[]): void {
-    const formattedMessage = Utils.formatLogMessage(messageOrFormat, args);
+    const formattedMessage = utils.formatLogMessage(messageOrFormat, args);
     console.warn(formattedMessage);
-    Utils.sendToCloudLogging(formattedMessage, 'WARNING');
+    utils.sendToCloudLogging(formattedMessage, 'WARNING');
+  },
+
+  logHttpFailure(contextMessage: string, response: { getResponseCode: () => number; getContentText?: () => string }): void {
+    const responseCode = response.getResponseCode();
+    const body = typeof response.getContentText === 'function' ? response.getContentText() : '';
+    const safeBody = body.length > 2000 ? `${body.slice(0, 2000)}...` : body;
+    utils.warn(`${contextMessage} | StatusCode=${responseCode} | Body=${safeBody}`);
   },
 
   error(messageOrFormat: unknown, ...args: unknown[]): void {
-    const formattedMessage = Utils.formatLogMessage(messageOrFormat, args);
+    const formattedMessage = utils.formatLogMessage(messageOrFormat, args);
     console.error(formattedMessage);
-    Utils.sendToCloudLogging(formattedMessage, 'ERROR');
+    utils.sendToCloudLogging(formattedMessage, 'ERROR');
   },
 
   fetchWebsiteTitle(url: string): string {
@@ -187,15 +194,17 @@ const Utils = (() => {
       const responseCode = response.getResponseCode();
 
       if (responseCode !== 200) {
-        Utils.warn(`Failed fetching blob | Location=${location}, StatusCode=${responseCode}`);
+        utils.warn(`Failed fetching blob | Location=${location}, StatusCode=${responseCode}`);
         return null;
       }
 
       return response.getBlob();
     } catch (error) {
-      Utils.error(`Failed fetching blob | Location=${location}, Error=${error}`);
+      utils.error(`Failed fetching blob | Location=${location}, Error=${error}`);
       return null;
     }
   },
   };
+
+  return utils;
 })();

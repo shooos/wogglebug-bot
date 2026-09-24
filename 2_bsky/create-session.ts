@@ -15,8 +15,8 @@
     });
     const responseCode = response.getResponseCode();
     if (responseCode < 200 || responseCode >= 300) {
-      const error = `Failed creating Bluesky session | StatusCode=${responseCode}`;
-      Utils.error(error);
+      const error = `Failed creating Bluesky session | StatusCode=${responseCode} | Body=${response.getContentText()}`;
+      Utils.logHttpFailure('Failed creating Bluesky session', response);
       throw new Error(error);
     }
 

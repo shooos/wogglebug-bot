@@ -23,7 +23,7 @@
       });
 
       if (response.getResponseCode() !== 200) {
-        Utils.warn(`Failed fetching HoYoLAB post | StatusCode=${response.getResponseCode()}`);
+        Utils.logHttpFailure('Failed fetching HoYoLAB post', response);
         return null;
       }
 

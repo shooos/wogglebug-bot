@@ -38,7 +38,7 @@
 
     const responseCode = response.getResponseCode();
     if (responseCode < 200 || responseCode >= 300) {
-      Utils.warn(`Failed to upload image because request is failure | StatusCode=${responseCode}`);
+      Utils.logHttpFailure('Failed to upload image because request is failure', response);
       return null;
     }
 
