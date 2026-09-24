@@ -31,7 +31,9 @@
       return;
     }
 
-    if (!postMessages(messages.concat(eventMessages))) return;
+    if (!postMessages(messages.concat(eventMessages))) {
+      Utils.warn(`Bluesky batch failed for Genshin; advancing cursor to avoid infinite re-posting | LastPostedId=${newArrivals[0]?.id ?? 'n/a'}, LastPostedEventId=${newArrivalEvents[0]?.id ?? 'n/a'}`);
+    }
 
     if (newArrivals.length) HoYoLAB.Genshin.saveLastPostedId!(newArrivals[0].id);
     if (newArrivalEvents.length) HoYoLAB.Genshin.saveLastPostedEventId!(newArrivalEvents[0].id);
@@ -47,7 +49,9 @@
       return;
     }
 
-    if (!postMessages(messages)) return;
+    if (!postMessages(messages)) {
+      Utils.warn(`Bluesky batch failed for ZZZ; advancing cursor to avoid infinite re-posting | LastPostedId=${newArrivals[0]?.id ?? 'n/a'}`);
+    }
 
     if (newArrivals.length) HoYoLAB.ZZZ.saveLastPostedId!(newArrivals[0].id);
   }
@@ -62,7 +66,9 @@
       return;
     }
 
-    if (!postMessages(messages)) return;
+    if (!postMessages(messages)) {
+      Utils.warn(`Bluesky batch failed for Star Rail; advancing cursor to avoid infinite re-posting | LastPostedId=${newArrivals[0]?.id ?? 'n/a'}`);
+    }
 
     if (newArrivals.length) HoYoLAB.StarRail.saveLastPostedId!(newArrivals[0].id);
   }
